@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.github.piotr-janczukowicz</groupId>
+    <artifactId>common-parent</artifactId>
+    <version>15</version>
+    <relativePath/>
+  </parent>
+
+  <artifactId>github-graphql-client</artifactId>
+  <version>1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>github-graphql-client</name>
+  <description>Typed Java client for the GitHub GraphQL API</description>
+  <url>https://github.com/piotr-janczukowicz/github-graphql-client</url>
+
+  <properties>
+    <common-core.version>4</common-core.version>
+    <github-client.version>2</github-client.version>
+    <junit.parallel.enabled>true</junit.parallel.enabled>
+    <test.module.args>--add-opens io.github.piotr_janczukowicz.graphqlclient/io.github.piotr_janczukowicz.github.graphql=org.junit.platform.commons,ALL-UNNAMED --add-opens io.github.piotr_janczukowicz.graphqlclient/io.github.piotr_janczukowicz.github.graphql.internal=org.junit.platform.commons,ALL-UNNAMED</test.module.args>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.github.piotr-janczukowicz</groupId>
+      <artifactId>github-client</artifactId>
+      <version>${github-client.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.soabase.record-builder</groupId>
+      <artifactId>record-builder-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.github.piotr-janczukowicz</groupId>
+      <artifactId>common-core</artifactId>
+      <version>${common-core.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <groups>unit</groups>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <groups>integration</groups>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*IT.java</include>
+            <include>**/*ITCase.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>smoke</id>
+      <properties>
+        <jacoco.skip>true</jacoco.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <groups combine.self="override">smoke</groups>
+              <includes combine.children="override">
+                <include>**/smoke/*SmokeIT.java</include>
+              </includes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

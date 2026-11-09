@@ -1,0 +1,12 @@
+package io.github.piotr_janczukowicz.github.graphql.model;
+
+import java.util.function.Function;
+import org.jspecify.annotations.Nullable;
+
+/** Selection of the GraphQL type {@code DeleteIssueFieldPayload}. */
+public interface DeleteIssueFieldPayloadSelector {
+
+    @Nullable String clientMutationId();
+
+    <R> @Nullable R issueField(Function<IssueFieldsSelector, R> selection);
+}

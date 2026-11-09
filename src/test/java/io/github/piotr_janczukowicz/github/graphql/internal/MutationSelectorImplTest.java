@@ -1,0 +1,2297 @@
+package io.github.piotr_janczukowicz.github.graphql.internal;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import io.github.piotr_janczukowicz.github.graphql.model.AbortQueuedMigrationsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AbortQueuedMigrationsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AbortRepositoryMigrationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AbortRepositoryMigrationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseAdministratorInvitationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseAdministratorInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseMemberInvitationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseMemberInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptTopicSuggestionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptTopicSuggestionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AccessUserNamespaceRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AccessUserNamespaceRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ActorType;
+import io.github.piotr_janczukowicz.github.graphql.model.AddAssigneesToAssignablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddAssigneesToAssignablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddBlockedByPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddBlockedByPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCloseIssueReferencesPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCloseIssueReferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionPollVotePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionPollVotePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseOrganizationMemberPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseOrganizationMemberPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseSupportEntitlementPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseSupportEntitlementPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddLabelsToLabelablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddLabelsToLabelablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectCardPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectColumnPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2DraftIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2DraftIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2ItemByIdPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2ItemByIdPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestCreationCapBypassUsersPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestCreationCapBypassUsersPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadReplyPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadReplyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddReactionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddReactionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddRelatesToPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddRelatesToPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddStarPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddStarPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddSubIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddUpvotePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddUpvotePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddVerifiableDomainPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.AddVerifiableDomainPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ApplyPendingIssueSuggestionsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ApplyPendingIssueSuggestionsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveDeploymentsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveDeploymentsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveVerifiableDomainPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveVerifiableDomainPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveProjectV2ItemPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveProjectV2ItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchivePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchivePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.BulkSponsorshipBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseAdminInvitationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseAdminInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseMemberInvitationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseMemberInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelSponsorshipPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelSponsorshipPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ChangeUserStatusPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ChangeUserStatusPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CheckSuiteAutoTriggerPreferenceBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearLabelsFromLabelablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearLabelsFromLabelablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearProjectV2ItemFieldValuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearProjectV2ItemFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneProjectPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneTemplateRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneTemplateRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseDiscussionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ClosePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ClosePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CommitMessageBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CommittableBranchBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectCardNoteToIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectCardNoteToIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectV2DraftIssueItemToIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectV2DraftIssueItemToIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertPullRequestToDraftPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertPullRequestToDraftPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CopyProjectV2PayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CopyProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateAttributionInvitationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateAttributionInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateBranchProtectionRulePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateBranchProtectionRulePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckRunPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckRunPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckSuitePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckSuitePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCommitOnBranchPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCommitOnBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentStatusPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentStatusPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDiscussionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnterpriseOrganizationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnterpriseOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnvironmentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIpAllowListEntryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIpAllowListEntryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldValuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueTypePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLabelPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLabelPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLinkedBranchPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLinkedBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateMigrationSourcePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateMigrationSourcePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2FieldPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2FieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2IssueFieldPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2IssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2PayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2StatusUpdatePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2StatusUpdatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2ViewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2ViewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreatePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreatePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRefPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRefPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryCustomPropertyPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryRulesetPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryRulesetPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsListingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsListingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsTierPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsTierPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateUserListPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateUserListPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CustomPropertyValueInputBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.CustomPropertyValueType;
+import io.github.piotr_janczukowicz.github.graphql.model.DeclineTopicSuggestionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeclineTopicSuggestionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteBranchProtectionRulePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteBranchProtectionRulePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDeploymentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDeploymentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteEnvironmentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIpAllowListEntryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIpAllowListEntryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldValuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueTypePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLabelPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLabelPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLinkedBranchPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLinkedBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePackageVersionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePackageVersionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectCardPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectColumnPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2FieldPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2FieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ItemPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2PayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2StatusUpdatePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2StatusUpdatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ViewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ViewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2WorkflowPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2WorkflowPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRefPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRefPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryCustomPropertyPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryRulesetPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryRulesetPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteUserListPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteUserListPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteVerifiableDomainPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteVerifiableDomainPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeploymentStatusState;
+import io.github.piotr_janczukowicz.github.graphql.model.DequeuePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DequeuePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DisablePullRequestAutoMergePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DisablePullRequestAutoMergePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissPullRequestReviewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissPullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissReason;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissRepositoryVulnerabilityAlertPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissRepositoryVulnerabilityAlertPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnablePullRequestAutoMergePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.EnablePullRequestAutoMergePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnqueuePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.EnqueuePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseAdministratorRole;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseDefaultRepositoryPermissionSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseDisallowedMethodsSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseEnabledDisabledSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseEnabledSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseMembersCanMakePurchasesSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowOrganizationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowUserPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowUserPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantEnterpriseOrganizationsMigratorRolePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantEnterpriseOrganizationsMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantMigratorRolePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ImportProjectPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ImportProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseAdminPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseAdminPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseMemberPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseMemberPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.IpAllowListEnabledSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.IpAllowListForInstalledAppsEnabledSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.IpAllowListUserLevelEnforcementEnabledSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.IssueFieldCreateOrUpdateInputBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.IssueFieldDataType;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToTeamPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToTeamPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkRepositoryToProjectPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkRepositoryToProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.LockLockablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.LockLockablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkDiscussionCommentAsAnswerPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkDiscussionCommentAsAnswerPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkFileAsViewedPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkFileAsViewedPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkProjectV2AsTemplatePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkProjectV2AsTemplatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkPullRequestReadyForReviewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkPullRequestReadyForReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MergeBranchPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MergeBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MergePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MergePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MigrationSourceType;
+import io.github.piotr_janczukowicz.github.graphql.model.MinimizeCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MinimizeCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectCardPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectColumnPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.NotificationRestrictionSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.PendingIssueSuggestionKind;
+import io.github.piotr_janczukowicz.github.graphql.model.PendingIssueSuggestionRefBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.PinEnvironmentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.PinEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssueCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ProjectColumnImportBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ProjectV2CollaboratorBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ProjectV2CustomFieldType;
+import io.github.piotr_janczukowicz.github.graphql.model.ProjectV2FieldValueBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ProjectV2Roles;
+import io.github.piotr_janczukowicz.github.graphql.model.ProjectV2ViewLayout;
+import io.github.piotr_janczukowicz.github.graphql.model.PromoteRepositoryCustomPropertyPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.PromoteRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PublishSponsorsTierPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.PublishSponsorsTierPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewEvent;
+import io.github.piotr_janczukowicz.github.graphql.model.ReactionContent;
+import io.github.piotr_janczukowicz.github.graphql.model.RefUpdateBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateEnterpriseIdentityProviderRecoveryCodesPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateEnterpriseIdentityProviderRecoveryCodesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateVerifiableDomainTokenPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateVerifiableDomainTokenPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectDeploymentsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectDeploymentsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectPendingIssueSuggestionsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectPendingIssueSuggestionsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveAssigneesFromAssignablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveAssigneesFromAssignablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveBlockedByPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveBlockedByPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveCloseIssueReferencesPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveCloseIssueReferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseAdminPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseAdminPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseIdentityProviderPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseIdentityProviderPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseMemberPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseMemberPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseOrganizationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseSupportEntitlementPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseSupportEntitlementPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveLabelsFromLabelablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveLabelsFromLabelablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveOutsideCollaboratorPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveOutsideCollaboratorPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemovePullRequestCreationCapBypassUsersPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemovePullRequestCreationCapBypassUsersPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveReactionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveReactionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveRelatesToPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveRelatesToPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveStarPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveStarPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveSubIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveUpvotePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveUpvotePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenDiscussionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenPullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenPullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReorderEnvironmentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ReorderEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReplaceActorsForAssignablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ReplaceActorsForAssignablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReportedContentClassifiers;
+import io.github.piotr_janczukowicz.github.graphql.model.RepositoryInteractionLimit;
+import io.github.piotr_janczukowicz.github.graphql.model.RepositoryPermission;
+import io.github.piotr_janczukowicz.github.graphql.model.RepositoryRuleConditionsInputBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RepositoryVisibility;
+import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestCheckSuitePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestCheckSuitePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestReviewsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestReviewsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ResolveReviewThreadPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.ResolveReviewThreadPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RetireSponsorsTierPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RetireSponsorsTierPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RevertPullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RevertPullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeEnterpriseOrganizationsMigratorRolePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeEnterpriseOrganizationsMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeMigratorRolePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RoleInOrganization;
+import io.github.piotr_janczukowicz.github.graphql.model.RuleEnforcement;
+import io.github.piotr_janczukowicz.github.graphql.model.SamlDigestAlgorithm;
+import io.github.piotr_janczukowicz.github.graphql.model.SamlSignatureAlgorithm;
+import io.github.piotr_janczukowicz.github.graphql.model.SetEnterpriseIdentityProviderPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.SetEnterpriseIdentityProviderPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetIssueFieldValuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.SetIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetOrganizationInteractionLimitPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.SetOrganizationInteractionLimitPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryCustomPropertyValuesPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryCustomPropertyValuesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryInteractionLimitPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryInteractionLimitPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetUserInteractionLimitPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.SetUserInteractionLimitPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.StartOrganizationMigrationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.StartOrganizationMigrationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.StartRepositoryMigrationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.StartRepositoryMigrationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SubmitPullRequestReviewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.SubmitPullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SubscriptionState;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferEnterpriseOrganizationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferEnterpriseOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveProjectV2ItemPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveProjectV2ItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchivePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchivePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowOrganizationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowUserPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowUserPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromTeamPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromTeamPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkRepositoryFromProjectPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkRepositoryFromProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlockLockablePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlockLockablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkDiscussionCommentAsAnswerPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkDiscussionCommentAsAnswerPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkFileAsViewedPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkFileAsViewedPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkIssueAsDuplicatePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkIssueAsDuplicatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkProjectV2AsTemplatePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkProjectV2AsTemplatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnminimizeCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnminimizeCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssueCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnresolveReviewThreadPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UnresolveReviewThreadPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateBranchProtectionRulePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateBranchProtectionRulePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckRunPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckRunPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckSuitePreferencesPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckSuitePreferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdministratorRolePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdministratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDeployKeySettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDeployKeySettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanCreateRepositoriesSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanCreateRepositoriesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteIssuesSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteIssuesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanMakePurchasesSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanMakePurchasesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOrganizationProjectsSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOrganizationProjectsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOwnerOrganizationRolePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOwnerOrganizationRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseProfilePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseProfilePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseRepositoryProjectsSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseRepositoryProjectsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnvironmentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEnabledSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEnabledSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEntryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEntryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListForInstalledAppsEnabledSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListForInstalledAppsEnabledSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListUserLevelEnforcementEnabledSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListUserLevelEnforcementEnabledSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldValuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueIssueTypePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueTypePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateLabelPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateLabelPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestrictionSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestrictionSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePatreonSponsorabilityPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePatreonSponsorabilityPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectCardPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectColumnPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2CollaboratorsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2CollaboratorsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2DraftIssuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2DraftIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2FieldPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2FieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemFieldValuePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemPositionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemPositionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2PayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2StatusUpdatePayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2StatusUpdatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ViewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ViewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestBranchPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewCommentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryRulesetPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryRulesetPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryWebCommitSignoffSettingPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryWebCommitSignoffSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSponsorshipPreferencesPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSponsorshipPreferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSubscriptionPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSubscriptionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamReviewAssignmentPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamReviewAssignmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamsRepositoryPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamsRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTopicsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTopicsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListsForItemPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListsForItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.VerifyVerifiableDomainPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.VerifyVerifiableDomainPayloadSelector;
+import io.github.piotr_janczukowicz.testsupport.UnitTest;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import tools.jackson.databind.json.JsonMapper;
+
+@UnitTest
+@SuppressWarnings({"deprecation", "removal"})
+class MutationSelectorImplTest {
+
+    private static final JsonMapper MAPPER = JsonMapper.builder().build();
+
+    private static final String RESPONSE = "{" + "\"abortQueuedMigrations\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"abortRepositoryMigration\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"acceptEnterpriseAdministratorInvitation\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"acceptEnterpriseMemberInvitation\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"acceptTopicSuggestion\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"accessUserNamespaceRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addAssigneesToAssignable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addBlockedBy\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addCloseIssueReferences\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addDiscussionComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addDiscussionPollVote\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addEnterpriseOrganizationMember\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addEnterpriseSupportEntitlement\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addLabelsToLabelable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addProjectCard\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addProjectColumn\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addProjectV2DraftIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addProjectV2ItemById\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addPullRequestCreationCapBypassUsers\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addPullRequestReview\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addPullRequestReviewComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addPullRequestReviewThread\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addPullRequestReviewThreadReply\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addReaction\":{\"clientMutationId\": \"x\"}" + "," + "\"addRelatesTo\":{\"clientMutationId\": \"x\"}"
+            + "," + "\"addStar\":{\"clientMutationId\": \"x\"}" + "," + "\"addSubIssue\":{\"clientMutationId\": \"x\"}"
+            + "," + "\"addUpvote\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"addVerifiableDomain\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"applyPendingIssueSuggestions\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"approveDeployments\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"approveVerifiableDomain\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"archiveProjectV2Item\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"archivePullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"archiveRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"cancelEnterpriseAdminInvitation\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"cancelEnterpriseMemberInvitation\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"cancelSponsorship\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"changeUserStatus\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"clearLabelsFromLabelable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"clearProjectV2ItemFieldValue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"cloneProject\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"cloneTemplateRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"closeDiscussion\":{\"clientMutationId\": \"x\"}" + "," + "\"closeIssue\":{\"clientMutationId\": \"x\"}"
+            + "," + "\"closePullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"convertProjectCardNoteToIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"convertProjectV2DraftIssueItemToIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"convertPullRequestToDraft\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"copyProjectV2\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createAttributionInvitation\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createBranchProtectionRule\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createCheckRun\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createCheckSuite\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createCommitOnBranch\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createDeployment\":{\"autoMerged\": true}" + ","
+            + "\"createDeploymentStatus\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createDiscussion\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createEnterpriseOrganization\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createEnvironment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createIpAllowListEntry\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createIssueField\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createIssueFieldValue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createIssueType\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createLabel\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createLinkedBranch\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createMigrationSource\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createProject\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createProjectV2\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createProjectV2Field\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createProjectV2IssueField\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createProjectV2StatusUpdate\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createProjectV2View\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createPullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createRef\":{\"clientMutationId\": \"x\"}" + "," + "\"createRepository\":{\"clientMutationId\": \"x\"}"
+            + "," + "\"createRepositoryCustomProperty\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createRepositoryRuleset\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createSponsorsListing\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createSponsorsTier\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createSponsorship\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createSponsorships\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"createUserList\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"declineTopicSuggestion\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteBranchProtectionRule\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteDeployment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteDiscussion\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteDiscussionComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteEnvironment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteIpAllowListEntry\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteIssueComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteIssueField\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteIssueFieldValue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteIssueType\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteLabel\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteLinkedBranch\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deletePackageVersion\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProject\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectCard\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectColumn\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectV2\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectV2Field\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectV2Item\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectV2StatusUpdate\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectV2View\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteProjectV2Workflow\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deletePullRequestReview\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deletePullRequestReviewComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteRef\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteRepositoryCustomProperty\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteRepositoryRuleset\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteUserList\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"deleteVerifiableDomain\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"dequeuePullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"disablePullRequestAutoMerge\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"dismissPullRequestReview\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"dismissRepositoryVulnerabilityAlert\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"enablePullRequestAutoMerge\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"enqueuePullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"followOrganization\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"followUser\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"grantEnterpriseOrganizationsMigratorRole\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"grantMigratorRole\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"importProject\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"inviteEnterpriseAdmin\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"inviteEnterpriseMember\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"linkProjectV2ToRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"linkProjectV2ToTeam\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"linkRepositoryToProject\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"lockLockable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"markDiscussionCommentAsAnswer\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"markFileAsViewed\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"markProjectV2AsTemplate\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"markPullRequestReadyForReview\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"mergeBranch\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"mergePullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"minimizeComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"moveProjectCard\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"moveProjectColumn\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"pinEnvironment\":{\"clientMutationId\": \"x\"}" + "," + "\"pinIssue\":{\"clientMutationId\": \"x\"}"
+            + "," + "\"pinIssueComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"promoteRepositoryCustomProperty\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"publishSponsorsTier\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"regenerateEnterpriseIdentityProviderRecoveryCodes\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"regenerateVerifiableDomainToken\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"rejectDeployments\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"rejectPendingIssueSuggestions\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeAssigneesFromAssignable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeBlockedBy\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeCloseIssueReferences\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeEnterpriseAdmin\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeEnterpriseIdentityProvider\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeEnterpriseMember\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeEnterpriseOrganization\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeEnterpriseSupportEntitlement\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeLabelsFromLabelable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeOutsideCollaborator\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removePullRequestCreationCapBypassUsers\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeReaction\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeRelatesTo\":{\"clientMutationId\": \"x\"}" + "," + "\"removeStar\":{\"clientMutationId\": \"x\"}"
+            + "," + "\"removeSubIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"removeUpvote\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"reopenDiscussion\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"reopenIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"reopenPullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"reorderEnvironment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"replaceActorsForAssignable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"reprioritizeSubIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"requestReviews\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"requestReviewsByLogin\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"rerequestCheckSuite\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"rerequestReviews\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"resolveReviewThread\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"retireSponsorsTier\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"revertPullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"revokeEnterpriseOrganizationsMigratorRole\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"revokeMigratorRole\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"setEnterpriseIdentityProvider\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"setIssueFieldValue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"setOrganizationInteractionLimit\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"setRepositoryCustomPropertyValues\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"setRepositoryInteractionLimit\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"setUserInteractionLimit\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"startOrganizationMigration\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"startRepositoryMigration\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"submitPullRequestReview\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"transferEnterpriseOrganization\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"transferIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unarchiveProjectV2Item\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unarchivePullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unarchiveRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unfollowOrganization\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unfollowUser\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unlinkProjectV2FromRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unlinkProjectV2FromTeam\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unlinkRepositoryFromProject\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unlockLockable\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unmarkDiscussionCommentAsAnswer\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unmarkFileAsViewed\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unmarkIssueAsDuplicate\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unmarkProjectV2AsTemplate\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unminimizeComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unpinIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unpinIssueComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"unresolveReviewThread\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateBranchProtectionRule\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateCheckRun\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateCheckSuitePreferences\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateDiscussion\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateDiscussionComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseAdministratorRole\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseAllowPrivateRepositoryForkingSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseDefaultRepositoryPermissionSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseDeployKeySetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanChangeRepositoryVisibilitySetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanCreateRepositoriesSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanDeleteIssuesSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanDeleteRepositoriesSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanInviteCollaboratorsSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanMakePurchasesSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanUpdateProtectedBranchesSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseMembersCanViewDependencyInsightsSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseOrganizationProjectsSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseOwnerOrganizationRole\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseProfile\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseRepositoryProjectsSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseTwoFactorAuthenticationRequiredSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnvironment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIpAllowListEnabledSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIpAllowListEntry\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIpAllowListForInstalledAppsEnabledSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIpAllowListUserLevelEnforcementEnabledSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIssueComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIssueField\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIssueFieldValue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIssueIssueType\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateIssueType\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateLabel\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateNotificationRestrictionSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateOrganizationAllowPrivateRepositoryForkingSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateOrganizationWebCommitSignoffSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updatePatreonSponsorability\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProject\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectCard\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectColumn\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2Collaborators\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2DraftIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2Field\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2ItemFieldValue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2ItemPosition\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2StatusUpdate\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateProjectV2View\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updatePullRequest\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updatePullRequestBranch\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updatePullRequestReview\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updatePullRequestReviewComment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateRef\":{\"clientMutationId\": \"x\"}" + "," + "\"updateRefs\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateRepositoryCustomProperty\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateRepositoryRuleset\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateRepositoryWebCommitSignoffSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateSponsorshipPreferences\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateSubscription\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateTeamReviewAssignment\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateTeamsRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateTopics\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateUserList\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateUserListsForItem\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"verifyVerifiableDomain\":{\"clientMutationId\": \"x\"}" + "}";
+
+    private static List<Object> readWithArguments(final MutationSelectorImpl selector) {
+        final List<Object> values = new ArrayList<>();
+        values.add(selector.abortQueuedMigrations(
+                AbortQueuedMigrationsPayloadBuilder.builder().ownerId("x").build(),
+                AbortQueuedMigrationsPayloadSelector::clientMutationId));
+        values.add(selector.abortRepositoryMigration(
+                AbortRepositoryMigrationPayloadBuilder.builder()
+                        .migrationId("x")
+                        .build(),
+                AbortRepositoryMigrationPayloadSelector::clientMutationId));
+        values.add(selector.acceptEnterpriseAdministratorInvitation(
+                AcceptEnterpriseAdministratorInvitationPayloadBuilder.builder()
+                        .invitationId("x")
+                        .build(),
+                AcceptEnterpriseAdministratorInvitationPayloadSelector::clientMutationId));
+        values.add(selector.acceptEnterpriseMemberInvitation(
+                AcceptEnterpriseMemberInvitationPayloadBuilder.builder()
+                        .invitationId("x")
+                        .build(),
+                AcceptEnterpriseMemberInvitationPayloadSelector::clientMutationId));
+        values.add(selector.acceptTopicSuggestion(
+                AcceptTopicSuggestionPayloadBuilder.builder().build(),
+                AcceptTopicSuggestionPayloadSelector::clientMutationId));
+        values.add(selector.accessUserNamespaceRepository(
+                AccessUserNamespaceRepositoryPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .repositoryId("x")
+                        .build(),
+                AccessUserNamespaceRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.addAssigneesToAssignable(
+                AddAssigneesToAssignablePayloadBuilder.builder()
+                        .assignableId("x")
+                        .build(),
+                AddAssigneesToAssignablePayloadSelector::clientMutationId));
+        values.add(selector.addBlockedBy(
+                AddBlockedByPayloadBuilder.builder()
+                        .blockingIssueId("x")
+                        .issueId("x")
+                        .build(),
+                AddBlockedByPayloadSelector::clientMutationId));
+        values.add(selector.addCloseIssueReferences(
+                AddCloseIssueReferencesPayloadBuilder.builder()
+                        .issueId("x")
+                        .pullRequestIds(List.of("x"))
+                        .build(),
+                AddCloseIssueReferencesPayloadSelector::clientMutationId));
+        values.add(selector.addComment(
+                AddCommentPayloadBuilder.builder().body("x").subjectId("x").build(),
+                AddCommentPayloadSelector::clientMutationId));
+        values.add(selector.addDiscussionComment(
+                AddDiscussionCommentPayloadBuilder.builder()
+                        .body("x")
+                        .discussionId("x")
+                        .build(),
+                AddDiscussionCommentPayloadSelector::clientMutationId));
+        values.add(selector.addDiscussionPollVote(
+                AddDiscussionPollVotePayloadBuilder.builder().pollOptionId("x").build(),
+                AddDiscussionPollVotePayloadSelector::clientMutationId));
+        values.add(selector.addEnterpriseOrganizationMember(
+                AddEnterpriseOrganizationMemberPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .organizationId("x")
+                        .userIds(List.of("x"))
+                        .build(),
+                AddEnterpriseOrganizationMemberPayloadSelector::clientMutationId));
+        values.add(selector.addEnterpriseSupportEntitlement(
+                AddEnterpriseSupportEntitlementPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .login("x")
+                        .build(),
+                AddEnterpriseSupportEntitlementPayloadSelector::clientMutationId));
+        values.add(selector.addLabelsToLabelable(
+                AddLabelsToLabelablePayloadBuilder.builder().labelableId("x").build(),
+                AddLabelsToLabelablePayloadSelector::clientMutationId));
+        values.add(selector.addProjectCard(
+                AddProjectCardPayloadBuilder.builder().projectColumnId("x").build(),
+                AddProjectCardPayloadSelector::clientMutationId));
+        values.add(selector.addProjectColumn(
+                AddProjectColumnPayloadBuilder.builder()
+                        .name("x")
+                        .projectId("x")
+                        .build(),
+                AddProjectColumnPayloadSelector::clientMutationId));
+        values.add(selector.addProjectV2DraftIssue(
+                AddProjectV2DraftIssuePayloadBuilder.builder()
+                        .projectId("x")
+                        .title("x")
+                        .build(),
+                AddProjectV2DraftIssuePayloadSelector::clientMutationId));
+        values.add(selector.addProjectV2ItemById(
+                AddProjectV2ItemByIdPayloadBuilder.builder()
+                        .contentId("x")
+                        .projectId("x")
+                        .build(),
+                AddProjectV2ItemByIdPayloadSelector::clientMutationId));
+        values.add(selector.addPullRequestCreationCapBypassUsers(
+                AddPullRequestCreationCapBypassUsersPayloadBuilder.builder()
+                        .repositoryId("x")
+                        .userIds(List.of("x"))
+                        .build(),
+                AddPullRequestCreationCapBypassUsersPayloadSelector::clientMutationId));
+        values.add(selector.addPullRequestReview(
+                AddPullRequestReviewPayloadBuilder.builder().pullRequestId("x").build(),
+                AddPullRequestReviewPayloadSelector::clientMutationId));
+        values.add(selector.addPullRequestReviewComment(
+                AddPullRequestReviewCommentPayloadBuilder.builder().build(),
+                AddPullRequestReviewCommentPayloadSelector::clientMutationId));
+        values.add(selector.addPullRequestReviewThread(
+                AddPullRequestReviewThreadPayloadBuilder.builder().body("x").build(),
+                AddPullRequestReviewThreadPayloadSelector::clientMutationId));
+        values.add(selector.addPullRequestReviewThreadReply(
+                AddPullRequestReviewThreadReplyPayloadBuilder.builder()
+                        .body("x")
+                        .pullRequestReviewThreadId("x")
+                        .build(),
+                AddPullRequestReviewThreadReplyPayloadSelector::clientMutationId));
+        values.add(selector.addReaction(
+                AddReactionPayloadBuilder.builder()
+                        .content(ReactionContent.CONFUSED)
+                        .subjectId("x")
+                        .build(),
+                AddReactionPayloadSelector::clientMutationId));
+        values.add(selector.addRelatesTo(
+                AddRelatesToPayloadBuilder.builder()
+                        .issueId("x")
+                        .relatedIssueId("x")
+                        .build(),
+                AddRelatesToPayloadSelector::clientMutationId));
+        values.add(selector.addStar(
+                AddStarPayloadBuilder.builder().starrableId("x").build(), AddStarPayloadSelector::clientMutationId));
+        values.add(selector.addSubIssue(
+                AddSubIssuePayloadBuilder.builder().issueId("x").build(),
+                AddSubIssuePayloadSelector::clientMutationId));
+        values.add(selector.addUpvote(
+                AddUpvotePayloadBuilder.builder().subjectId("x").build(), AddUpvotePayloadSelector::clientMutationId));
+        values.add(selector.addVerifiableDomain(
+                AddVerifiableDomainPayloadBuilder.builder()
+                        .domain("x")
+                        .ownerId("x")
+                        .build(),
+                AddVerifiableDomainPayloadSelector::clientMutationId));
+        values.add(selector.applyPendingIssueSuggestions(
+                ApplyPendingIssueSuggestionsPayloadBuilder.builder()
+                        .actorId("x")
+                        .issueId("x")
+                        .suggestions(List.of(PendingIssueSuggestionRefBuilder.builder()
+                                .kind(PendingIssueSuggestionKind.ASSIGNEE)
+                                .build()))
+                        .build(),
+                ApplyPendingIssueSuggestionsPayloadSelector::clientMutationId));
+        values.add(selector.approveDeployments(
+                ApproveDeploymentsPayloadBuilder.builder()
+                        .environmentIds(List.of("x"))
+                        .workflowRunId("x")
+                        .build(),
+                ApproveDeploymentsPayloadSelector::clientMutationId));
+        values.add(selector.approveVerifiableDomain(
+                ApproveVerifiableDomainPayloadBuilder.builder().id("x").build(),
+                ApproveVerifiableDomainPayloadSelector::clientMutationId));
+        values.add(selector.archiveProjectV2Item(
+                ArchiveProjectV2ItemPayloadBuilder.builder()
+                        .itemId("x")
+                        .projectId("x")
+                        .build(),
+                ArchiveProjectV2ItemPayloadSelector::clientMutationId));
+        values.add(selector.archivePullRequest(
+                ArchivePullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                ArchivePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.archiveRepository(
+                ArchiveRepositoryPayloadBuilder.builder().repositoryId("x").build(),
+                ArchiveRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.cancelEnterpriseAdminInvitation(
+                CancelEnterpriseAdminInvitationPayloadBuilder.builder()
+                        .invitationId("x")
+                        .build(),
+                CancelEnterpriseAdminInvitationPayloadSelector::clientMutationId));
+        values.add(selector.cancelEnterpriseMemberInvitation(
+                CancelEnterpriseMemberInvitationPayloadBuilder.builder()
+                        .invitationId("x")
+                        .build(),
+                CancelEnterpriseMemberInvitationPayloadSelector::clientMutationId));
+        values.add(selector.cancelSponsorship(
+                CancelSponsorshipPayloadBuilder.builder().build(), CancelSponsorshipPayloadSelector::clientMutationId));
+        values.add(selector.changeUserStatus(
+                ChangeUserStatusPayloadBuilder.builder().build(), ChangeUserStatusPayloadSelector::clientMutationId));
+        values.add(selector.clearLabelsFromLabelable(
+                ClearLabelsFromLabelablePayloadBuilder.builder()
+                        .labelableId("x")
+                        .build(),
+                ClearLabelsFromLabelablePayloadSelector::clientMutationId));
+        values.add(selector.clearProjectV2ItemFieldValue(
+                ClearProjectV2ItemFieldValuePayloadBuilder.builder()
+                        .fieldId("x")
+                        .itemId("x")
+                        .projectId("x")
+                        .build(),
+                ClearProjectV2ItemFieldValuePayloadSelector::clientMutationId));
+        values.add(selector.cloneProject(
+                CloneProjectPayloadBuilder.builder()
+                        .includeWorkflows(true)
+                        .name("x")
+                        .sourceId("x")
+                        .targetOwnerId("x")
+                        .build(),
+                CloneProjectPayloadSelector::clientMutationId));
+        values.add(selector.cloneTemplateRepository(
+                CloneTemplateRepositoryPayloadBuilder.builder()
+                        .name("x")
+                        .ownerId("x")
+                        .repositoryId("x")
+                        .visibility(RepositoryVisibility.INTERNAL)
+                        .build(),
+                CloneTemplateRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.closeDiscussion(
+                CloseDiscussionPayloadBuilder.builder().discussionId("x").build(),
+                CloseDiscussionPayloadSelector::clientMutationId));
+        values.add(selector.closeIssue(
+                CloseIssuePayloadBuilder.builder().issueId("x").build(), CloseIssuePayloadSelector::clientMutationId));
+        values.add(selector.closePullRequest(
+                ClosePullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                ClosePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.convertProjectCardNoteToIssue(
+                ConvertProjectCardNoteToIssuePayloadBuilder.builder()
+                        .projectCardId("x")
+                        .repositoryId("x")
+                        .build(),
+                ConvertProjectCardNoteToIssuePayloadSelector::clientMutationId));
+        values.add(selector.convertProjectV2DraftIssueItemToIssue(
+                ConvertProjectV2DraftIssueItemToIssuePayloadBuilder.builder()
+                        .itemId("x")
+                        .repositoryId("x")
+                        .build(),
+                ConvertProjectV2DraftIssueItemToIssuePayloadSelector::clientMutationId));
+        values.add(selector.convertPullRequestToDraft(
+                ConvertPullRequestToDraftPayloadBuilder.builder()
+                        .pullRequestId("x")
+                        .build(),
+                ConvertPullRequestToDraftPayloadSelector::clientMutationId));
+        values.add(selector.copyProjectV2(
+                CopyProjectV2PayloadBuilder.builder()
+                        .ownerId("x")
+                        .projectId("x")
+                        .title("x")
+                        .build(),
+                CopyProjectV2PayloadSelector::clientMutationId));
+        values.add(selector.createAttributionInvitation(
+                CreateAttributionInvitationPayloadBuilder.builder()
+                        .ownerId("x")
+                        .sourceId("x")
+                        .targetId("x")
+                        .build(),
+                CreateAttributionInvitationPayloadSelector::clientMutationId));
+        values.add(selector.createBranchProtectionRule(
+                CreateBranchProtectionRulePayloadBuilder.builder()
+                        .pattern("x")
+                        .repositoryId("x")
+                        .build(),
+                CreateBranchProtectionRulePayloadSelector::clientMutationId));
+        values.add(selector.createCheckRun(
+                CreateCheckRunPayloadBuilder.builder()
+                        .headSha("x")
+                        .name("x")
+                        .repositoryId("x")
+                        .build(),
+                CreateCheckRunPayloadSelector::clientMutationId));
+        values.add(selector.createCheckSuite(
+                CreateCheckSuitePayloadBuilder.builder()
+                        .headSha("x")
+                        .repositoryId("x")
+                        .build(),
+                CreateCheckSuitePayloadSelector::clientMutationId));
+        values.add(selector.createCommitOnBranch(
+                CreateCommitOnBranchPayloadBuilder.builder()
+                        .branch(CommittableBranchBuilder.builder().build())
+                        .expectedHeadOid("x")
+                        .message(CommitMessageBuilder.builder().headline("x").build())
+                        .build(),
+                CreateCommitOnBranchPayloadSelector::clientMutationId));
+        values.add(selector.createDeployment(
+                CreateDeploymentPayloadBuilder.builder()
+                        .refId("x")
+                        .repositoryId("x")
+                        .build(),
+                CreateDeploymentPayloadSelector::autoMerged));
+        values.add(selector.createDeploymentStatus(
+                CreateDeploymentStatusPayloadBuilder.builder()
+                        .deploymentId("x")
+                        .state(DeploymentStatusState.ERROR)
+                        .build(),
+                CreateDeploymentStatusPayloadSelector::clientMutationId));
+        values.add(selector.createDiscussion(
+                CreateDiscussionPayloadBuilder.builder()
+                        .body("x")
+                        .categoryId("x")
+                        .repositoryId("x")
+                        .title("x")
+                        .build(),
+                CreateDiscussionPayloadSelector::clientMutationId));
+        values.add(selector.createEnterpriseOrganization(
+                CreateEnterpriseOrganizationPayloadBuilder.builder()
+                        .adminLogins(List.of("x"))
+                        .billingEmail("x")
+                        .enterpriseId("x")
+                        .login("x")
+                        .profileName("x")
+                        .build(),
+                CreateEnterpriseOrganizationPayloadSelector::clientMutationId));
+        values.add(selector.createEnvironment(
+                CreateEnvironmentPayloadBuilder.builder()
+                        .name("x")
+                        .repositoryId("x")
+                        .build(),
+                CreateEnvironmentPayloadSelector::clientMutationId));
+        values.add(selector.createIpAllowListEntry(
+                CreateIpAllowListEntryPayloadBuilder.builder()
+                        .allowListValue("x")
+                        .isActive(true)
+                        .ownerId("x")
+                        .build(),
+                CreateIpAllowListEntryPayloadSelector::clientMutationId));
+        values.add(selector.createIssue(
+                CreateIssuePayloadBuilder.builder().repositoryId("x").title("x").build(),
+                CreateIssuePayloadSelector::clientMutationId));
+        values.add(selector.createIssueField(
+                CreateIssueFieldPayloadBuilder.builder()
+                        .dataType(IssueFieldDataType.DATE)
+                        .name("x")
+                        .ownerId("x")
+                        .build(),
+                CreateIssueFieldPayloadSelector::clientMutationId));
+        values.add(selector.createIssueFieldValue(
+                CreateIssueFieldValuePayloadBuilder.builder()
+                        .issueField(IssueFieldCreateOrUpdateInputBuilder.builder()
+                                .fieldId("x")
+                                .build())
+                        .issueId("x")
+                        .build(),
+                CreateIssueFieldValuePayloadSelector::clientMutationId));
+        values.add(selector.createIssueType(
+                CreateIssueTypePayloadBuilder.builder()
+                        .isEnabled(true)
+                        .name("x")
+                        .ownerId("x")
+                        .build(),
+                CreateIssueTypePayloadSelector::clientMutationId));
+        values.add(selector.createLabel(
+                CreateLabelPayloadBuilder.builder()
+                        .color("x")
+                        .name("x")
+                        .repositoryId("x")
+                        .build(),
+                CreateLabelPayloadSelector::clientMutationId));
+        values.add(selector.createLinkedBranch(
+                CreateLinkedBranchPayloadBuilder.builder().issueId("x").oid("x").build(),
+                CreateLinkedBranchPayloadSelector::clientMutationId));
+        values.add(selector.createMigrationSource(
+                CreateMigrationSourcePayloadBuilder.builder()
+                        .name("x")
+                        .ownerId("x")
+                        .type(MigrationSourceType.AZURE_DEVOPS)
+                        .build(),
+                CreateMigrationSourcePayloadSelector::clientMutationId));
+        values.add(selector.createProject(
+                CreateProjectPayloadBuilder.builder().name("x").ownerId("x").build(),
+                CreateProjectPayloadSelector::clientMutationId));
+        values.add(selector.createProjectV2(
+                CreateProjectV2PayloadBuilder.builder().ownerId("x").title("x").build(),
+                CreateProjectV2PayloadSelector::clientMutationId));
+        values.add(selector.createProjectV2Field(
+                CreateProjectV2FieldPayloadBuilder.builder()
+                        .dataType(ProjectV2CustomFieldType.DATE)
+                        .name("x")
+                        .projectId("x")
+                        .build(),
+                CreateProjectV2FieldPayloadSelector::clientMutationId));
+        values.add(selector.createProjectV2IssueField(
+                CreateProjectV2IssueFieldPayloadBuilder.builder()
+                        .issueFieldId("x")
+                        .projectId("x")
+                        .build(),
+                CreateProjectV2IssueFieldPayloadSelector::clientMutationId));
+        values.add(selector.createProjectV2StatusUpdate(
+                CreateProjectV2StatusUpdatePayloadBuilder.builder()
+                        .projectId("x")
+                        .build(),
+                CreateProjectV2StatusUpdatePayloadSelector::clientMutationId));
+        values.add(selector.createProjectV2View(
+                CreateProjectV2ViewPayloadBuilder.builder()
+                        .layout(ProjectV2ViewLayout.BOARD_LAYOUT)
+                        .name("x")
+                        .projectId("x")
+                        .build(),
+                CreateProjectV2ViewPayloadSelector::clientMutationId));
+        values.add(selector.createPullRequest(
+                CreatePullRequestPayloadBuilder.builder()
+                        .baseRefName("x")
+                        .headRefName("x")
+                        .repositoryId("x")
+                        .title("x")
+                        .build(),
+                CreatePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.createRef(
+                CreateRefPayloadBuilder.builder()
+                        .name("x")
+                        .oid("x")
+                        .repositoryId("x")
+                        .build(),
+                CreateRefPayloadSelector::clientMutationId));
+        values.add(selector.createRepository(
+                CreateRepositoryPayloadBuilder.builder()
+                        .name("x")
+                        .visibility(RepositoryVisibility.INTERNAL)
+                        .build(),
+                CreateRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.createRepositoryCustomProperty(
+                CreateRepositoryCustomPropertyPayloadBuilder.builder()
+                        .propertyName("x")
+                        .sourceId("x")
+                        .valueType(CustomPropertyValueType.MULTI_SELECT)
+                        .build(),
+                CreateRepositoryCustomPropertyPayloadSelector::clientMutationId));
+        values.add(selector.createRepositoryRuleset(
+                CreateRepositoryRulesetPayloadBuilder.builder()
+                        .conditions(
+                                RepositoryRuleConditionsInputBuilder.builder().build())
+                        .enforcement(RuleEnforcement.ACTIVE)
+                        .name("x")
+                        .sourceId("x")
+                        .build(),
+                CreateRepositoryRulesetPayloadSelector::clientMutationId));
+        values.add(selector.createSponsorsListing(
+                CreateSponsorsListingPayloadBuilder.builder().build(),
+                CreateSponsorsListingPayloadSelector::clientMutationId));
+        values.add(selector.createSponsorsTier(
+                CreateSponsorsTierPayloadBuilder.builder()
+                        .amount(1)
+                        .description("x")
+                        .build(),
+                CreateSponsorsTierPayloadSelector::clientMutationId));
+        values.add(selector.createSponsorship(
+                CreateSponsorshipPayloadBuilder.builder().build(), CreateSponsorshipPayloadSelector::clientMutationId));
+        values.add(selector.createSponsorships(
+                CreateSponsorshipsPayloadBuilder.builder()
+                        .sponsorLogin("x")
+                        .sponsorships(List.of(
+                                BulkSponsorshipBuilder.builder().amount(1).build()))
+                        .build(),
+                CreateSponsorshipsPayloadSelector::clientMutationId));
+        values.add(selector.createUserList(
+                CreateUserListPayloadBuilder.builder().name("x").build(),
+                CreateUserListPayloadSelector::clientMutationId));
+        values.add(selector.declineTopicSuggestion(
+                DeclineTopicSuggestionPayloadBuilder.builder().build(),
+                DeclineTopicSuggestionPayloadSelector::clientMutationId));
+        values.add(selector.deleteBranchProtectionRule(
+                DeleteBranchProtectionRulePayloadBuilder.builder()
+                        .branchProtectionRuleId("x")
+                        .build(),
+                DeleteBranchProtectionRulePayloadSelector::clientMutationId));
+        values.add(selector.deleteDeployment(
+                DeleteDeploymentPayloadBuilder.builder().id("x").build(),
+                DeleteDeploymentPayloadSelector::clientMutationId));
+        values.add(selector.deleteDiscussion(
+                DeleteDiscussionPayloadBuilder.builder().id("x").build(),
+                DeleteDiscussionPayloadSelector::clientMutationId));
+        values.add(selector.deleteDiscussionComment(
+                DeleteDiscussionCommentPayloadBuilder.builder().id("x").build(),
+                DeleteDiscussionCommentPayloadSelector::clientMutationId));
+        values.add(selector.deleteEnvironment(
+                DeleteEnvironmentPayloadBuilder.builder().id("x").build(),
+                DeleteEnvironmentPayloadSelector::clientMutationId));
+        values.add(selector.deleteIpAllowListEntry(
+                DeleteIpAllowListEntryPayloadBuilder.builder()
+                        .ipAllowListEntryId("x")
+                        .build(),
+                DeleteIpAllowListEntryPayloadSelector::clientMutationId));
+        values.add(selector.deleteIssue(
+                DeleteIssuePayloadBuilder.builder().issueId("x").build(),
+                DeleteIssuePayloadSelector::clientMutationId));
+        values.add(selector.deleteIssueComment(
+                DeleteIssueCommentPayloadBuilder.builder().id("x").build(),
+                DeleteIssueCommentPayloadSelector::clientMutationId));
+        values.add(selector.deleteIssueField(
+                DeleteIssueFieldPayloadBuilder.builder().fieldId("x").build(),
+                DeleteIssueFieldPayloadSelector::clientMutationId));
+        values.add(selector.deleteIssueFieldValue(
+                DeleteIssueFieldValuePayloadBuilder.builder()
+                        .fieldId("x")
+                        .issueId("x")
+                        .build(),
+                DeleteIssueFieldValuePayloadSelector::clientMutationId));
+        values.add(selector.deleteIssueType(
+                DeleteIssueTypePayloadBuilder.builder().issueTypeId("x").build(),
+                DeleteIssueTypePayloadSelector::clientMutationId));
+        values.add(selector.deleteLabel(
+                DeleteLabelPayloadBuilder.builder().id("x").build(), DeleteLabelPayloadSelector::clientMutationId));
+        values.add(selector.deleteLinkedBranch(
+                DeleteLinkedBranchPayloadBuilder.builder().linkedBranchId("x").build(),
+                DeleteLinkedBranchPayloadSelector::clientMutationId));
+        values.add(selector.deletePackageVersion(
+                DeletePackageVersionPayloadBuilder.builder()
+                        .packageVersionId("x")
+                        .build(),
+                DeletePackageVersionPayloadSelector::clientMutationId));
+        values.add(selector.deleteProject(
+                DeleteProjectPayloadBuilder.builder().projectId("x").build(),
+                DeleteProjectPayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectCard(
+                DeleteProjectCardPayloadBuilder.builder().cardId("x").build(),
+                DeleteProjectCardPayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectColumn(
+                DeleteProjectColumnPayloadBuilder.builder().columnId("x").build(),
+                DeleteProjectColumnPayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectV2(
+                DeleteProjectV2PayloadBuilder.builder().projectId("x").build(),
+                DeleteProjectV2PayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectV2Field(
+                DeleteProjectV2FieldPayloadBuilder.builder().fieldId("x").build(),
+                DeleteProjectV2FieldPayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectV2Item(
+                DeleteProjectV2ItemPayloadBuilder.builder()
+                        .itemId("x")
+                        .projectId("x")
+                        .build(),
+                DeleteProjectV2ItemPayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectV2StatusUpdate(
+                DeleteProjectV2StatusUpdatePayloadBuilder.builder()
+                        .statusUpdateId("x")
+                        .build(),
+                DeleteProjectV2StatusUpdatePayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectV2View(
+                DeleteProjectV2ViewPayloadBuilder.builder().viewId("x").build(),
+                DeleteProjectV2ViewPayloadSelector::clientMutationId));
+        values.add(selector.deleteProjectV2Workflow(
+                DeleteProjectV2WorkflowPayloadBuilder.builder().workflowId("x").build(),
+                DeleteProjectV2WorkflowPayloadSelector::clientMutationId));
+        values.add(selector.deletePullRequestReview(
+                DeletePullRequestReviewPayloadBuilder.builder()
+                        .pullRequestReviewId("x")
+                        .build(),
+                DeletePullRequestReviewPayloadSelector::clientMutationId));
+        values.add(selector.deletePullRequestReviewComment(
+                DeletePullRequestReviewCommentPayloadBuilder.builder().id("x").build(),
+                DeletePullRequestReviewCommentPayloadSelector::clientMutationId));
+        values.add(selector.deleteRef(
+                DeleteRefPayloadBuilder.builder().refId("x").build(), DeleteRefPayloadSelector::clientMutationId));
+        values.add(selector.deleteRepositoryCustomProperty(
+                DeleteRepositoryCustomPropertyPayloadBuilder.builder().id("x").build(),
+                DeleteRepositoryCustomPropertyPayloadSelector::clientMutationId));
+        values.add(selector.deleteRepositoryRuleset(
+                DeleteRepositoryRulesetPayloadBuilder.builder()
+                        .repositoryRulesetId("x")
+                        .build(),
+                DeleteRepositoryRulesetPayloadSelector::clientMutationId));
+        values.add(selector.deleteUserList(
+                DeleteUserListPayloadBuilder.builder().listId("x").build(),
+                DeleteUserListPayloadSelector::clientMutationId));
+        values.add(selector.deleteVerifiableDomain(
+                DeleteVerifiableDomainPayloadBuilder.builder().id("x").build(),
+                DeleteVerifiableDomainPayloadSelector::clientMutationId));
+        values.add(selector.dequeuePullRequest(
+                DequeuePullRequestPayloadBuilder.builder().id("x").build(),
+                DequeuePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.disablePullRequestAutoMerge(
+                DisablePullRequestAutoMergePayloadBuilder.builder()
+                        .pullRequestId("x")
+                        .build(),
+                DisablePullRequestAutoMergePayloadSelector::clientMutationId));
+        values.add(selector.dismissPullRequestReview(
+                DismissPullRequestReviewPayloadBuilder.builder()
+                        .message("x")
+                        .pullRequestReviewId("x")
+                        .build(),
+                DismissPullRequestReviewPayloadSelector::clientMutationId));
+        values.add(selector.dismissRepositoryVulnerabilityAlert(
+                DismissRepositoryVulnerabilityAlertPayloadBuilder.builder()
+                        .dismissReason(DismissReason.FIX_STARTED)
+                        .repositoryVulnerabilityAlertId("x")
+                        .build(),
+                DismissRepositoryVulnerabilityAlertPayloadSelector::clientMutationId));
+        values.add(selector.enablePullRequestAutoMerge(
+                EnablePullRequestAutoMergePayloadBuilder.builder()
+                        .pullRequestId("x")
+                        .build(),
+                EnablePullRequestAutoMergePayloadSelector::clientMutationId));
+        values.add(selector.enqueuePullRequest(
+                EnqueuePullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                EnqueuePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.followOrganization(
+                FollowOrganizationPayloadBuilder.builder().organizationId("x").build(),
+                FollowOrganizationPayloadSelector::clientMutationId));
+        values.add(selector.followUser(
+                FollowUserPayloadBuilder.builder().userId("x").build(), FollowUserPayloadSelector::clientMutationId));
+        values.add(selector.grantEnterpriseOrganizationsMigratorRole(
+                GrantEnterpriseOrganizationsMigratorRolePayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .login("x")
+                        .build(),
+                GrantEnterpriseOrganizationsMigratorRolePayloadSelector::clientMutationId));
+        values.add(selector.grantMigratorRole(
+                GrantMigratorRolePayloadBuilder.builder()
+                        .actor("x")
+                        .actorType(ActorType.TEAM)
+                        .organizationId("x")
+                        .build(),
+                GrantMigratorRolePayloadSelector::clientMutationId));
+        values.add(selector.importProject(
+                ImportProjectPayloadBuilder.builder()
+                        .columnImports(List.of(ProjectColumnImportBuilder.builder()
+                                .columnName("x")
+                                .position(1)
+                                .build()))
+                        .name("x")
+                        .ownerName("x")
+                        .build(),
+                ImportProjectPayloadSelector::clientMutationId));
+        values.add(selector.inviteEnterpriseAdmin(
+                InviteEnterpriseAdminPayloadBuilder.builder().enterpriseId("x").build(),
+                InviteEnterpriseAdminPayloadSelector::clientMutationId));
+        values.add(selector.inviteEnterpriseMember(
+                InviteEnterpriseMemberPayloadBuilder.builder().enterpriseId("x").build(),
+                InviteEnterpriseMemberPayloadSelector::clientMutationId));
+        values.add(selector.linkProjectV2ToRepository(
+                LinkProjectV2ToRepositoryPayloadBuilder.builder()
+                        .projectId("x")
+                        .repositoryId("x")
+                        .build(),
+                LinkProjectV2ToRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.linkProjectV2ToTeam(
+                LinkProjectV2ToTeamPayloadBuilder.builder()
+                        .projectId("x")
+                        .teamId("x")
+                        .build(),
+                LinkProjectV2ToTeamPayloadSelector::clientMutationId));
+        values.add(selector.linkRepositoryToProject(
+                LinkRepositoryToProjectPayloadBuilder.builder()
+                        .projectId("x")
+                        .repositoryId("x")
+                        .build(),
+                LinkRepositoryToProjectPayloadSelector::clientMutationId));
+        values.add(selector.lockLockable(
+                LockLockablePayloadBuilder.builder().lockableId("x").build(),
+                LockLockablePayloadSelector::clientMutationId));
+        values.add(selector.markDiscussionCommentAsAnswer(
+                MarkDiscussionCommentAsAnswerPayloadBuilder.builder().id("x").build(),
+                MarkDiscussionCommentAsAnswerPayloadSelector::clientMutationId));
+        values.add(selector.markFileAsViewed(
+                MarkFileAsViewedPayloadBuilder.builder()
+                        .path("x")
+                        .pullRequestId("x")
+                        .build(),
+                MarkFileAsViewedPayloadSelector::clientMutationId));
+        values.add(selector.markProjectV2AsTemplate(
+                MarkProjectV2AsTemplatePayloadBuilder.builder().projectId("x").build(),
+                MarkProjectV2AsTemplatePayloadSelector::clientMutationId));
+        values.add(selector.markPullRequestReadyForReview(
+                MarkPullRequestReadyForReviewPayloadBuilder.builder()
+                        .pullRequestId("x")
+                        .build(),
+                MarkPullRequestReadyForReviewPayloadSelector::clientMutationId));
+        values.add(selector.mergeBranch(
+                MergeBranchPayloadBuilder.builder()
+                        .base("x")
+                        .head("x")
+                        .repositoryId("x")
+                        .build(),
+                MergeBranchPayloadSelector::clientMutationId));
+        values.add(selector.mergePullRequest(
+                MergePullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                MergePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.minimizeComment(
+                MinimizeCommentPayloadBuilder.builder()
+                        .classifier(ReportedContentClassifiers.ABUSE)
+                        .subjectId("x")
+                        .build(),
+                MinimizeCommentPayloadSelector::clientMutationId));
+        values.add(selector.moveProjectCard(
+                MoveProjectCardPayloadBuilder.builder()
+                        .cardId("x")
+                        .columnId("x")
+                        .build(),
+                MoveProjectCardPayloadSelector::clientMutationId));
+        values.add(selector.moveProjectColumn(
+                MoveProjectColumnPayloadBuilder.builder().columnId("x").build(),
+                MoveProjectColumnPayloadSelector::clientMutationId));
+        values.add(selector.pinEnvironment(
+                PinEnvironmentPayloadBuilder.builder()
+                        .environmentId("x")
+                        .pinned(true)
+                        .build(),
+                PinEnvironmentPayloadSelector::clientMutationId));
+        values.add(selector.pinIssue(
+                PinIssuePayloadBuilder.builder().issueId("x").build(), PinIssuePayloadSelector::clientMutationId));
+        values.add(selector.pinIssueComment(
+                PinIssueCommentPayloadBuilder.builder().issueCommentId("x").build(),
+                PinIssueCommentPayloadSelector::clientMutationId));
+        values.add(selector.promoteRepositoryCustomProperty(
+                PromoteRepositoryCustomPropertyPayloadBuilder.builder()
+                        .repositoryCustomPropertyId("x")
+                        .build(),
+                PromoteRepositoryCustomPropertyPayloadSelector::clientMutationId));
+        values.add(selector.publishSponsorsTier(
+                PublishSponsorsTierPayloadBuilder.builder().tierId("x").build(),
+                PublishSponsorsTierPayloadSelector::clientMutationId));
+        values.add(selector.regenerateEnterpriseIdentityProviderRecoveryCodes(
+                RegenerateEnterpriseIdentityProviderRecoveryCodesPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .build(),
+                RegenerateEnterpriseIdentityProviderRecoveryCodesPayloadSelector::clientMutationId));
+        values.add(selector.regenerateVerifiableDomainToken(
+                RegenerateVerifiableDomainTokenPayloadBuilder.builder().id("x").build(),
+                RegenerateVerifiableDomainTokenPayloadSelector::clientMutationId));
+        values.add(selector.rejectDeployments(
+                RejectDeploymentsPayloadBuilder.builder()
+                        .environmentIds(List.of("x"))
+                        .workflowRunId("x")
+                        .build(),
+                RejectDeploymentsPayloadSelector::clientMutationId));
+        values.add(selector.rejectPendingIssueSuggestions(
+                RejectPendingIssueSuggestionsPayloadBuilder.builder()
+                        .actorId("x")
+                        .issueId("x")
+                        .suggestions(List.of(PendingIssueSuggestionRefBuilder.builder()
+                                .kind(PendingIssueSuggestionKind.ASSIGNEE)
+                                .build()))
+                        .build(),
+                RejectPendingIssueSuggestionsPayloadSelector::clientMutationId));
+        values.add(selector.removeAssigneesFromAssignable(
+                RemoveAssigneesFromAssignablePayloadBuilder.builder()
+                        .assignableId("x")
+                        .assigneeIds(List.of("x"))
+                        .build(),
+                RemoveAssigneesFromAssignablePayloadSelector::clientMutationId));
+        values.add(selector.removeBlockedBy(
+                RemoveBlockedByPayloadBuilder.builder()
+                        .blockingIssueId("x")
+                        .issueId("x")
+                        .build(),
+                RemoveBlockedByPayloadSelector::clientMutationId));
+        values.add(selector.removeCloseIssueReferences(
+                RemoveCloseIssueReferencesPayloadBuilder.builder()
+                        .issueId("x")
+                        .pullRequestIds(List.of("x"))
+                        .build(),
+                RemoveCloseIssueReferencesPayloadSelector::clientMutationId));
+        values.add(selector.removeEnterpriseAdmin(
+                RemoveEnterpriseAdminPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .login("x")
+                        .build(),
+                RemoveEnterpriseAdminPayloadSelector::clientMutationId));
+        values.add(selector.removeEnterpriseIdentityProvider(
+                RemoveEnterpriseIdentityProviderPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .build(),
+                RemoveEnterpriseIdentityProviderPayloadSelector::clientMutationId));
+        values.add(selector.removeEnterpriseMember(
+                RemoveEnterpriseMemberPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .userId("x")
+                        .build(),
+                RemoveEnterpriseMemberPayloadSelector::clientMutationId));
+        values.add(selector.removeEnterpriseOrganization(
+                RemoveEnterpriseOrganizationPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .organizationId("x")
+                        .build(),
+                RemoveEnterpriseOrganizationPayloadSelector::clientMutationId));
+        values.add(selector.removeEnterpriseSupportEntitlement(
+                RemoveEnterpriseSupportEntitlementPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .login("x")
+                        .build(),
+                RemoveEnterpriseSupportEntitlementPayloadSelector::clientMutationId));
+        values.add(selector.removeLabelsFromLabelable(
+                RemoveLabelsFromLabelablePayloadBuilder.builder()
+                        .labelIds(List.of("x"))
+                        .labelableId("x")
+                        .build(),
+                RemoveLabelsFromLabelablePayloadSelector::clientMutationId));
+        values.add(selector.removeOutsideCollaborator(
+                RemoveOutsideCollaboratorPayloadBuilder.builder()
+                        .organizationId("x")
+                        .userId("x")
+                        .build(),
+                RemoveOutsideCollaboratorPayloadSelector::clientMutationId));
+        values.add(selector.removePullRequestCreationCapBypassUsers(
+                RemovePullRequestCreationCapBypassUsersPayloadBuilder.builder()
+                        .repositoryId("x")
+                        .userIds(List.of("x"))
+                        .build(),
+                RemovePullRequestCreationCapBypassUsersPayloadSelector::clientMutationId));
+        values.add(selector.removeReaction(
+                RemoveReactionPayloadBuilder.builder()
+                        .content(ReactionContent.CONFUSED)
+                        .subjectId("x")
+                        .build(),
+                RemoveReactionPayloadSelector::clientMutationId));
+        values.add(selector.removeRelatesTo(
+                RemoveRelatesToPayloadBuilder.builder()
+                        .issueId("x")
+                        .relatedIssueId("x")
+                        .build(),
+                RemoveRelatesToPayloadSelector::clientMutationId));
+        values.add(selector.removeStar(
+                RemoveStarPayloadBuilder.builder().starrableId("x").build(),
+                RemoveStarPayloadSelector::clientMutationId));
+        values.add(selector.removeSubIssue(
+                RemoveSubIssuePayloadBuilder.builder()
+                        .issueId("x")
+                        .subIssueId("x")
+                        .build(),
+                RemoveSubIssuePayloadSelector::clientMutationId));
+        values.add(selector.removeUpvote(
+                RemoveUpvotePayloadBuilder.builder().subjectId("x").build(),
+                RemoveUpvotePayloadSelector::clientMutationId));
+        values.add(selector.reopenDiscussion(
+                ReopenDiscussionPayloadBuilder.builder().discussionId("x").build(),
+                ReopenDiscussionPayloadSelector::clientMutationId));
+        values.add(selector.reopenIssue(
+                ReopenIssuePayloadBuilder.builder().issueId("x").build(),
+                ReopenIssuePayloadSelector::clientMutationId));
+        values.add(selector.reopenPullRequest(
+                ReopenPullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                ReopenPullRequestPayloadSelector::clientMutationId));
+        values.add(selector.reorderEnvironment(
+                ReorderEnvironmentPayloadBuilder.builder()
+                        .environmentId("x")
+                        .position(1)
+                        .build(),
+                ReorderEnvironmentPayloadSelector::clientMutationId));
+        values.add(selector.replaceActorsForAssignable(
+                ReplaceActorsForAssignablePayloadBuilder.builder()
+                        .assignableId("x")
+                        .build(),
+                ReplaceActorsForAssignablePayloadSelector::clientMutationId));
+        values.add(selector.reprioritizeSubIssue(
+                ReprioritizeSubIssuePayloadBuilder.builder()
+                        .issueId("x")
+                        .subIssueId("x")
+                        .build(),
+                ReprioritizeSubIssuePayloadSelector::clientMutationId));
+        values.add(selector.requestReviews(
+                RequestReviewsPayloadBuilder.builder().pullRequestId("x").build(),
+                RequestReviewsPayloadSelector::clientMutationId));
+        values.add(selector.requestReviewsByLogin(
+                RequestReviewsByLoginPayloadBuilder.builder().pullRequestId("x").build(),
+                RequestReviewsByLoginPayloadSelector::clientMutationId));
+        values.add(selector.rerequestCheckSuite(
+                RerequestCheckSuitePayloadBuilder.builder()
+                        .checkSuiteId("x")
+                        .repositoryId("x")
+                        .build(),
+                RerequestCheckSuitePayloadSelector::clientMutationId));
+        values.add(selector.rerequestReviews(
+                RerequestReviewsPayloadBuilder.builder().pullRequestId("x").build(),
+                RerequestReviewsPayloadSelector::clientMutationId));
+        values.add(selector.resolveReviewThread(
+                ResolveReviewThreadPayloadBuilder.builder().threadId("x").build(),
+                ResolveReviewThreadPayloadSelector::clientMutationId));
+        values.add(selector.retireSponsorsTier(
+                RetireSponsorsTierPayloadBuilder.builder().tierId("x").build(),
+                RetireSponsorsTierPayloadSelector::clientMutationId));
+        values.add(selector.revertPullRequest(
+                RevertPullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                RevertPullRequestPayloadSelector::clientMutationId));
+        values.add(selector.revokeEnterpriseOrganizationsMigratorRole(
+                RevokeEnterpriseOrganizationsMigratorRolePayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .login("x")
+                        .build(),
+                RevokeEnterpriseOrganizationsMigratorRolePayloadSelector::clientMutationId));
+        values.add(selector.revokeMigratorRole(
+                RevokeMigratorRolePayloadBuilder.builder()
+                        .actor("x")
+                        .actorType(ActorType.TEAM)
+                        .organizationId("x")
+                        .build(),
+                RevokeMigratorRolePayloadSelector::clientMutationId));
+        values.add(selector.setEnterpriseIdentityProvider(
+                SetEnterpriseIdentityProviderPayloadBuilder.builder()
+                        .digestMethod(SamlDigestAlgorithm.SHA1)
+                        .enterpriseId("x")
+                        .idpCertificate("x")
+                        .signatureMethod(SamlSignatureAlgorithm.RSA_SHA1)
+                        .ssoUrl("x")
+                        .build(),
+                SetEnterpriseIdentityProviderPayloadSelector::clientMutationId));
+        values.add(selector.setIssueFieldValue(
+                SetIssueFieldValuePayloadBuilder.builder()
+                        .issueFields(List.of(IssueFieldCreateOrUpdateInputBuilder.builder()
+                                .fieldId("x")
+                                .build()))
+                        .issueId("x")
+                        .build(),
+                SetIssueFieldValuePayloadSelector::clientMutationId));
+        values.add(selector.setOrganizationInteractionLimit(
+                SetOrganizationInteractionLimitPayloadBuilder.builder()
+                        .limit(RepositoryInteractionLimit.COLLABORATORS_ONLY)
+                        .organizationId("x")
+                        .build(),
+                SetOrganizationInteractionLimitPayloadSelector::clientMutationId));
+        values.add(selector.setRepositoryCustomPropertyValues(
+                SetRepositoryCustomPropertyValuesPayloadBuilder.builder()
+                        .properties(List.of(CustomPropertyValueInputBuilder.builder()
+                                .propertyName("x")
+                                .build()))
+                        .repositoryId("x")
+                        .build(),
+                SetRepositoryCustomPropertyValuesPayloadSelector::clientMutationId));
+        values.add(selector.setRepositoryInteractionLimit(
+                SetRepositoryInteractionLimitPayloadBuilder.builder()
+                        .limit(RepositoryInteractionLimit.COLLABORATORS_ONLY)
+                        .repositoryId("x")
+                        .build(),
+                SetRepositoryInteractionLimitPayloadSelector::clientMutationId));
+        values.add(selector.setUserInteractionLimit(
+                SetUserInteractionLimitPayloadBuilder.builder()
+                        .limit(RepositoryInteractionLimit.COLLABORATORS_ONLY)
+                        .userId("x")
+                        .build(),
+                SetUserInteractionLimitPayloadSelector::clientMutationId));
+        values.add(selector.startOrganizationMigration(
+                StartOrganizationMigrationPayloadBuilder.builder()
+                        .sourceAccessToken("x")
+                        .sourceOrgUrl("x")
+                        .targetEnterpriseId("x")
+                        .targetOrgName("x")
+                        .build(),
+                StartOrganizationMigrationPayloadSelector::clientMutationId));
+        values.add(selector.startRepositoryMigration(
+                StartRepositoryMigrationPayloadBuilder.builder()
+                        .ownerId("x")
+                        .repositoryName("x")
+                        .sourceId("x")
+                        .sourceRepositoryUrl("x")
+                        .build(),
+                StartRepositoryMigrationPayloadSelector::clientMutationId));
+        values.add(selector.submitPullRequestReview(
+                SubmitPullRequestReviewPayloadBuilder.builder()
+                        .event(PullRequestReviewEvent.APPROVE)
+                        .build(),
+                SubmitPullRequestReviewPayloadSelector::clientMutationId));
+        values.add(selector.transferEnterpriseOrganization(
+                TransferEnterpriseOrganizationPayloadBuilder.builder()
+                        .destinationEnterpriseId("x")
+                        .organizationId("x")
+                        .build(),
+                TransferEnterpriseOrganizationPayloadSelector::clientMutationId));
+        values.add(selector.transferIssue(
+                TransferIssuePayloadBuilder.builder()
+                        .issueId("x")
+                        .repositoryId("x")
+                        .build(),
+                TransferIssuePayloadSelector::clientMutationId));
+        values.add(selector.unarchiveProjectV2Item(
+                UnarchiveProjectV2ItemPayloadBuilder.builder()
+                        .itemId("x")
+                        .projectId("x")
+                        .build(),
+                UnarchiveProjectV2ItemPayloadSelector::clientMutationId));
+        values.add(selector.unarchivePullRequest(
+                UnarchivePullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                UnarchivePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.unarchiveRepository(
+                UnarchiveRepositoryPayloadBuilder.builder().repositoryId("x").build(),
+                UnarchiveRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.unfollowOrganization(
+                UnfollowOrganizationPayloadBuilder.builder().organizationId("x").build(),
+                UnfollowOrganizationPayloadSelector::clientMutationId));
+        values.add(selector.unfollowUser(
+                UnfollowUserPayloadBuilder.builder().userId("x").build(),
+                UnfollowUserPayloadSelector::clientMutationId));
+        values.add(selector.unlinkProjectV2FromRepository(
+                UnlinkProjectV2FromRepositoryPayloadBuilder.builder()
+                        .projectId("x")
+                        .repositoryId("x")
+                        .build(),
+                UnlinkProjectV2FromRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.unlinkProjectV2FromTeam(
+                UnlinkProjectV2FromTeamPayloadBuilder.builder()
+                        .projectId("x")
+                        .teamId("x")
+                        .build(),
+                UnlinkProjectV2FromTeamPayloadSelector::clientMutationId));
+        values.add(selector.unlinkRepositoryFromProject(
+                UnlinkRepositoryFromProjectPayloadBuilder.builder()
+                        .projectId("x")
+                        .repositoryId("x")
+                        .build(),
+                UnlinkRepositoryFromProjectPayloadSelector::clientMutationId));
+        values.add(selector.unlockLockable(
+                UnlockLockablePayloadBuilder.builder().lockableId("x").build(),
+                UnlockLockablePayloadSelector::clientMutationId));
+        values.add(selector.unmarkDiscussionCommentAsAnswer(
+                UnmarkDiscussionCommentAsAnswerPayloadBuilder.builder().id("x").build(),
+                UnmarkDiscussionCommentAsAnswerPayloadSelector::clientMutationId));
+        values.add(selector.unmarkFileAsViewed(
+                UnmarkFileAsViewedPayloadBuilder.builder()
+                        .path("x")
+                        .pullRequestId("x")
+                        .build(),
+                UnmarkFileAsViewedPayloadSelector::clientMutationId));
+        values.add(selector.unmarkIssueAsDuplicate(
+                UnmarkIssueAsDuplicatePayloadBuilder.builder()
+                        .canonicalId("x")
+                        .duplicateId("x")
+                        .build(),
+                UnmarkIssueAsDuplicatePayloadSelector::clientMutationId));
+        values.add(selector.unmarkProjectV2AsTemplate(
+                UnmarkProjectV2AsTemplatePayloadBuilder.builder().projectId("x").build(),
+                UnmarkProjectV2AsTemplatePayloadSelector::clientMutationId));
+        values.add(selector.unminimizeComment(
+                UnminimizeCommentPayloadBuilder.builder().subjectId("x").build(),
+                UnminimizeCommentPayloadSelector::clientMutationId));
+        values.add(selector.unpinIssue(
+                UnpinIssuePayloadBuilder.builder().issueId("x").build(), UnpinIssuePayloadSelector::clientMutationId));
+        values.add(selector.unpinIssueComment(
+                UnpinIssueCommentPayloadBuilder.builder().issueCommentId("x").build(),
+                UnpinIssueCommentPayloadSelector::clientMutationId));
+        values.add(selector.unresolveReviewThread(
+                UnresolveReviewThreadPayloadBuilder.builder().threadId("x").build(),
+                UnresolveReviewThreadPayloadSelector::clientMutationId));
+        values.add(selector.updateBranchProtectionRule(
+                UpdateBranchProtectionRulePayloadBuilder.builder()
+                        .branchProtectionRuleId("x")
+                        .build(),
+                UpdateBranchProtectionRulePayloadSelector::clientMutationId));
+        values.add(selector.updateCheckRun(
+                UpdateCheckRunPayloadBuilder.builder()
+                        .checkRunId("x")
+                        .repositoryId("x")
+                        .build(),
+                UpdateCheckRunPayloadSelector::clientMutationId));
+        values.add(selector.updateCheckSuitePreferences(
+                UpdateCheckSuitePreferencesPayloadBuilder.builder()
+                        .autoTriggerPreferences(List.of(CheckSuiteAutoTriggerPreferenceBuilder.builder()
+                                .appId("x")
+                                .setting(true)
+                                .build()))
+                        .repositoryId("x")
+                        .build(),
+                UpdateCheckSuitePreferencesPayloadSelector::clientMutationId));
+        values.add(selector.updateDiscussion(
+                UpdateDiscussionPayloadBuilder.builder().discussionId("x").build(),
+                UpdateDiscussionPayloadSelector::clientMutationId));
+        values.add(selector.updateDiscussionComment(
+                UpdateDiscussionCommentPayloadBuilder.builder()
+                        .body("x")
+                        .commentId("x")
+                        .build(),
+                UpdateDiscussionCommentPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseAdministratorRole(
+                UpdateEnterpriseAdministratorRolePayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .login("x")
+                        .role(EnterpriseAdministratorRole.BILLING_MANAGER)
+                        .build(),
+                UpdateEnterpriseAdministratorRolePayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseAllowPrivateRepositoryForkingSetting(
+                UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseDefaultRepositoryPermissionSetting(
+                UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseDefaultRepositoryPermissionSettingValue.ADMIN)
+                        .build(),
+                UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseDeployKeySetting(
+                UpdateEnterpriseDeployKeySettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseDeployKeySettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanChangeRepositoryVisibilitySetting(
+                UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanCreateRepositoriesSetting(
+                UpdateEnterpriseMembersCanCreateRepositoriesSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .build(),
+                UpdateEnterpriseMembersCanCreateRepositoriesSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanDeleteIssuesSetting(
+                UpdateEnterpriseMembersCanDeleteIssuesSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseMembersCanDeleteIssuesSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanDeleteRepositoriesSetting(
+                UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanInviteCollaboratorsSetting(
+                UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanMakePurchasesSetting(
+                UpdateEnterpriseMembersCanMakePurchasesSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseMembersCanMakePurchasesSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseMembersCanMakePurchasesSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanUpdateProtectedBranchesSetting(
+                UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseMembersCanViewDependencyInsightsSetting(
+                UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseOrganizationProjectsSetting(
+                UpdateEnterpriseOrganizationProjectsSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseOrganizationProjectsSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseOwnerOrganizationRole(
+                UpdateEnterpriseOwnerOrganizationRolePayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .organizationId("x")
+                        .organizationRole(RoleInOrganization.DIRECT_MEMBER)
+                        .build(),
+                UpdateEnterpriseOwnerOrganizationRolePayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseProfile(
+                UpdateEnterpriseProfilePayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .build(),
+                UpdateEnterpriseProfilePayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseRepositoryProjectsSetting(
+                UpdateEnterpriseRepositoryProjectsSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
+                        .build(),
+                UpdateEnterpriseRepositoryProjectsSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting(
+                UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseDisallowedMethodsSettingValue.INSECURE)
+                        .build(),
+                UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseTwoFactorAuthenticationRequiredSetting(
+                UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .settingValue(EnterpriseEnabledSettingValue.ENABLED)
+                        .build(),
+                UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnvironment(
+                UpdateEnvironmentPayloadBuilder.builder().environmentId("x").build(),
+                UpdateEnvironmentPayloadSelector::clientMutationId));
+        values.add(selector.updateIpAllowListEnabledSetting(
+                UpdateIpAllowListEnabledSettingPayloadBuilder.builder()
+                        .ownerId("x")
+                        .settingValue(IpAllowListEnabledSettingValue.DISABLED)
+                        .build(),
+                UpdateIpAllowListEnabledSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateIpAllowListEntry(
+                UpdateIpAllowListEntryPayloadBuilder.builder()
+                        .allowListValue("x")
+                        .ipAllowListEntryId("x")
+                        .isActive(true)
+                        .build(),
+                UpdateIpAllowListEntryPayloadSelector::clientMutationId));
+        values.add(selector.updateIpAllowListForInstalledAppsEnabledSetting(
+                UpdateIpAllowListForInstalledAppsEnabledSettingPayloadBuilder.builder()
+                        .ownerId("x")
+                        .settingValue(IpAllowListForInstalledAppsEnabledSettingValue.DISABLED)
+                        .build(),
+                UpdateIpAllowListForInstalledAppsEnabledSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateIpAllowListUserLevelEnforcementEnabledSetting(
+                UpdateIpAllowListUserLevelEnforcementEnabledSettingPayloadBuilder.builder()
+                        .ownerId("x")
+                        .settingValue(IpAllowListUserLevelEnforcementEnabledSettingValue.DISABLED)
+                        .build(),
+                UpdateIpAllowListUserLevelEnforcementEnabledSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateIssue(
+                UpdateIssuePayloadBuilder.builder().id("x").build(), UpdateIssuePayloadSelector::clientMutationId));
+        values.add(selector.updateIssueComment(
+                UpdateIssueCommentPayloadBuilder.builder().body("x").id("x").build(),
+                UpdateIssueCommentPayloadSelector::clientMutationId));
+        values.add(selector.updateIssueField(
+                UpdateIssueFieldPayloadBuilder.builder().id("x").build(),
+                UpdateIssueFieldPayloadSelector::clientMutationId));
+        values.add(selector.updateIssueFieldValue(
+                UpdateIssueFieldValuePayloadBuilder.builder()
+                        .issueField(IssueFieldCreateOrUpdateInputBuilder.builder()
+                                .fieldId("x")
+                                .build())
+                        .issueId("x")
+                        .build(),
+                UpdateIssueFieldValuePayloadSelector::clientMutationId));
+        values.add(selector.updateIssueIssueType(
+                UpdateIssueIssueTypePayloadBuilder.builder().issueId("x").build(),
+                UpdateIssueIssueTypePayloadSelector::clientMutationId));
+        values.add(selector.updateIssueType(
+                UpdateIssueTypePayloadBuilder.builder().issueTypeId("x").build(),
+                UpdateIssueTypePayloadSelector::clientMutationId));
+        values.add(selector.updateLabel(
+                UpdateLabelPayloadBuilder.builder().id("x").build(), UpdateLabelPayloadSelector::clientMutationId));
+        values.add(selector.updateNotificationRestrictionSetting(
+                UpdateNotificationRestrictionSettingPayloadBuilder.builder()
+                        .ownerId("x")
+                        .settingValue(NotificationRestrictionSettingValue.DISABLED)
+                        .build(),
+                UpdateNotificationRestrictionSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateOrganizationAllowPrivateRepositoryForkingSetting(
+                UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadBuilder.builder()
+                        .forkingEnabled(true)
+                        .organizationId("x")
+                        .build(),
+                UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateOrganizationWebCommitSignoffSetting(
+                UpdateOrganizationWebCommitSignoffSettingPayloadBuilder.builder()
+                        .organizationId("x")
+                        .webCommitSignoffRequired(true)
+                        .build(),
+                UpdateOrganizationWebCommitSignoffSettingPayloadSelector::clientMutationId));
+        values.add(selector.updatePatreonSponsorability(
+                UpdatePatreonSponsorabilityPayloadBuilder.builder()
+                        .enablePatreonSponsorships(true)
+                        .build(),
+                UpdatePatreonSponsorabilityPayloadSelector::clientMutationId));
+        values.add(selector.updateProject(
+                UpdateProjectPayloadBuilder.builder().projectId("x").build(),
+                UpdateProjectPayloadSelector::clientMutationId));
+        values.add(selector.updateProjectCard(
+                UpdateProjectCardPayloadBuilder.builder().projectCardId("x").build(),
+                UpdateProjectCardPayloadSelector::clientMutationId));
+        values.add(selector.updateProjectColumn(
+                UpdateProjectColumnPayloadBuilder.builder()
+                        .name("x")
+                        .projectColumnId("x")
+                        .build(),
+                UpdateProjectColumnPayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2(
+                UpdateProjectV2PayloadBuilder.builder().projectId("x").build(),
+                UpdateProjectV2PayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2Collaborators(
+                UpdateProjectV2CollaboratorsPayloadBuilder.builder()
+                        .collaborators(List.of(ProjectV2CollaboratorBuilder.builder()
+                                .role(ProjectV2Roles.ADMIN)
+                                .build()))
+                        .projectId("x")
+                        .build(),
+                UpdateProjectV2CollaboratorsPayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2DraftIssue(
+                UpdateProjectV2DraftIssuePayloadBuilder.builder()
+                        .draftIssueId("x")
+                        .build(),
+                UpdateProjectV2DraftIssuePayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2Field(
+                UpdateProjectV2FieldPayloadBuilder.builder().fieldId("x").build(),
+                UpdateProjectV2FieldPayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2ItemFieldValue(
+                UpdateProjectV2ItemFieldValuePayloadBuilder.builder()
+                        .fieldId("x")
+                        .itemId("x")
+                        .projectId("x")
+                        .value(ProjectV2FieldValueBuilder.builder().build())
+                        .build(),
+                UpdateProjectV2ItemFieldValuePayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2ItemPosition(
+                UpdateProjectV2ItemPositionPayloadBuilder.builder()
+                        .itemId("x")
+                        .projectId("x")
+                        .build(),
+                UpdateProjectV2ItemPositionPayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2StatusUpdate(
+                UpdateProjectV2StatusUpdatePayloadBuilder.builder()
+                        .statusUpdateId("x")
+                        .build(),
+                UpdateProjectV2StatusUpdatePayloadSelector::clientMutationId));
+        values.add(selector.updateProjectV2View(
+                UpdateProjectV2ViewPayloadBuilder.builder().viewId("x").build(),
+                UpdateProjectV2ViewPayloadSelector::clientMutationId));
+        values.add(selector.updatePullRequest(
+                UpdatePullRequestPayloadBuilder.builder().pullRequestId("x").build(),
+                UpdatePullRequestPayloadSelector::clientMutationId));
+        values.add(selector.updatePullRequestBranch(
+                UpdatePullRequestBranchPayloadBuilder.builder()
+                        .pullRequestId("x")
+                        .build(),
+                UpdatePullRequestBranchPayloadSelector::clientMutationId));
+        values.add(selector.updatePullRequestReview(
+                UpdatePullRequestReviewPayloadBuilder.builder()
+                        .body("x")
+                        .pullRequestReviewId("x")
+                        .build(),
+                UpdatePullRequestReviewPayloadSelector::clientMutationId));
+        values.add(selector.updatePullRequestReviewComment(
+                UpdatePullRequestReviewCommentPayloadBuilder.builder()
+                        .body("x")
+                        .pullRequestReviewCommentId("x")
+                        .build(),
+                UpdatePullRequestReviewCommentPayloadSelector::clientMutationId));
+        values.add(selector.updateRef(
+                UpdateRefPayloadBuilder.builder().oid("x").refId("x").build(),
+                UpdateRefPayloadSelector::clientMutationId));
+        values.add(selector.updateRefs(
+                UpdateRefsPayloadBuilder.builder()
+                        .refUpdates(List.of(RefUpdateBuilder.builder()
+                                .afterOid("x")
+                                .name("x")
+                                .build()))
+                        .repositoryId("x")
+                        .build(),
+                UpdateRefsPayloadSelector::clientMutationId));
+        values.add(selector.updateRepository(
+                UpdateRepositoryPayloadBuilder.builder().repositoryId("x").build(),
+                UpdateRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.updateRepositoryCustomProperty(
+                UpdateRepositoryCustomPropertyPayloadBuilder.builder()
+                        .repositoryCustomPropertyId("x")
+                        .build(),
+                UpdateRepositoryCustomPropertyPayloadSelector::clientMutationId));
+        values.add(selector.updateRepositoryRuleset(
+                UpdateRepositoryRulesetPayloadBuilder.builder()
+                        .repositoryRulesetId("x")
+                        .build(),
+                UpdateRepositoryRulesetPayloadSelector::clientMutationId));
+        values.add(selector.updateRepositoryWebCommitSignoffSetting(
+                UpdateRepositoryWebCommitSignoffSettingPayloadBuilder.builder()
+                        .repositoryId("x")
+                        .webCommitSignoffRequired(true)
+                        .build(),
+                UpdateRepositoryWebCommitSignoffSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateSponsorshipPreferences(
+                UpdateSponsorshipPreferencesPayloadBuilder.builder().build(),
+                UpdateSponsorshipPreferencesPayloadSelector::clientMutationId));
+        values.add(selector.updateSubscription(
+                UpdateSubscriptionPayloadBuilder.builder()
+                        .state(SubscriptionState.IGNORED)
+                        .subscribableId("x")
+                        .build(),
+                UpdateSubscriptionPayloadSelector::clientMutationId));
+        values.add(selector.updateTeamReviewAssignment(
+                UpdateTeamReviewAssignmentPayloadBuilder.builder()
+                        .enabled(true)
+                        .id("x")
+                        .build(),
+                UpdateTeamReviewAssignmentPayloadSelector::clientMutationId));
+        values.add(selector.updateTeamsRepository(
+                UpdateTeamsRepositoryPayloadBuilder.builder()
+                        .permission(RepositoryPermission.ADMIN)
+                        .repositoryId("x")
+                        .teamIds(List.of("x"))
+                        .build(),
+                UpdateTeamsRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.updateTopics(
+                UpdateTopicsPayloadBuilder.builder()
+                        .repositoryId("x")
+                        .topicNames(List.of("x"))
+                        .build(),
+                UpdateTopicsPayloadSelector::clientMutationId));
+        values.add(selector.updateUserList(
+                UpdateUserListPayloadBuilder.builder().listId("x").build(),
+                UpdateUserListPayloadSelector::clientMutationId));
+        values.add(selector.updateUserListsForItem(
+                UpdateUserListsForItemPayloadBuilder.builder()
+                        .itemId("x")
+                        .listIds(List.of("x"))
+                        .build(),
+                UpdateUserListsForItemPayloadSelector::clientMutationId));
+        values.add(selector.verifyVerifiableDomain(
+                VerifyVerifiableDomainPayloadBuilder.builder().id("x").build(),
+                VerifyVerifiableDomainPayloadSelector::clientMutationId));
+        return values;
+    }
+
+    @Test
+    void read_shouldMapEveryField_whenTheResponseHasAllValues() {
+        final FieldSelection root = FieldSelection.root();
+        readWithArguments(new MutationSelectorImpl(new RecordingCursor(root)));
+        final MutationSelectorImpl selector =
+                new MutationSelectorImpl(new MappingCursor(MAPPER.readTree(RESPONSE), root));
+
+        final List<Object> values = readWithArguments(selector);
+
+        assertThat(values)
+                .containsExactly(
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", true,
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x");
+    }
+}

@@ -1,0 +1,59 @@
+package io.github.piotr_janczukowicz.github.graphql.model;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.Assertions.entry;
+
+import io.github.piotr_janczukowicz.testsupport.UnitTest;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class RemoveRelatesToPayloadTest {
+
+    @Test
+    void constructor_shouldFail_whenIssueIdIsNull() {
+        final RemoveRelatesToPayloadBuilder builder =
+                RemoveRelatesToPayloadBuilder.builder().relatedIssueId("x");
+
+        final Throwable thrown = catchThrowable(builder::build);
+
+        assertThat(thrown).isInstanceOf(NullPointerException.class).hasMessage("issueId must not be null");
+    }
+
+    @Test
+    void constructor_shouldFail_whenRelatedIssueIdIsNull() {
+        final RemoveRelatesToPayloadBuilder builder =
+                RemoveRelatesToPayloadBuilder.builder().issueId("x");
+
+        final Throwable thrown = catchThrowable(builder::build);
+
+        assertThat(thrown).isInstanceOf(NullPointerException.class).hasMessage("relatedIssueId must not be null");
+    }
+
+    @Test
+    void toVariable_shouldContainOnlyTheRequiredFields_whenNothingElseIsSet() {
+        final RemoveRelatesToPayload input = RemoveRelatesToPayloadBuilder.builder()
+                .issueId("x")
+                .relatedIssueId("x")
+                .build();
+
+        final Map<String, Object> variable = input.toVariable();
+
+        assertThat(variable).containsExactly(entry("issueId", "x"), entry("relatedIssueId", "x"));
+    }
+
+    @Test
+    void toVariable_shouldContainEveryField_whenAllAreSet() {
+        final RemoveRelatesToPayload input = RemoveRelatesToPayloadBuilder.builder()
+                .clientMutationId("x")
+                .issueId("x")
+                .relatedIssueId("x")
+                .build();
+
+        final Map<String, Object> variable = input.toVariable();
+
+        assertThat(variable)
+                .containsExactly(entry("clientMutationId", "x"), entry("issueId", "x"), entry("relatedIssueId", "x"));
+    }
+}
