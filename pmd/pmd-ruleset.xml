@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<ruleset name="github-graphql"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+  <description>PMD rules for github-graphql: the shared model ruleset of common-build-config</description>
+  <rule ref="pmd-model-ruleset.xml">
+    <!-- Size of a type, not a defect: the selectors mirror GitHub's wide GraphQL types (Repository reads 250 types). -->
+    <exclude name="CouplingBetweenObjects"/>
+    <!-- The schema names six mutations setX (setUserInteractionLimit); a Java method has to keep the schema name. -->
+    <exclude name="LinguisticNaming"/>
+    <!-- Re-added below: toVariable() of a wide input record is one if per field, which these rules count. -->
+    <exclude name="CognitiveComplexity"/>
+    <exclude name="CyclomaticComplexity"/>
+    <exclude name="NPathComplexity"/>
+    <exclude name="NcssCount"/>
+  </rule>
+  <rule ref="category/java/design.xml/CognitiveComplexity">
+    <properties>
+      <property name="violationSuppressXPath" value="self::MethodDeclaration[@Name='toVariable']"/>
+    </properties>
+  </rule>
+  <!-- Methods keep the default limit of 10 except toVariable(); the class limit fits a wide selector. -->
+  <rule ref="category/java/design.xml/CyclomaticComplexity">
+    <properties>
+      <property name="classReportLevel" value="5000"/>
+      <property name="violationSuppressXPath" value="self::MethodDeclaration[@Name='toVariable']"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/NPathComplexity">
+    <properties>
+      <property name="violationSuppressXPath" value="self::MethodDeclaration[@Name='toVariable']"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/NcssCount">
+    <properties>
+      <property name="violationSuppressXPath" value="self::MethodDeclaration[@Name='toVariable']"/>
+    </properties>
+  </rule>
+  <!-- The same rule, without the setter check. -->
+  <rule ref="category/java/codestyle.xml/LinguisticNaming">
+    <properties>
+      <property name="checkSetters" value="false"/>
+    </properties>
+  </rule>
+</ruleset>

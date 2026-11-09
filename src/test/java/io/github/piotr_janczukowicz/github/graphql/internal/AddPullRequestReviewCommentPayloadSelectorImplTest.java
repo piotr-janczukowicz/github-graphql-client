@@ -1,0 +1,42 @@
+package io.github.piotr_janczukowicz.github.graphql.internal;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import io.github.piotr_janczukowicz.github.graphql.model.CommentAuthorAssociation;
+import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewCommentEdgeSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewCommentSelector;
+import io.github.piotr_janczukowicz.testsupport.UnitTest;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import tools.jackson.databind.json.JsonMapper;
+
+@UnitTest
+class AddPullRequestReviewCommentPayloadSelectorImplTest {
+
+    private static final JsonMapper MAPPER = JsonMapper.builder().build();
+
+    private static final String RESPONSE =
+            "{" + "\"clientMutationId\":\"x\"" + "," + "\"comment\":{\"authorAssociation\": \"COLLABORATOR\"}" + ","
+                    + "\"commentEdge\":{\"cursor\": \"x\"}" + "}";
+
+    private static List<Object> readWithArguments(final AddPullRequestReviewCommentPayloadSelectorImpl selector) {
+        final List<Object> values = new ArrayList<>();
+        values.add(selector.clientMutationId());
+        values.add(selector.comment(PullRequestReviewCommentSelector::authorAssociation));
+        values.add(selector.commentEdge(PullRequestReviewCommentEdgeSelector::cursor));
+        return values;
+    }
+
+    @Test
+    void read_shouldMapEveryField_whenTheResponseHasAllValues() {
+        final FieldSelection root = FieldSelection.root();
+        readWithArguments(new AddPullRequestReviewCommentPayloadSelectorImpl(new RecordingCursor(root)));
+        final AddPullRequestReviewCommentPayloadSelectorImpl selector =
+                new AddPullRequestReviewCommentPayloadSelectorImpl(new MappingCursor(MAPPER.readTree(RESPONSE), root));
+
+        final List<Object> values = readWithArguments(selector);
+
+        assertThat(values).containsExactly("x", CommentAuthorAssociation.COLLABORATOR, "x");
+    }
+}

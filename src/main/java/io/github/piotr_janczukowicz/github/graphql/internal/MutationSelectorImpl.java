@@ -1,0 +1,3615 @@
+package io.github.piotr_janczukowicz.github.graphql.internal;
+
+import static io.github.piotr_janczukowicz.util.ValidationUtils.requireNonNull;
+
+import io.github.piotr_janczukowicz.github.graphql.model.AbortQueuedMigrationsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AbortQueuedMigrationsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AbortRepositoryMigrationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AbortRepositoryMigrationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseAdministratorInvitationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseAdministratorInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseMemberInvitationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptEnterpriseMemberInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptTopicSuggestionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AcceptTopicSuggestionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AccessUserNamespaceRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AccessUserNamespaceRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddAssigneesToAssignablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddAssigneesToAssignablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddBlockedByPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddBlockedByPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCloseIssueReferencesPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCloseIssueReferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionPollVotePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddDiscussionPollVotePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseOrganizationMemberPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseOrganizationMemberPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseSupportEntitlementPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddEnterpriseSupportEntitlementPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddLabelsToLabelablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddLabelsToLabelablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectCardPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectColumnPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2DraftIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2DraftIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2ItemByIdPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddProjectV2ItemByIdPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestCreationCapBypassUsersPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestCreationCapBypassUsersPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadReplyPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddPullRequestReviewThreadReplyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddReactionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddReactionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddRelatesToPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddRelatesToPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddStarPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddStarPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddSubIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddUpvotePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddUpvotePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.AddVerifiableDomainPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.AddVerifiableDomainPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ApplyPendingIssueSuggestionsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ApplyPendingIssueSuggestionsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveDeploymentsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveDeploymentsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveVerifiableDomainPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ApproveVerifiableDomainPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveProjectV2ItemPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveProjectV2ItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchivePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchivePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ArchiveRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseAdminInvitationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseAdminInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseMemberInvitationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelEnterpriseMemberInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelSponsorshipPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CancelSponsorshipPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ChangeUserStatusPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ChangeUserStatusPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearLabelsFromLabelablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearLabelsFromLabelablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearProjectV2ItemFieldValuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ClearProjectV2ItemFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneProjectPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneTemplateRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CloneTemplateRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseDiscussionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CloseIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ClosePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ClosePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectCardNoteToIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectCardNoteToIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectV2DraftIssueItemToIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectV2DraftIssueItemToIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertPullRequestToDraftPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ConvertPullRequestToDraftPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CopyProjectV2Payload;
+import io.github.piotr_janczukowicz.github.graphql.model.CopyProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateAttributionInvitationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateAttributionInvitationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateBranchProtectionRulePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateBranchProtectionRulePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckRunPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckRunPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckSuitePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCheckSuitePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCommitOnBranchPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateCommitOnBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentStatusPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDeploymentStatusPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDiscussionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnterpriseOrganizationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnterpriseOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnvironmentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIpAllowListEntryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIpAllowListEntryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldValuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueTypePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLabelPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLabelPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLinkedBranchPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateLinkedBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateMigrationSourcePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateMigrationSourcePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2FieldPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2FieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2IssueFieldPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2IssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2Payload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2StatusUpdatePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2StatusUpdatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2ViewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateProjectV2ViewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreatePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreatePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRefPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRefPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryCustomPropertyPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryRulesetPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateRepositoryRulesetPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsListingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsListingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsTierPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorsTierPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateSponsorshipsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateUserListPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.CreateUserListPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeclineTopicSuggestionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeclineTopicSuggestionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteBranchProtectionRulePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteBranchProtectionRulePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDeploymentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDeploymentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteEnvironmentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIpAllowListEntryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIpAllowListEntryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldValuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueTypePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLabelPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLabelPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLinkedBranchPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteLinkedBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePackageVersionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePackageVersionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectCardPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectColumnPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2FieldPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2FieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ItemPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2Payload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2StatusUpdatePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2StatusUpdatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ViewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2ViewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2WorkflowPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2WorkflowPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeletePullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRefPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRefPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryCustomPropertyPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryRulesetPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteRepositoryRulesetPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteUserListPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteUserListPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteVerifiableDomainPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteVerifiableDomainPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DequeuePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DequeuePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DisablePullRequestAutoMergePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DisablePullRequestAutoMergePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissPullRequestReviewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissPullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissRepositoryVulnerabilityAlertPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.DismissRepositoryVulnerabilityAlertPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnablePullRequestAutoMergePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.EnablePullRequestAutoMergePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnqueuePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.EnqueuePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowOrganizationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowUserPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.FollowUserPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantEnterpriseOrganizationsMigratorRolePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantEnterpriseOrganizationsMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantMigratorRolePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.GrantMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ImportProjectPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ImportProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseAdminPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseAdminPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseMemberPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.InviteEnterpriseMemberPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToTeamPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkProjectV2ToTeamPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkRepositoryToProjectPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.LinkRepositoryToProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.LockLockablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.LockLockablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkDiscussionCommentAsAnswerPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkDiscussionCommentAsAnswerPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkFileAsViewedPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkFileAsViewedPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkProjectV2AsTemplatePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkProjectV2AsTemplatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkPullRequestReadyForReviewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MarkPullRequestReadyForReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MergeBranchPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MergeBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MergePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MergePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MinimizeCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MinimizeCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectCardPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectColumnPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.MutationSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PinEnvironmentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.PinEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssueCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.PinIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PromoteRepositoryCustomPropertyPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.PromoteRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.PublishSponsorsTierPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.PublishSponsorsTierPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateEnterpriseIdentityProviderRecoveryCodesPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateEnterpriseIdentityProviderRecoveryCodesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateVerifiableDomainTokenPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RegenerateVerifiableDomainTokenPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectDeploymentsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectDeploymentsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectPendingIssueSuggestionsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RejectPendingIssueSuggestionsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveAssigneesFromAssignablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveAssigneesFromAssignablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveBlockedByPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveBlockedByPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveCloseIssueReferencesPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveCloseIssueReferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseAdminPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseAdminPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseIdentityProviderPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseIdentityProviderPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseMemberPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseMemberPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseOrganizationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseSupportEntitlementPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveEnterpriseSupportEntitlementPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveLabelsFromLabelablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveLabelsFromLabelablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveOutsideCollaboratorPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveOutsideCollaboratorPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemovePullRequestCreationCapBypassUsersPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemovePullRequestCreationCapBypassUsersPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveReactionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveReactionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveRelatesToPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveRelatesToPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveStarPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveStarPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveSubIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveUpvotePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RemoveUpvotePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenDiscussionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenPullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ReopenPullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReorderEnvironmentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ReorderEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReplaceActorsForAssignablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ReplaceActorsForAssignablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestCheckSuitePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestCheckSuitePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestReviewsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RerequestReviewsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ResolveReviewThreadPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.ResolveReviewThreadPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RetireSponsorsTierPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RetireSponsorsTierPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RevertPullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RevertPullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeEnterpriseOrganizationsMigratorRolePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeEnterpriseOrganizationsMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeMigratorRolePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RevokeMigratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetEnterpriseIdentityProviderPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.SetEnterpriseIdentityProviderPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetIssueFieldValuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.SetIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetOrganizationInteractionLimitPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.SetOrganizationInteractionLimitPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryCustomPropertyValuesPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryCustomPropertyValuesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryInteractionLimitPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryInteractionLimitPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetUserInteractionLimitPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.SetUserInteractionLimitPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.StartOrganizationMigrationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.StartOrganizationMigrationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.StartRepositoryMigrationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.StartRepositoryMigrationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SubmitPullRequestReviewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.SubmitPullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferEnterpriseOrganizationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferEnterpriseOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.TransferIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveProjectV2ItemPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveProjectV2ItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchivePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchivePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnarchiveRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowOrganizationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowOrganizationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowUserPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnfollowUserPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromTeamPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkProjectV2FromTeamPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkRepositoryFromProjectPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlinkRepositoryFromProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlockLockablePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnlockLockablePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkDiscussionCommentAsAnswerPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkDiscussionCommentAsAnswerPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkFileAsViewedPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkFileAsViewedPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkIssueAsDuplicatePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkIssueAsDuplicatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkProjectV2AsTemplatePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnmarkProjectV2AsTemplatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnminimizeCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnminimizeCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssueCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnpinIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UnresolveReviewThreadPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UnresolveReviewThreadPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateBranchProtectionRulePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateBranchProtectionRulePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckRunPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckRunPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckSuitePreferencesPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateCheckSuitePreferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateDiscussionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdministratorRolePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdministratorRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDeployKeySettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDeployKeySettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanCreateRepositoriesSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanCreateRepositoriesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteIssuesSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteIssuesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanMakePurchasesSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanMakePurchasesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOrganizationProjectsSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOrganizationProjectsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOwnerOrganizationRolePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseOwnerOrganizationRolePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseProfilePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseProfilePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseRepositoryProjectsSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseRepositoryProjectsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnvironmentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnvironmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEnabledSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEnabledSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEntryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListEntryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListForInstalledAppsEnabledSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListForInstalledAppsEnabledSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListUserLevelEnforcementEnabledSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIpAllowListUserLevelEnforcementEnabledSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldValuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueIssueTypePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueTypePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateIssueTypePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateLabelPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateLabelPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestrictionSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestrictionSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePatreonSponsorabilityPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePatreonSponsorabilityPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectCardPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectCardPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectColumnPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectColumnPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2CollaboratorsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2CollaboratorsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2DraftIssuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2DraftIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2FieldPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2FieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemFieldValuePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemFieldValuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemPositionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemPositionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2Payload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2PayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2StatusUpdatePayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2StatusUpdatePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ViewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ViewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestBranchPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestBranchPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewCommentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewCommentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdatePullRequestReviewPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryRulesetPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryRulesetPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryWebCommitSignoffSettingPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryWebCommitSignoffSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSponsorshipPreferencesPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSponsorshipPreferencesPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSubscriptionPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateSubscriptionPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamReviewAssignmentPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamReviewAssignmentPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamsRepositoryPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTeamsRepositoryPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTopicsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateTopicsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListsForItemPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateUserListsForItemPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.VerifyVerifiableDomainPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.VerifyVerifiableDomainPayloadSelector;
+import java.util.function.Function;
+import org.jspecify.annotations.Nullable;
+
+/** Reads and records the fields of {@code Mutation}; used by the generated selection code only. */
+final class MutationSelectorImpl implements MutationSelector {
+
+    private static final String INPUT = "input";
+
+    private static final String REMOVAL = "removal";
+
+    private final Cursor cursor;
+
+    MutationSelectorImpl(final Cursor cursor) {
+        this.cursor = cursor;
+    }
+
+    @Override
+    public <R> @Nullable R abortQueuedMigrations(
+            final AbortQueuedMigrationsPayload input,
+            final Function<AbortQueuedMigrationsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "abortQueuedMigrations",
+                child -> selection.apply(new AbortQueuedMigrationsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AbortQueuedMigrationsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R abortRepositoryMigration(
+            final AbortRepositoryMigrationPayload input,
+            final Function<AbortRepositoryMigrationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "abortRepositoryMigration",
+                child -> selection.apply(new AbortRepositoryMigrationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AbortRepositoryMigrationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R acceptEnterpriseAdministratorInvitation(
+            final AcceptEnterpriseAdministratorInvitationPayload input,
+            final Function<AcceptEnterpriseAdministratorInvitationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "acceptEnterpriseAdministratorInvitation",
+                child -> selection.apply(new AcceptEnterpriseAdministratorInvitationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AcceptEnterpriseAdministratorInvitationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R acceptEnterpriseMemberInvitation(
+            final AcceptEnterpriseMemberInvitationPayload input,
+            final Function<AcceptEnterpriseMemberInvitationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "acceptEnterpriseMemberInvitation",
+                child -> selection.apply(new AcceptEnterpriseMemberInvitationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AcceptEnterpriseMemberInvitationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R acceptTopicSuggestion(
+            final AcceptTopicSuggestionPayload input,
+            final Function<AcceptTopicSuggestionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "acceptTopicSuggestion",
+                child -> selection.apply(new AcceptTopicSuggestionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AcceptTopicSuggestionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R accessUserNamespaceRepository(
+            final AccessUserNamespaceRepositoryPayload input,
+            final Function<AccessUserNamespaceRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "accessUserNamespaceRepository",
+                child -> selection.apply(new AccessUserNamespaceRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AccessUserNamespaceRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addAssigneesToAssignable(
+            final AddAssigneesToAssignablePayload input,
+            final Function<AddAssigneesToAssignablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addAssigneesToAssignable",
+                child -> selection.apply(new AddAssigneesToAssignablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddAssigneesToAssignableInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addBlockedBy(
+            final AddBlockedByPayload input, final Function<AddBlockedByPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addBlockedBy",
+                child -> selection.apply(new AddBlockedByPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddBlockedByInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addCloseIssueReferences(
+            final AddCloseIssueReferencesPayload input,
+            final Function<AddCloseIssueReferencesPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addCloseIssueReferences",
+                child -> selection.apply(new AddCloseIssueReferencesPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddCloseIssueReferencesInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addComment(
+            final AddCommentPayload input, final Function<AddCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addComment",
+                child -> selection.apply(new AddCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addDiscussionComment(
+            final AddDiscussionCommentPayload input, final Function<AddDiscussionCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addDiscussionComment",
+                child -> selection.apply(new AddDiscussionCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddDiscussionCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addDiscussionPollVote(
+            final AddDiscussionPollVotePayload input,
+            final Function<AddDiscussionPollVotePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addDiscussionPollVote",
+                child -> selection.apply(new AddDiscussionPollVotePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddDiscussionPollVoteInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addEnterpriseOrganizationMember(
+            final AddEnterpriseOrganizationMemberPayload input,
+            final Function<AddEnterpriseOrganizationMemberPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addEnterpriseOrganizationMember",
+                child -> selection.apply(new AddEnterpriseOrganizationMemberPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddEnterpriseOrganizationMemberInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addEnterpriseSupportEntitlement(
+            final AddEnterpriseSupportEntitlementPayload input,
+            final Function<AddEnterpriseSupportEntitlementPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addEnterpriseSupportEntitlement",
+                child -> selection.apply(new AddEnterpriseSupportEntitlementPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddEnterpriseSupportEntitlementInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addLabelsToLabelable(
+            final AddLabelsToLabelablePayload input, final Function<AddLabelsToLabelablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addLabelsToLabelable",
+                child -> selection.apply(new AddLabelsToLabelablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddLabelsToLabelableInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R addProjectCard(
+            final AddProjectCardPayload input, final Function<AddProjectCardPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addProjectCard",
+                child -> selection.apply(new AddProjectCardPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddProjectCardInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R addProjectColumn(
+            final AddProjectColumnPayload input, final Function<AddProjectColumnPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addProjectColumn",
+                child -> selection.apply(new AddProjectColumnPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddProjectColumnInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addProjectV2DraftIssue(
+            final AddProjectV2DraftIssuePayload input,
+            final Function<AddProjectV2DraftIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addProjectV2DraftIssue",
+                child -> selection.apply(new AddProjectV2DraftIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddProjectV2DraftIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addProjectV2ItemById(
+            final AddProjectV2ItemByIdPayload input, final Function<AddProjectV2ItemByIdPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addProjectV2ItemById",
+                child -> selection.apply(new AddProjectV2ItemByIdPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddProjectV2ItemByIdInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addPullRequestCreationCapBypassUsers(
+            final AddPullRequestCreationCapBypassUsersPayload input,
+            final Function<AddPullRequestCreationCapBypassUsersPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addPullRequestCreationCapBypassUsers",
+                child -> selection.apply(new AddPullRequestCreationCapBypassUsersPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddPullRequestCreationCapBypassUsersInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addPullRequestReview(
+            final AddPullRequestReviewPayload input, final Function<AddPullRequestReviewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addPullRequestReview",
+                child -> selection.apply(new AddPullRequestReviewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddPullRequestReviewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addPullRequestReviewComment(
+            final AddPullRequestReviewCommentPayload input,
+            final Function<AddPullRequestReviewCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addPullRequestReviewComment",
+                child -> selection.apply(new AddPullRequestReviewCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddPullRequestReviewCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addPullRequestReviewThread(
+            final AddPullRequestReviewThreadPayload input,
+            final Function<AddPullRequestReviewThreadPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addPullRequestReviewThread",
+                child -> selection.apply(new AddPullRequestReviewThreadPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddPullRequestReviewThreadInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addPullRequestReviewThreadReply(
+            final AddPullRequestReviewThreadReplyPayload input,
+            final Function<AddPullRequestReviewThreadReplyPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addPullRequestReviewThreadReply",
+                child -> selection.apply(new AddPullRequestReviewThreadReplyPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddPullRequestReviewThreadReplyInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addReaction(
+            final AddReactionPayload input, final Function<AddReactionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addReaction",
+                child -> selection.apply(new AddReactionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddReactionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addRelatesTo(
+            final AddRelatesToPayload input, final Function<AddRelatesToPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addRelatesTo",
+                child -> selection.apply(new AddRelatesToPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddRelatesToInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addStar(final AddStarPayload input, final Function<AddStarPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addStar",
+                child -> selection.apply(new AddStarPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddStarInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addSubIssue(
+            final AddSubIssuePayload input, final Function<AddSubIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addSubIssue",
+                child -> selection.apply(new AddSubIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddSubIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addUpvote(
+            final AddUpvotePayload input, final Function<AddUpvotePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addUpvote",
+                child -> selection.apply(new AddUpvotePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddUpvoteInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R addVerifiableDomain(
+            final AddVerifiableDomainPayload input, final Function<AddVerifiableDomainPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "addVerifiableDomain",
+                child -> selection.apply(new AddVerifiableDomainPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "AddVerifiableDomainInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R applyPendingIssueSuggestions(
+            final ApplyPendingIssueSuggestionsPayload input,
+            final Function<ApplyPendingIssueSuggestionsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "applyPendingIssueSuggestions",
+                child -> selection.apply(new ApplyPendingIssueSuggestionsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ApplyPendingIssueSuggestionsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R approveDeployments(
+            final ApproveDeploymentsPayload input, final Function<ApproveDeploymentsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "approveDeployments",
+                child -> selection.apply(new ApproveDeploymentsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ApproveDeploymentsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R approveVerifiableDomain(
+            final ApproveVerifiableDomainPayload input,
+            final Function<ApproveVerifiableDomainPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "approveVerifiableDomain",
+                child -> selection.apply(new ApproveVerifiableDomainPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ApproveVerifiableDomainInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R archiveProjectV2Item(
+            final ArchiveProjectV2ItemPayload input, final Function<ArchiveProjectV2ItemPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "archiveProjectV2Item",
+                child -> selection.apply(new ArchiveProjectV2ItemPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ArchiveProjectV2ItemInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R archivePullRequest(
+            final ArchivePullRequestPayload input, final Function<ArchivePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "archivePullRequest",
+                child -> selection.apply(new ArchivePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ArchivePullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R archiveRepository(
+            final ArchiveRepositoryPayload input, final Function<ArchiveRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "archiveRepository",
+                child -> selection.apply(new ArchiveRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ArchiveRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R cancelEnterpriseAdminInvitation(
+            final CancelEnterpriseAdminInvitationPayload input,
+            final Function<CancelEnterpriseAdminInvitationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "cancelEnterpriseAdminInvitation",
+                child -> selection.apply(new CancelEnterpriseAdminInvitationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CancelEnterpriseAdminInvitationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R cancelEnterpriseMemberInvitation(
+            final CancelEnterpriseMemberInvitationPayload input,
+            final Function<CancelEnterpriseMemberInvitationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "cancelEnterpriseMemberInvitation",
+                child -> selection.apply(new CancelEnterpriseMemberInvitationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CancelEnterpriseMemberInvitationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R cancelSponsorship(
+            final CancelSponsorshipPayload input, final Function<CancelSponsorshipPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "cancelSponsorship",
+                child -> selection.apply(new CancelSponsorshipPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CancelSponsorshipInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R changeUserStatus(
+            final ChangeUserStatusPayload input, final Function<ChangeUserStatusPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "changeUserStatus",
+                child -> selection.apply(new ChangeUserStatusPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ChangeUserStatusInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R clearLabelsFromLabelable(
+            final ClearLabelsFromLabelablePayload input,
+            final Function<ClearLabelsFromLabelablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "clearLabelsFromLabelable",
+                child -> selection.apply(new ClearLabelsFromLabelablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ClearLabelsFromLabelableInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R clearProjectV2ItemFieldValue(
+            final ClearProjectV2ItemFieldValuePayload input,
+            final Function<ClearProjectV2ItemFieldValuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "clearProjectV2ItemFieldValue",
+                child -> selection.apply(new ClearProjectV2ItemFieldValuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ClearProjectV2ItemFieldValueInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R cloneProject(
+            final CloneProjectPayload input, final Function<CloneProjectPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "cloneProject",
+                child -> selection.apply(new CloneProjectPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CloneProjectInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R cloneTemplateRepository(
+            final CloneTemplateRepositoryPayload input,
+            final Function<CloneTemplateRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "cloneTemplateRepository",
+                child -> selection.apply(new CloneTemplateRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CloneTemplateRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R closeDiscussion(
+            final CloseDiscussionPayload input, final Function<CloseDiscussionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "closeDiscussion",
+                child -> selection.apply(new CloseDiscussionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CloseDiscussionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R closeIssue(
+            final CloseIssuePayload input, final Function<CloseIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "closeIssue",
+                child -> selection.apply(new CloseIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CloseIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R closePullRequest(
+            final ClosePullRequestPayload input, final Function<ClosePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "closePullRequest",
+                child -> selection.apply(new ClosePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ClosePullRequestInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R convertProjectCardNoteToIssue(
+            final ConvertProjectCardNoteToIssuePayload input,
+            final Function<ConvertProjectCardNoteToIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "convertProjectCardNoteToIssue",
+                child -> selection.apply(new ConvertProjectCardNoteToIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ConvertProjectCardNoteToIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R convertProjectV2DraftIssueItemToIssue(
+            final ConvertProjectV2DraftIssueItemToIssuePayload input,
+            final Function<ConvertProjectV2DraftIssueItemToIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "convertProjectV2DraftIssueItemToIssue",
+                child -> selection.apply(new ConvertProjectV2DraftIssueItemToIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ConvertProjectV2DraftIssueItemToIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R convertPullRequestToDraft(
+            final ConvertPullRequestToDraftPayload input,
+            final Function<ConvertPullRequestToDraftPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "convertPullRequestToDraft",
+                child -> selection.apply(new ConvertPullRequestToDraftPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ConvertPullRequestToDraftInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R copyProjectV2(
+            final CopyProjectV2Payload input, final Function<CopyProjectV2PayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "copyProjectV2",
+                child -> selection.apply(new CopyProjectV2PayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CopyProjectV2Input!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createAttributionInvitation(
+            final CreateAttributionInvitationPayload input,
+            final Function<CreateAttributionInvitationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createAttributionInvitation",
+                child -> selection.apply(new CreateAttributionInvitationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateAttributionInvitationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createBranchProtectionRule(
+            final CreateBranchProtectionRulePayload input,
+            final Function<CreateBranchProtectionRulePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createBranchProtectionRule",
+                child -> selection.apply(new CreateBranchProtectionRulePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateBranchProtectionRuleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createCheckRun(
+            final CreateCheckRunPayload input, final Function<CreateCheckRunPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createCheckRun",
+                child -> selection.apply(new CreateCheckRunPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateCheckRunInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createCheckSuite(
+            final CreateCheckSuitePayload input, final Function<CreateCheckSuitePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createCheckSuite",
+                child -> selection.apply(new CreateCheckSuitePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateCheckSuiteInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createCommitOnBranch(
+            final CreateCommitOnBranchPayload input, final Function<CreateCommitOnBranchPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createCommitOnBranch",
+                child -> selection.apply(new CreateCommitOnBranchPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateCommitOnBranchInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createDeployment(
+            final CreateDeploymentPayload input, final Function<CreateDeploymentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createDeployment",
+                child -> selection.apply(new CreateDeploymentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateDeploymentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createDeploymentStatus(
+            final CreateDeploymentStatusPayload input,
+            final Function<CreateDeploymentStatusPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createDeploymentStatus",
+                child -> selection.apply(new CreateDeploymentStatusPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateDeploymentStatusInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createDiscussion(
+            final CreateDiscussionPayload input, final Function<CreateDiscussionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createDiscussion",
+                child -> selection.apply(new CreateDiscussionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateDiscussionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createEnterpriseOrganization(
+            final CreateEnterpriseOrganizationPayload input,
+            final Function<CreateEnterpriseOrganizationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createEnterpriseOrganization",
+                child -> selection.apply(new CreateEnterpriseOrganizationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateEnterpriseOrganizationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createEnvironment(
+            final CreateEnvironmentPayload input, final Function<CreateEnvironmentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createEnvironment",
+                child -> selection.apply(new CreateEnvironmentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateEnvironmentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createIpAllowListEntry(
+            final CreateIpAllowListEntryPayload input,
+            final Function<CreateIpAllowListEntryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createIpAllowListEntry",
+                child -> selection.apply(new CreateIpAllowListEntryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateIpAllowListEntryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createIssue(
+            final CreateIssuePayload input, final Function<CreateIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createIssue",
+                child -> selection.apply(new CreateIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createIssueField(
+            final CreateIssueFieldPayload input, final Function<CreateIssueFieldPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createIssueField",
+                child -> selection.apply(new CreateIssueFieldPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateIssueFieldInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createIssueFieldValue(
+            final CreateIssueFieldValuePayload input,
+            final Function<CreateIssueFieldValuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createIssueFieldValue",
+                child -> selection.apply(new CreateIssueFieldValuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateIssueFieldValueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createIssueType(
+            final CreateIssueTypePayload input, final Function<CreateIssueTypePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createIssueType",
+                child -> selection.apply(new CreateIssueTypePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateIssueTypeInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createLabel(
+            final CreateLabelPayload input, final Function<CreateLabelPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createLabel",
+                child -> selection.apply(new CreateLabelPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateLabelInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createLinkedBranch(
+            final CreateLinkedBranchPayload input, final Function<CreateLinkedBranchPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createLinkedBranch",
+                child -> selection.apply(new CreateLinkedBranchPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateLinkedBranchInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createMigrationSource(
+            final CreateMigrationSourcePayload input,
+            final Function<CreateMigrationSourcePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createMigrationSource",
+                child -> selection.apply(new CreateMigrationSourcePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateMigrationSourceInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R createProject(
+            final CreateProjectPayload input, final Function<CreateProjectPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createProject",
+                child -> selection.apply(new CreateProjectPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateProjectInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createProjectV2(
+            final CreateProjectV2Payload input, final Function<CreateProjectV2PayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createProjectV2",
+                child -> selection.apply(new CreateProjectV2PayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateProjectV2Input!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createProjectV2Field(
+            final CreateProjectV2FieldPayload input, final Function<CreateProjectV2FieldPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createProjectV2Field",
+                child -> selection.apply(new CreateProjectV2FieldPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateProjectV2FieldInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createProjectV2IssueField(
+            final CreateProjectV2IssueFieldPayload input,
+            final Function<CreateProjectV2IssueFieldPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createProjectV2IssueField",
+                child -> selection.apply(new CreateProjectV2IssueFieldPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateProjectV2IssueFieldInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createProjectV2StatusUpdate(
+            final CreateProjectV2StatusUpdatePayload input,
+            final Function<CreateProjectV2StatusUpdatePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createProjectV2StatusUpdate",
+                child -> selection.apply(new CreateProjectV2StatusUpdatePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateProjectV2StatusUpdateInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createProjectV2View(
+            final CreateProjectV2ViewPayload input, final Function<CreateProjectV2ViewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createProjectV2View",
+                child -> selection.apply(new CreateProjectV2ViewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateProjectV2ViewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createPullRequest(
+            final CreatePullRequestPayload input, final Function<CreatePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createPullRequest",
+                child -> selection.apply(new CreatePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreatePullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createRef(
+            final CreateRefPayload input, final Function<CreateRefPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createRef",
+                child -> selection.apply(new CreateRefPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateRefInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createRepository(
+            final CreateRepositoryPayload input, final Function<CreateRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createRepository",
+                child -> selection.apply(new CreateRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createRepositoryCustomProperty(
+            final CreateRepositoryCustomPropertyPayload input,
+            final Function<CreateRepositoryCustomPropertyPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createRepositoryCustomProperty",
+                child -> selection.apply(new CreateRepositoryCustomPropertyPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateRepositoryCustomPropertyInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createRepositoryRuleset(
+            final CreateRepositoryRulesetPayload input,
+            final Function<CreateRepositoryRulesetPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createRepositoryRuleset",
+                child -> selection.apply(new CreateRepositoryRulesetPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateRepositoryRulesetInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createSponsorsListing(
+            final CreateSponsorsListingPayload input,
+            final Function<CreateSponsorsListingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createSponsorsListing",
+                child -> selection.apply(new CreateSponsorsListingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateSponsorsListingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createSponsorsTier(
+            final CreateSponsorsTierPayload input, final Function<CreateSponsorsTierPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createSponsorsTier",
+                child -> selection.apply(new CreateSponsorsTierPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateSponsorsTierInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createSponsorship(
+            final CreateSponsorshipPayload input, final Function<CreateSponsorshipPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createSponsorship",
+                child -> selection.apply(new CreateSponsorshipPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateSponsorshipInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createSponsorships(
+            final CreateSponsorshipsPayload input, final Function<CreateSponsorshipsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createSponsorships",
+                child -> selection.apply(new CreateSponsorshipsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateSponsorshipsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R createUserList(
+            final CreateUserListPayload input, final Function<CreateUserListPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "createUserList",
+                child -> selection.apply(new CreateUserListPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "CreateUserListInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R declineTopicSuggestion(
+            final DeclineTopicSuggestionPayload input,
+            final Function<DeclineTopicSuggestionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "declineTopicSuggestion",
+                child -> selection.apply(new DeclineTopicSuggestionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeclineTopicSuggestionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteBranchProtectionRule(
+            final DeleteBranchProtectionRulePayload input,
+            final Function<DeleteBranchProtectionRulePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteBranchProtectionRule",
+                child -> selection.apply(new DeleteBranchProtectionRulePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteBranchProtectionRuleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteDeployment(
+            final DeleteDeploymentPayload input, final Function<DeleteDeploymentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteDeployment",
+                child -> selection.apply(new DeleteDeploymentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteDeploymentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteDiscussion(
+            final DeleteDiscussionPayload input, final Function<DeleteDiscussionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteDiscussion",
+                child -> selection.apply(new DeleteDiscussionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteDiscussionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteDiscussionComment(
+            final DeleteDiscussionCommentPayload input,
+            final Function<DeleteDiscussionCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteDiscussionComment",
+                child -> selection.apply(new DeleteDiscussionCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteDiscussionCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteEnvironment(
+            final DeleteEnvironmentPayload input, final Function<DeleteEnvironmentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteEnvironment",
+                child -> selection.apply(new DeleteEnvironmentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteEnvironmentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteIpAllowListEntry(
+            final DeleteIpAllowListEntryPayload input,
+            final Function<DeleteIpAllowListEntryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteIpAllowListEntry",
+                child -> selection.apply(new DeleteIpAllowListEntryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteIpAllowListEntryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteIssue(
+            final DeleteIssuePayload input, final Function<DeleteIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteIssue",
+                child -> selection.apply(new DeleteIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteIssueComment(
+            final DeleteIssueCommentPayload input, final Function<DeleteIssueCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteIssueComment",
+                child -> selection.apply(new DeleteIssueCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteIssueCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteIssueField(
+            final DeleteIssueFieldPayload input, final Function<DeleteIssueFieldPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteIssueField",
+                child -> selection.apply(new DeleteIssueFieldPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteIssueFieldInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteIssueFieldValue(
+            final DeleteIssueFieldValuePayload input,
+            final Function<DeleteIssueFieldValuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteIssueFieldValue",
+                child -> selection.apply(new DeleteIssueFieldValuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteIssueFieldValueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteIssueType(
+            final DeleteIssueTypePayload input, final Function<DeleteIssueTypePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteIssueType",
+                child -> selection.apply(new DeleteIssueTypePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteIssueTypeInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteLabel(
+            final DeleteLabelPayload input, final Function<DeleteLabelPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteLabel",
+                child -> selection.apply(new DeleteLabelPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteLabelInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteLinkedBranch(
+            final DeleteLinkedBranchPayload input, final Function<DeleteLinkedBranchPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteLinkedBranch",
+                child -> selection.apply(new DeleteLinkedBranchPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteLinkedBranchInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deletePackageVersion(
+            final DeletePackageVersionPayload input, final Function<DeletePackageVersionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deletePackageVersion",
+                child -> selection.apply(new DeletePackageVersionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeletePackageVersionInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R deleteProject(
+            final DeleteProjectPayload input, final Function<DeleteProjectPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProject",
+                child -> selection.apply(new DeleteProjectPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R deleteProjectCard(
+            final DeleteProjectCardPayload input, final Function<DeleteProjectCardPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectCard",
+                child -> selection.apply(new DeleteProjectCardPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectCardInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R deleteProjectColumn(
+            final DeleteProjectColumnPayload input, final Function<DeleteProjectColumnPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectColumn",
+                child -> selection.apply(new DeleteProjectColumnPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectColumnInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteProjectV2(
+            final DeleteProjectV2Payload input, final Function<DeleteProjectV2PayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectV2",
+                child -> selection.apply(new DeleteProjectV2PayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectV2Input!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteProjectV2Field(
+            final DeleteProjectV2FieldPayload input, final Function<DeleteProjectV2FieldPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectV2Field",
+                child -> selection.apply(new DeleteProjectV2FieldPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectV2FieldInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteProjectV2Item(
+            final DeleteProjectV2ItemPayload input, final Function<DeleteProjectV2ItemPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectV2Item",
+                child -> selection.apply(new DeleteProjectV2ItemPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectV2ItemInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteProjectV2StatusUpdate(
+            final DeleteProjectV2StatusUpdatePayload input,
+            final Function<DeleteProjectV2StatusUpdatePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectV2StatusUpdate",
+                child -> selection.apply(new DeleteProjectV2StatusUpdatePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectV2StatusUpdateInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteProjectV2View(
+            final DeleteProjectV2ViewPayload input, final Function<DeleteProjectV2ViewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectV2View",
+                child -> selection.apply(new DeleteProjectV2ViewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectV2ViewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteProjectV2Workflow(
+            final DeleteProjectV2WorkflowPayload input,
+            final Function<DeleteProjectV2WorkflowPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteProjectV2Workflow",
+                child -> selection.apply(new DeleteProjectV2WorkflowPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteProjectV2WorkflowInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deletePullRequestReview(
+            final DeletePullRequestReviewPayload input,
+            final Function<DeletePullRequestReviewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deletePullRequestReview",
+                child -> selection.apply(new DeletePullRequestReviewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeletePullRequestReviewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deletePullRequestReviewComment(
+            final DeletePullRequestReviewCommentPayload input,
+            final Function<DeletePullRequestReviewCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deletePullRequestReviewComment",
+                child -> selection.apply(new DeletePullRequestReviewCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeletePullRequestReviewCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteRef(
+            final DeleteRefPayload input, final Function<DeleteRefPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteRef",
+                child -> selection.apply(new DeleteRefPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteRefInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteRepositoryCustomProperty(
+            final DeleteRepositoryCustomPropertyPayload input,
+            final Function<DeleteRepositoryCustomPropertyPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteRepositoryCustomProperty",
+                child -> selection.apply(new DeleteRepositoryCustomPropertyPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteRepositoryCustomPropertyInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteRepositoryRuleset(
+            final DeleteRepositoryRulesetPayload input,
+            final Function<DeleteRepositoryRulesetPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteRepositoryRuleset",
+                child -> selection.apply(new DeleteRepositoryRulesetPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteRepositoryRulesetInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteUserList(
+            final DeleteUserListPayload input, final Function<DeleteUserListPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteUserList",
+                child -> selection.apply(new DeleteUserListPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteUserListInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R deleteVerifiableDomain(
+            final DeleteVerifiableDomainPayload input,
+            final Function<DeleteVerifiableDomainPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "deleteVerifiableDomain",
+                child -> selection.apply(new DeleteVerifiableDomainPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DeleteVerifiableDomainInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R dequeuePullRequest(
+            final DequeuePullRequestPayload input, final Function<DequeuePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "dequeuePullRequest",
+                child -> selection.apply(new DequeuePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DequeuePullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R disablePullRequestAutoMerge(
+            final DisablePullRequestAutoMergePayload input,
+            final Function<DisablePullRequestAutoMergePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "disablePullRequestAutoMerge",
+                child -> selection.apply(new DisablePullRequestAutoMergePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DisablePullRequestAutoMergeInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R dismissPullRequestReview(
+            final DismissPullRequestReviewPayload input,
+            final Function<DismissPullRequestReviewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "dismissPullRequestReview",
+                child -> selection.apply(new DismissPullRequestReviewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DismissPullRequestReviewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R dismissRepositoryVulnerabilityAlert(
+            final DismissRepositoryVulnerabilityAlertPayload input,
+            final Function<DismissRepositoryVulnerabilityAlertPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "dismissRepositoryVulnerabilityAlert",
+                child -> selection.apply(new DismissRepositoryVulnerabilityAlertPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "DismissRepositoryVulnerabilityAlertInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R enablePullRequestAutoMerge(
+            final EnablePullRequestAutoMergePayload input,
+            final Function<EnablePullRequestAutoMergePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "enablePullRequestAutoMerge",
+                child -> selection.apply(new EnablePullRequestAutoMergePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "EnablePullRequestAutoMergeInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R enqueuePullRequest(
+            final EnqueuePullRequestPayload input, final Function<EnqueuePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "enqueuePullRequest",
+                child -> selection.apply(new EnqueuePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "EnqueuePullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R followOrganization(
+            final FollowOrganizationPayload input, final Function<FollowOrganizationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "followOrganization",
+                child -> selection.apply(new FollowOrganizationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "FollowOrganizationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R followUser(
+            final FollowUserPayload input, final Function<FollowUserPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "followUser",
+                child -> selection.apply(new FollowUserPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "FollowUserInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R grantEnterpriseOrganizationsMigratorRole(
+            final GrantEnterpriseOrganizationsMigratorRolePayload input,
+            final Function<GrantEnterpriseOrganizationsMigratorRolePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "grantEnterpriseOrganizationsMigratorRole",
+                child -> selection.apply(new GrantEnterpriseOrganizationsMigratorRolePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "GrantEnterpriseOrganizationsMigratorRoleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R grantMigratorRole(
+            final GrantMigratorRolePayload input, final Function<GrantMigratorRolePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "grantMigratorRole",
+                child -> selection.apply(new GrantMigratorRolePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "GrantMigratorRoleInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R importProject(
+            final ImportProjectPayload input, final Function<ImportProjectPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "importProject",
+                child -> selection.apply(new ImportProjectPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ImportProjectInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R inviteEnterpriseAdmin(
+            final InviteEnterpriseAdminPayload input,
+            final Function<InviteEnterpriseAdminPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "inviteEnterpriseAdmin",
+                child -> selection.apply(new InviteEnterpriseAdminPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "InviteEnterpriseAdminInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R inviteEnterpriseMember(
+            final InviteEnterpriseMemberPayload input,
+            final Function<InviteEnterpriseMemberPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "inviteEnterpriseMember",
+                child -> selection.apply(new InviteEnterpriseMemberPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "InviteEnterpriseMemberInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R linkProjectV2ToRepository(
+            final LinkProjectV2ToRepositoryPayload input,
+            final Function<LinkProjectV2ToRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "linkProjectV2ToRepository",
+                child -> selection.apply(new LinkProjectV2ToRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "LinkProjectV2ToRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R linkProjectV2ToTeam(
+            final LinkProjectV2ToTeamPayload input, final Function<LinkProjectV2ToTeamPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "linkProjectV2ToTeam",
+                child -> selection.apply(new LinkProjectV2ToTeamPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "LinkProjectV2ToTeamInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R linkRepositoryToProject(
+            final LinkRepositoryToProjectPayload input,
+            final Function<LinkRepositoryToProjectPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "linkRepositoryToProject",
+                child -> selection.apply(new LinkRepositoryToProjectPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "LinkRepositoryToProjectInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R lockLockable(
+            final LockLockablePayload input, final Function<LockLockablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "lockLockable",
+                child -> selection.apply(new LockLockablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "LockLockableInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R markDiscussionCommentAsAnswer(
+            final MarkDiscussionCommentAsAnswerPayload input,
+            final Function<MarkDiscussionCommentAsAnswerPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "markDiscussionCommentAsAnswer",
+                child -> selection.apply(new MarkDiscussionCommentAsAnswerPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MarkDiscussionCommentAsAnswerInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R markFileAsViewed(
+            final MarkFileAsViewedPayload input, final Function<MarkFileAsViewedPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "markFileAsViewed",
+                child -> selection.apply(new MarkFileAsViewedPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MarkFileAsViewedInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R markProjectV2AsTemplate(
+            final MarkProjectV2AsTemplatePayload input,
+            final Function<MarkProjectV2AsTemplatePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "markProjectV2AsTemplate",
+                child -> selection.apply(new MarkProjectV2AsTemplatePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MarkProjectV2AsTemplateInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R markPullRequestReadyForReview(
+            final MarkPullRequestReadyForReviewPayload input,
+            final Function<MarkPullRequestReadyForReviewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "markPullRequestReadyForReview",
+                child -> selection.apply(new MarkPullRequestReadyForReviewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MarkPullRequestReadyForReviewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R mergeBranch(
+            final MergeBranchPayload input, final Function<MergeBranchPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "mergeBranch",
+                child -> selection.apply(new MergeBranchPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MergeBranchInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R mergePullRequest(
+            final MergePullRequestPayload input, final Function<MergePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "mergePullRequest",
+                child -> selection.apply(new MergePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MergePullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R minimizeComment(
+            final MinimizeCommentPayload input, final Function<MinimizeCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "minimizeComment",
+                child -> selection.apply(new MinimizeCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MinimizeCommentInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R moveProjectCard(
+            final MoveProjectCardPayload input, final Function<MoveProjectCardPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "moveProjectCard",
+                child -> selection.apply(new MoveProjectCardPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MoveProjectCardInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R moveProjectColumn(
+            final MoveProjectColumnPayload input, final Function<MoveProjectColumnPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "moveProjectColumn",
+                child -> selection.apply(new MoveProjectColumnPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "MoveProjectColumnInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R pinEnvironment(
+            final PinEnvironmentPayload input, final Function<PinEnvironmentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "pinEnvironment",
+                child -> selection.apply(new PinEnvironmentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "PinEnvironmentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R pinIssue(final PinIssuePayload input, final Function<PinIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "pinIssue",
+                child -> selection.apply(new PinIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "PinIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R pinIssueComment(
+            final PinIssueCommentPayload input, final Function<PinIssueCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "pinIssueComment",
+                child -> selection.apply(new PinIssueCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "PinIssueCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R promoteRepositoryCustomProperty(
+            final PromoteRepositoryCustomPropertyPayload input,
+            final Function<PromoteRepositoryCustomPropertyPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "promoteRepositoryCustomProperty",
+                child -> selection.apply(new PromoteRepositoryCustomPropertyPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "PromoteRepositoryCustomPropertyInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R publishSponsorsTier(
+            final PublishSponsorsTierPayload input, final Function<PublishSponsorsTierPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "publishSponsorsTier",
+                child -> selection.apply(new PublishSponsorsTierPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "PublishSponsorsTierInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R regenerateEnterpriseIdentityProviderRecoveryCodes(
+            final RegenerateEnterpriseIdentityProviderRecoveryCodesPayload input,
+            final Function<RegenerateEnterpriseIdentityProviderRecoveryCodesPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "regenerateEnterpriseIdentityProviderRecoveryCodes",
+                child -> selection.apply(
+                        new RegenerateEnterpriseIdentityProviderRecoveryCodesPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RegenerateEnterpriseIdentityProviderRecoveryCodesInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R regenerateVerifiableDomainToken(
+            final RegenerateVerifiableDomainTokenPayload input,
+            final Function<RegenerateVerifiableDomainTokenPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "regenerateVerifiableDomainToken",
+                child -> selection.apply(new RegenerateVerifiableDomainTokenPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RegenerateVerifiableDomainTokenInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R rejectDeployments(
+            final RejectDeploymentsPayload input, final Function<RejectDeploymentsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "rejectDeployments",
+                child -> selection.apply(new RejectDeploymentsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RejectDeploymentsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R rejectPendingIssueSuggestions(
+            final RejectPendingIssueSuggestionsPayload input,
+            final Function<RejectPendingIssueSuggestionsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "rejectPendingIssueSuggestions",
+                child -> selection.apply(new RejectPendingIssueSuggestionsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RejectPendingIssueSuggestionsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeAssigneesFromAssignable(
+            final RemoveAssigneesFromAssignablePayload input,
+            final Function<RemoveAssigneesFromAssignablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeAssigneesFromAssignable",
+                child -> selection.apply(new RemoveAssigneesFromAssignablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveAssigneesFromAssignableInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeBlockedBy(
+            final RemoveBlockedByPayload input, final Function<RemoveBlockedByPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeBlockedBy",
+                child -> selection.apply(new RemoveBlockedByPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveBlockedByInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeCloseIssueReferences(
+            final RemoveCloseIssueReferencesPayload input,
+            final Function<RemoveCloseIssueReferencesPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeCloseIssueReferences",
+                child -> selection.apply(new RemoveCloseIssueReferencesPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveCloseIssueReferencesInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeEnterpriseAdmin(
+            final RemoveEnterpriseAdminPayload input,
+            final Function<RemoveEnterpriseAdminPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeEnterpriseAdmin",
+                child -> selection.apply(new RemoveEnterpriseAdminPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveEnterpriseAdminInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeEnterpriseIdentityProvider(
+            final RemoveEnterpriseIdentityProviderPayload input,
+            final Function<RemoveEnterpriseIdentityProviderPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeEnterpriseIdentityProvider",
+                child -> selection.apply(new RemoveEnterpriseIdentityProviderPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveEnterpriseIdentityProviderInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeEnterpriseMember(
+            final RemoveEnterpriseMemberPayload input,
+            final Function<RemoveEnterpriseMemberPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeEnterpriseMember",
+                child -> selection.apply(new RemoveEnterpriseMemberPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveEnterpriseMemberInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeEnterpriseOrganization(
+            final RemoveEnterpriseOrganizationPayload input,
+            final Function<RemoveEnterpriseOrganizationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeEnterpriseOrganization",
+                child -> selection.apply(new RemoveEnterpriseOrganizationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveEnterpriseOrganizationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeEnterpriseSupportEntitlement(
+            final RemoveEnterpriseSupportEntitlementPayload input,
+            final Function<RemoveEnterpriseSupportEntitlementPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeEnterpriseSupportEntitlement",
+                child -> selection.apply(new RemoveEnterpriseSupportEntitlementPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveEnterpriseSupportEntitlementInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeLabelsFromLabelable(
+            final RemoveLabelsFromLabelablePayload input,
+            final Function<RemoveLabelsFromLabelablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeLabelsFromLabelable",
+                child -> selection.apply(new RemoveLabelsFromLabelablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveLabelsFromLabelableInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeOutsideCollaborator(
+            final RemoveOutsideCollaboratorPayload input,
+            final Function<RemoveOutsideCollaboratorPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeOutsideCollaborator",
+                child -> selection.apply(new RemoveOutsideCollaboratorPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveOutsideCollaboratorInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removePullRequestCreationCapBypassUsers(
+            final RemovePullRequestCreationCapBypassUsersPayload input,
+            final Function<RemovePullRequestCreationCapBypassUsersPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removePullRequestCreationCapBypassUsers",
+                child -> selection.apply(new RemovePullRequestCreationCapBypassUsersPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemovePullRequestCreationCapBypassUsersInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeReaction(
+            final RemoveReactionPayload input, final Function<RemoveReactionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeReaction",
+                child -> selection.apply(new RemoveReactionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveReactionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeRelatesTo(
+            final RemoveRelatesToPayload input, final Function<RemoveRelatesToPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeRelatesTo",
+                child -> selection.apply(new RemoveRelatesToPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveRelatesToInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeStar(
+            final RemoveStarPayload input, final Function<RemoveStarPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeStar",
+                child -> selection.apply(new RemoveStarPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveStarInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeSubIssue(
+            final RemoveSubIssuePayload input, final Function<RemoveSubIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeSubIssue",
+                child -> selection.apply(new RemoveSubIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveSubIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R removeUpvote(
+            final RemoveUpvotePayload input, final Function<RemoveUpvotePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "removeUpvote",
+                child -> selection.apply(new RemoveUpvotePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RemoveUpvoteInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R reopenDiscussion(
+            final ReopenDiscussionPayload input, final Function<ReopenDiscussionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "reopenDiscussion",
+                child -> selection.apply(new ReopenDiscussionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ReopenDiscussionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R reopenIssue(
+            final ReopenIssuePayload input, final Function<ReopenIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "reopenIssue",
+                child -> selection.apply(new ReopenIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ReopenIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R reopenPullRequest(
+            final ReopenPullRequestPayload input, final Function<ReopenPullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "reopenPullRequest",
+                child -> selection.apply(new ReopenPullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ReopenPullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R reorderEnvironment(
+            final ReorderEnvironmentPayload input, final Function<ReorderEnvironmentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "reorderEnvironment",
+                child -> selection.apply(new ReorderEnvironmentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ReorderEnvironmentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R replaceActorsForAssignable(
+            final ReplaceActorsForAssignablePayload input,
+            final Function<ReplaceActorsForAssignablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "replaceActorsForAssignable",
+                child -> selection.apply(new ReplaceActorsForAssignablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ReplaceActorsForAssignableInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R reprioritizeSubIssue(
+            final ReprioritizeSubIssuePayload input, final Function<ReprioritizeSubIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "reprioritizeSubIssue",
+                child -> selection.apply(new ReprioritizeSubIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ReprioritizeSubIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R requestReviews(
+            final RequestReviewsPayload input, final Function<RequestReviewsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "requestReviews",
+                child -> selection.apply(new RequestReviewsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RequestReviewsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R requestReviewsByLogin(
+            final RequestReviewsByLoginPayload input,
+            final Function<RequestReviewsByLoginPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "requestReviewsByLogin",
+                child -> selection.apply(new RequestReviewsByLoginPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RequestReviewsByLoginInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R rerequestCheckSuite(
+            final RerequestCheckSuitePayload input, final Function<RerequestCheckSuitePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "rerequestCheckSuite",
+                child -> selection.apply(new RerequestCheckSuitePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RerequestCheckSuiteInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R rerequestReviews(
+            final RerequestReviewsPayload input, final Function<RerequestReviewsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "rerequestReviews",
+                child -> selection.apply(new RerequestReviewsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RerequestReviewsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R resolveReviewThread(
+            final ResolveReviewThreadPayload input, final Function<ResolveReviewThreadPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "resolveReviewThread",
+                child -> selection.apply(new ResolveReviewThreadPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "ResolveReviewThreadInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R retireSponsorsTier(
+            final RetireSponsorsTierPayload input, final Function<RetireSponsorsTierPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "retireSponsorsTier",
+                child -> selection.apply(new RetireSponsorsTierPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RetireSponsorsTierInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R revertPullRequest(
+            final RevertPullRequestPayload input, final Function<RevertPullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "revertPullRequest",
+                child -> selection.apply(new RevertPullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RevertPullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R revokeEnterpriseOrganizationsMigratorRole(
+            final RevokeEnterpriseOrganizationsMigratorRolePayload input,
+            final Function<RevokeEnterpriseOrganizationsMigratorRolePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "revokeEnterpriseOrganizationsMigratorRole",
+                child -> selection.apply(new RevokeEnterpriseOrganizationsMigratorRolePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RevokeEnterpriseOrganizationsMigratorRoleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R revokeMigratorRole(
+            final RevokeMigratorRolePayload input, final Function<RevokeMigratorRolePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "revokeMigratorRole",
+                child -> selection.apply(new RevokeMigratorRolePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RevokeMigratorRoleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R setEnterpriseIdentityProvider(
+            final SetEnterpriseIdentityProviderPayload input,
+            final Function<SetEnterpriseIdentityProviderPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "setEnterpriseIdentityProvider",
+                child -> selection.apply(new SetEnterpriseIdentityProviderPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "SetEnterpriseIdentityProviderInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R setIssueFieldValue(
+            final SetIssueFieldValuePayload input, final Function<SetIssueFieldValuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "setIssueFieldValue",
+                child -> selection.apply(new SetIssueFieldValuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "SetIssueFieldValueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R setOrganizationInteractionLimit(
+            final SetOrganizationInteractionLimitPayload input,
+            final Function<SetOrganizationInteractionLimitPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "setOrganizationInteractionLimit",
+                child -> selection.apply(new SetOrganizationInteractionLimitPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "SetOrganizationInteractionLimitInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R setRepositoryCustomPropertyValues(
+            final SetRepositoryCustomPropertyValuesPayload input,
+            final Function<SetRepositoryCustomPropertyValuesPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "setRepositoryCustomPropertyValues",
+                child -> selection.apply(new SetRepositoryCustomPropertyValuesPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "SetRepositoryCustomPropertyValuesInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R setRepositoryInteractionLimit(
+            final SetRepositoryInteractionLimitPayload input,
+            final Function<SetRepositoryInteractionLimitPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "setRepositoryInteractionLimit",
+                child -> selection.apply(new SetRepositoryInteractionLimitPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "SetRepositoryInteractionLimitInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R setUserInteractionLimit(
+            final SetUserInteractionLimitPayload input,
+            final Function<SetUserInteractionLimitPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "setUserInteractionLimit",
+                child -> selection.apply(new SetUserInteractionLimitPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "SetUserInteractionLimitInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R startOrganizationMigration(
+            final StartOrganizationMigrationPayload input,
+            final Function<StartOrganizationMigrationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "startOrganizationMigration",
+                child -> selection.apply(new StartOrganizationMigrationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "StartOrganizationMigrationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R startRepositoryMigration(
+            final StartRepositoryMigrationPayload input,
+            final Function<StartRepositoryMigrationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "startRepositoryMigration",
+                child -> selection.apply(new StartRepositoryMigrationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "StartRepositoryMigrationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R submitPullRequestReview(
+            final SubmitPullRequestReviewPayload input,
+            final Function<SubmitPullRequestReviewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "submitPullRequestReview",
+                child -> selection.apply(new SubmitPullRequestReviewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "SubmitPullRequestReviewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R transferEnterpriseOrganization(
+            final TransferEnterpriseOrganizationPayload input,
+            final Function<TransferEnterpriseOrganizationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "transferEnterpriseOrganization",
+                child -> selection.apply(new TransferEnterpriseOrganizationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "TransferEnterpriseOrganizationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R transferIssue(
+            final TransferIssuePayload input, final Function<TransferIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "transferIssue",
+                child -> selection.apply(new TransferIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "TransferIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unarchiveProjectV2Item(
+            final UnarchiveProjectV2ItemPayload input,
+            final Function<UnarchiveProjectV2ItemPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unarchiveProjectV2Item",
+                child -> selection.apply(new UnarchiveProjectV2ItemPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnarchiveProjectV2ItemInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unarchivePullRequest(
+            final UnarchivePullRequestPayload input, final Function<UnarchivePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unarchivePullRequest",
+                child -> selection.apply(new UnarchivePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnarchivePullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unarchiveRepository(
+            final UnarchiveRepositoryPayload input, final Function<UnarchiveRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unarchiveRepository",
+                child -> selection.apply(new UnarchiveRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnarchiveRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unfollowOrganization(
+            final UnfollowOrganizationPayload input, final Function<UnfollowOrganizationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unfollowOrganization",
+                child -> selection.apply(new UnfollowOrganizationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnfollowOrganizationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unfollowUser(
+            final UnfollowUserPayload input, final Function<UnfollowUserPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unfollowUser",
+                child -> selection.apply(new UnfollowUserPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnfollowUserInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unlinkProjectV2FromRepository(
+            final UnlinkProjectV2FromRepositoryPayload input,
+            final Function<UnlinkProjectV2FromRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unlinkProjectV2FromRepository",
+                child -> selection.apply(new UnlinkProjectV2FromRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnlinkProjectV2FromRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unlinkProjectV2FromTeam(
+            final UnlinkProjectV2FromTeamPayload input,
+            final Function<UnlinkProjectV2FromTeamPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unlinkProjectV2FromTeam",
+                child -> selection.apply(new UnlinkProjectV2FromTeamPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnlinkProjectV2FromTeamInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R unlinkRepositoryFromProject(
+            final UnlinkRepositoryFromProjectPayload input,
+            final Function<UnlinkRepositoryFromProjectPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unlinkRepositoryFromProject",
+                child -> selection.apply(new UnlinkRepositoryFromProjectPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnlinkRepositoryFromProjectInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unlockLockable(
+            final UnlockLockablePayload input, final Function<UnlockLockablePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unlockLockable",
+                child -> selection.apply(new UnlockLockablePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnlockLockableInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unmarkDiscussionCommentAsAnswer(
+            final UnmarkDiscussionCommentAsAnswerPayload input,
+            final Function<UnmarkDiscussionCommentAsAnswerPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unmarkDiscussionCommentAsAnswer",
+                child -> selection.apply(new UnmarkDiscussionCommentAsAnswerPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnmarkDiscussionCommentAsAnswerInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unmarkFileAsViewed(
+            final UnmarkFileAsViewedPayload input, final Function<UnmarkFileAsViewedPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unmarkFileAsViewed",
+                child -> selection.apply(new UnmarkFileAsViewedPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnmarkFileAsViewedInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unmarkIssueAsDuplicate(
+            final UnmarkIssueAsDuplicatePayload input,
+            final Function<UnmarkIssueAsDuplicatePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unmarkIssueAsDuplicate",
+                child -> selection.apply(new UnmarkIssueAsDuplicatePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnmarkIssueAsDuplicateInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unmarkProjectV2AsTemplate(
+            final UnmarkProjectV2AsTemplatePayload input,
+            final Function<UnmarkProjectV2AsTemplatePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unmarkProjectV2AsTemplate",
+                child -> selection.apply(new UnmarkProjectV2AsTemplatePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnmarkProjectV2AsTemplateInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unminimizeComment(
+            final UnminimizeCommentPayload input, final Function<UnminimizeCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unminimizeComment",
+                child -> selection.apply(new UnminimizeCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnminimizeCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unpinIssue(
+            final UnpinIssuePayload input, final Function<UnpinIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unpinIssue",
+                child -> selection.apply(new UnpinIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnpinIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unpinIssueComment(
+            final UnpinIssueCommentPayload input, final Function<UnpinIssueCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unpinIssueComment",
+                child -> selection.apply(new UnpinIssueCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnpinIssueCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R unresolveReviewThread(
+            final UnresolveReviewThreadPayload input,
+            final Function<UnresolveReviewThreadPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "unresolveReviewThread",
+                child -> selection.apply(new UnresolveReviewThreadPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UnresolveReviewThreadInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateBranchProtectionRule(
+            final UpdateBranchProtectionRulePayload input,
+            final Function<UpdateBranchProtectionRulePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateBranchProtectionRule",
+                child -> selection.apply(new UpdateBranchProtectionRulePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateBranchProtectionRuleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateCheckRun(
+            final UpdateCheckRunPayload input, final Function<UpdateCheckRunPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateCheckRun",
+                child -> selection.apply(new UpdateCheckRunPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateCheckRunInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateCheckSuitePreferences(
+            final UpdateCheckSuitePreferencesPayload input,
+            final Function<UpdateCheckSuitePreferencesPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateCheckSuitePreferences",
+                child -> selection.apply(new UpdateCheckSuitePreferencesPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateCheckSuitePreferencesInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateDiscussion(
+            final UpdateDiscussionPayload input, final Function<UpdateDiscussionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateDiscussion",
+                child -> selection.apply(new UpdateDiscussionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateDiscussionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateDiscussionComment(
+            final UpdateDiscussionCommentPayload input,
+            final Function<UpdateDiscussionCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateDiscussionComment",
+                child -> selection.apply(new UpdateDiscussionCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateDiscussionCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseAdministratorRole(
+            final UpdateEnterpriseAdministratorRolePayload input,
+            final Function<UpdateEnterpriseAdministratorRolePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseAdministratorRole",
+                child -> selection.apply(new UpdateEnterpriseAdministratorRolePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseAdministratorRoleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseAllowPrivateRepositoryForkingSetting(
+            final UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload input,
+            final Function<UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseAllowPrivateRepositoryForkingSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseDefaultRepositoryPermissionSetting(
+            final UpdateEnterpriseDefaultRepositoryPermissionSettingPayload input,
+            final Function<UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseDefaultRepositoryPermissionSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseDefaultRepositoryPermissionSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseDeployKeySetting(
+            final UpdateEnterpriseDeployKeySettingPayload input,
+            final Function<UpdateEnterpriseDeployKeySettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseDeployKeySetting",
+                child -> selection.apply(new UpdateEnterpriseDeployKeySettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseDeployKeySettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanChangeRepositoryVisibilitySetting(
+            final UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayload input,
+            final Function<UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanChangeRepositoryVisibilitySetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayloadSelectorImpl(child)),
+                Argument.of(
+                        INPUT,
+                        "UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput!",
+                        input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanCreateRepositoriesSetting(
+            final UpdateEnterpriseMembersCanCreateRepositoriesSettingPayload input,
+            final Function<UpdateEnterpriseMembersCanCreateRepositoriesSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanCreateRepositoriesSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseMembersCanCreateRepositoriesSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseMembersCanCreateRepositoriesSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanDeleteIssuesSetting(
+            final UpdateEnterpriseMembersCanDeleteIssuesSettingPayload input,
+            final Function<UpdateEnterpriseMembersCanDeleteIssuesSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanDeleteIssuesSetting",
+                child -> selection.apply(new UpdateEnterpriseMembersCanDeleteIssuesSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseMembersCanDeleteIssuesSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanDeleteRepositoriesSetting(
+            final UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayload input,
+            final Function<UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanDeleteRepositoriesSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanInviteCollaboratorsSetting(
+            final UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayload input,
+            final Function<UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanInviteCollaboratorsSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanMakePurchasesSetting(
+            final UpdateEnterpriseMembersCanMakePurchasesSettingPayload input,
+            final Function<UpdateEnterpriseMembersCanMakePurchasesSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanMakePurchasesSetting",
+                child -> selection.apply(new UpdateEnterpriseMembersCanMakePurchasesSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseMembersCanMakePurchasesSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanUpdateProtectedBranchesSetting(
+            final UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayload input,
+            final Function<UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanUpdateProtectedBranchesSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayloadSelectorImpl(child)),
+                Argument.of(
+                        INPUT, "UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseMembersCanViewDependencyInsightsSetting(
+            final UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayload input,
+            final Function<UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseMembersCanViewDependencyInsightsSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayloadSelectorImpl(child)),
+                Argument.of(
+                        INPUT, "UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseOrganizationProjectsSetting(
+            final UpdateEnterpriseOrganizationProjectsSettingPayload input,
+            final Function<UpdateEnterpriseOrganizationProjectsSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseOrganizationProjectsSetting",
+                child -> selection.apply(new UpdateEnterpriseOrganizationProjectsSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseOrganizationProjectsSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseOwnerOrganizationRole(
+            final UpdateEnterpriseOwnerOrganizationRolePayload input,
+            final Function<UpdateEnterpriseOwnerOrganizationRolePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseOwnerOrganizationRole",
+                child -> selection.apply(new UpdateEnterpriseOwnerOrganizationRolePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseOwnerOrganizationRoleInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseProfile(
+            final UpdateEnterpriseProfilePayload input,
+            final Function<UpdateEnterpriseProfilePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseProfile",
+                child -> selection.apply(new UpdateEnterpriseProfilePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseProfileInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseRepositoryProjectsSetting(
+            final UpdateEnterpriseRepositoryProjectsSettingPayload input,
+            final Function<UpdateEnterpriseRepositoryProjectsSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseRepositoryProjectsSetting",
+                child -> selection.apply(new UpdateEnterpriseRepositoryProjectsSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseRepositoryProjectsSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting(
+            final UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayload input,
+            final Function<UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayloadSelector, R>
+                    selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayloadSelectorImpl(child)),
+                Argument.of(
+                        INPUT,
+                        "UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingInput!",
+                        input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnterpriseTwoFactorAuthenticationRequiredSetting(
+            final UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayload input,
+            final Function<UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseTwoFactorAuthenticationRequiredSetting",
+                child -> selection.apply(
+                        new UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateEnvironment(
+            final UpdateEnvironmentPayload input, final Function<UpdateEnvironmentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnvironment",
+                child -> selection.apply(new UpdateEnvironmentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnvironmentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIpAllowListEnabledSetting(
+            final UpdateIpAllowListEnabledSettingPayload input,
+            final Function<UpdateIpAllowListEnabledSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIpAllowListEnabledSetting",
+                child -> selection.apply(new UpdateIpAllowListEnabledSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIpAllowListEnabledSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIpAllowListEntry(
+            final UpdateIpAllowListEntryPayload input,
+            final Function<UpdateIpAllowListEntryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIpAllowListEntry",
+                child -> selection.apply(new UpdateIpAllowListEntryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIpAllowListEntryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIpAllowListForInstalledAppsEnabledSetting(
+            final UpdateIpAllowListForInstalledAppsEnabledSettingPayload input,
+            final Function<UpdateIpAllowListForInstalledAppsEnabledSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIpAllowListForInstalledAppsEnabledSetting",
+                child -> selection.apply(new UpdateIpAllowListForInstalledAppsEnabledSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIpAllowListForInstalledAppsEnabledSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIpAllowListUserLevelEnforcementEnabledSetting(
+            final UpdateIpAllowListUserLevelEnforcementEnabledSettingPayload input,
+            final Function<UpdateIpAllowListUserLevelEnforcementEnabledSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIpAllowListUserLevelEnforcementEnabledSetting",
+                child -> selection.apply(
+                        new UpdateIpAllowListUserLevelEnforcementEnabledSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIpAllowListUserLevelEnforcementEnabledSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIssue(
+            final UpdateIssuePayload input, final Function<UpdateIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIssue",
+                child -> selection.apply(new UpdateIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIssueComment(
+            final UpdateIssueCommentPayload input, final Function<UpdateIssueCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIssueComment",
+                child -> selection.apply(new UpdateIssueCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIssueCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIssueField(
+            final UpdateIssueFieldPayload input, final Function<UpdateIssueFieldPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIssueField",
+                child -> selection.apply(new UpdateIssueFieldPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIssueFieldInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIssueFieldValue(
+            final UpdateIssueFieldValuePayload input,
+            final Function<UpdateIssueFieldValuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIssueFieldValue",
+                child -> selection.apply(new UpdateIssueFieldValuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIssueFieldValueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIssueIssueType(
+            final UpdateIssueIssueTypePayload input, final Function<UpdateIssueIssueTypePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIssueIssueType",
+                child -> selection.apply(new UpdateIssueIssueTypePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIssueIssueTypeInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateIssueType(
+            final UpdateIssueTypePayload input, final Function<UpdateIssueTypePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateIssueType",
+                child -> selection.apply(new UpdateIssueTypePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateIssueTypeInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateLabel(
+            final UpdateLabelPayload input, final Function<UpdateLabelPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateLabel",
+                child -> selection.apply(new UpdateLabelPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateLabelInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateNotificationRestrictionSetting(
+            final UpdateNotificationRestrictionSettingPayload input,
+            final Function<UpdateNotificationRestrictionSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateNotificationRestrictionSetting",
+                child -> selection.apply(new UpdateNotificationRestrictionSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateNotificationRestrictionSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateOrganizationAllowPrivateRepositoryForkingSetting(
+            final UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload input,
+            final Function<UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateOrganizationAllowPrivateRepositoryForkingSetting",
+                child -> selection.apply(
+                        new UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateOrganizationAllowPrivateRepositoryForkingSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateOrganizationWebCommitSignoffSetting(
+            final UpdateOrganizationWebCommitSignoffSettingPayload input,
+            final Function<UpdateOrganizationWebCommitSignoffSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateOrganizationWebCommitSignoffSetting",
+                child -> selection.apply(new UpdateOrganizationWebCommitSignoffSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateOrganizationWebCommitSignoffSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updatePatreonSponsorability(
+            final UpdatePatreonSponsorabilityPayload input,
+            final Function<UpdatePatreonSponsorabilityPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updatePatreonSponsorability",
+                child -> selection.apply(new UpdatePatreonSponsorabilityPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdatePatreonSponsorabilityInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R updateProject(
+            final UpdateProjectPayload input, final Function<UpdateProjectPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProject",
+                child -> selection.apply(new UpdateProjectPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R updateProjectCard(
+            final UpdateProjectCardPayload input, final Function<UpdateProjectCardPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectCard",
+                child -> selection.apply(new UpdateProjectCardPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectCardInput!", input.toVariable()));
+    }
+
+    /**
+     * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see:
+     *     https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
+     */
+    @Override
+    @Deprecated(forRemoval = true)
+    @SuppressWarnings(REMOVAL)
+    public <R> @Nullable R updateProjectColumn(
+            final UpdateProjectColumnPayload input, final Function<UpdateProjectColumnPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectColumn",
+                child -> selection.apply(new UpdateProjectColumnPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectColumnInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2(
+            final UpdateProjectV2Payload input, final Function<UpdateProjectV2PayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2",
+                child -> selection.apply(new UpdateProjectV2PayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2Input!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2Collaborators(
+            final UpdateProjectV2CollaboratorsPayload input,
+            final Function<UpdateProjectV2CollaboratorsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2Collaborators",
+                child -> selection.apply(new UpdateProjectV2CollaboratorsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2CollaboratorsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2DraftIssue(
+            final UpdateProjectV2DraftIssuePayload input,
+            final Function<UpdateProjectV2DraftIssuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2DraftIssue",
+                child -> selection.apply(new UpdateProjectV2DraftIssuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2DraftIssueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2Field(
+            final UpdateProjectV2FieldPayload input, final Function<UpdateProjectV2FieldPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2Field",
+                child -> selection.apply(new UpdateProjectV2FieldPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2FieldInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2ItemFieldValue(
+            final UpdateProjectV2ItemFieldValuePayload input,
+            final Function<UpdateProjectV2ItemFieldValuePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2ItemFieldValue",
+                child -> selection.apply(new UpdateProjectV2ItemFieldValuePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2ItemFieldValueInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2ItemPosition(
+            final UpdateProjectV2ItemPositionPayload input,
+            final Function<UpdateProjectV2ItemPositionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2ItemPosition",
+                child -> selection.apply(new UpdateProjectV2ItemPositionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2ItemPositionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2StatusUpdate(
+            final UpdateProjectV2StatusUpdatePayload input,
+            final Function<UpdateProjectV2StatusUpdatePayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2StatusUpdate",
+                child -> selection.apply(new UpdateProjectV2StatusUpdatePayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2StatusUpdateInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateProjectV2View(
+            final UpdateProjectV2ViewPayload input, final Function<UpdateProjectV2ViewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateProjectV2View",
+                child -> selection.apply(new UpdateProjectV2ViewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateProjectV2ViewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updatePullRequest(
+            final UpdatePullRequestPayload input, final Function<UpdatePullRequestPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updatePullRequest",
+                child -> selection.apply(new UpdatePullRequestPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdatePullRequestInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updatePullRequestBranch(
+            final UpdatePullRequestBranchPayload input,
+            final Function<UpdatePullRequestBranchPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updatePullRequestBranch",
+                child -> selection.apply(new UpdatePullRequestBranchPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdatePullRequestBranchInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updatePullRequestReview(
+            final UpdatePullRequestReviewPayload input,
+            final Function<UpdatePullRequestReviewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updatePullRequestReview",
+                child -> selection.apply(new UpdatePullRequestReviewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdatePullRequestReviewInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updatePullRequestReviewComment(
+            final UpdatePullRequestReviewCommentPayload input,
+            final Function<UpdatePullRequestReviewCommentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updatePullRequestReviewComment",
+                child -> selection.apply(new UpdatePullRequestReviewCommentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdatePullRequestReviewCommentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateRef(
+            final UpdateRefPayload input, final Function<UpdateRefPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateRef",
+                child -> selection.apply(new UpdateRefPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateRefInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateRefs(
+            final UpdateRefsPayload input, final Function<UpdateRefsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateRefs",
+                child -> selection.apply(new UpdateRefsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateRefsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateRepository(
+            final UpdateRepositoryPayload input, final Function<UpdateRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateRepository",
+                child -> selection.apply(new UpdateRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateRepositoryCustomProperty(
+            final UpdateRepositoryCustomPropertyPayload input,
+            final Function<UpdateRepositoryCustomPropertyPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateRepositoryCustomProperty",
+                child -> selection.apply(new UpdateRepositoryCustomPropertyPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateRepositoryCustomPropertyInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateRepositoryRuleset(
+            final UpdateRepositoryRulesetPayload input,
+            final Function<UpdateRepositoryRulesetPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateRepositoryRuleset",
+                child -> selection.apply(new UpdateRepositoryRulesetPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateRepositoryRulesetInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateRepositoryWebCommitSignoffSetting(
+            final UpdateRepositoryWebCommitSignoffSettingPayload input,
+            final Function<UpdateRepositoryWebCommitSignoffSettingPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateRepositoryWebCommitSignoffSetting",
+                child -> selection.apply(new UpdateRepositoryWebCommitSignoffSettingPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateRepositoryWebCommitSignoffSettingInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateSponsorshipPreferences(
+            final UpdateSponsorshipPreferencesPayload input,
+            final Function<UpdateSponsorshipPreferencesPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateSponsorshipPreferences",
+                child -> selection.apply(new UpdateSponsorshipPreferencesPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateSponsorshipPreferencesInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateSubscription(
+            final UpdateSubscriptionPayload input, final Function<UpdateSubscriptionPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateSubscription",
+                child -> selection.apply(new UpdateSubscriptionPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateSubscriptionInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateTeamReviewAssignment(
+            final UpdateTeamReviewAssignmentPayload input,
+            final Function<UpdateTeamReviewAssignmentPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateTeamReviewAssignment",
+                child -> selection.apply(new UpdateTeamReviewAssignmentPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateTeamReviewAssignmentInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateTeamsRepository(
+            final UpdateTeamsRepositoryPayload input,
+            final Function<UpdateTeamsRepositoryPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateTeamsRepository",
+                child -> selection.apply(new UpdateTeamsRepositoryPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateTeamsRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateTopics(
+            final UpdateTopicsPayload input, final Function<UpdateTopicsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateTopics",
+                child -> selection.apply(new UpdateTopicsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateTopicsInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateUserList(
+            final UpdateUserListPayload input, final Function<UpdateUserListPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateUserList",
+                child -> selection.apply(new UpdateUserListPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateUserListInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateUserListsForItem(
+            final UpdateUserListsForItemPayload input,
+            final Function<UpdateUserListsForItemPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateUserListsForItem",
+                child -> selection.apply(new UpdateUserListsForItemPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateUserListsForItemInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R verifyVerifiableDomain(
+            final VerifyVerifiableDomainPayload input,
+            final Function<VerifyVerifiableDomainPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "verifyVerifiableDomain",
+                child -> selection.apply(new VerifyVerifiableDomainPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "VerifyVerifiableDomainInput!", input.toVariable()));
+    }
+}

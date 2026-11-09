@@ -1,0 +1,27 @@
+package io.github.piotr_janczukowicz.github.graphql.internal;
+
+import io.github.piotr_janczukowicz.github.graphql.model.DeleteProjectV2FieldPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.ProjectV2FieldConfigurationSelector;
+import java.util.function.Function;
+import org.jspecify.annotations.Nullable;
+
+/** Reads and records the fields of {@code DeleteProjectV2FieldPayload}; used by the generated selection code only. */
+final class DeleteProjectV2FieldPayloadSelectorImpl implements DeleteProjectV2FieldPayloadSelector {
+
+    private final Cursor cursor;
+
+    DeleteProjectV2FieldPayloadSelectorImpl(final Cursor cursor) {
+        this.cursor = cursor;
+    }
+
+    @Override
+    public @Nullable String clientMutationId() {
+        return cursor.get("clientMutationId", ScalarType.STRING);
+    }
+
+    @Override
+    public <R> @Nullable R projectV2Field(final Function<ProjectV2FieldConfigurationSelector, R> selection) {
+        return cursor.object(
+                "projectV2Field", child -> selection.apply(new ProjectV2FieldConfigurationSelectorImpl(child)));
+    }
+}
