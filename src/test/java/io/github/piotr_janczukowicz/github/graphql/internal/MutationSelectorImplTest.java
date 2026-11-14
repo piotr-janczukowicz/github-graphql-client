@@ -885,6 +885,7 @@ class MutationSelectorImplTest {
             + "\"updateUserListsForItem\":{\"clientMutationId\": \"x\"}" + ","
             + "\"verifyVerifiableDomain\":{\"clientMutationId\": \"x\"}" + "}";
 
+    @SuppressWarnings("PMD.NcssCount")
     private static List<Object> readWithArguments(final MutationSelectorImpl selector) {
         final List<Object> values = new ArrayList<>();
         values.add(selector.abortQueuedMigrations(

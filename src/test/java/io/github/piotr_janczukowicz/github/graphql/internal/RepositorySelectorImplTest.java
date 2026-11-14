@@ -272,6 +272,7 @@ class RepositorySelectorImplTest {
             + "\"watchers\":{\"nodes\": [{\"anyPinnableItems\": true}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + "," + "\"webCommitSignoffRequired\":true" + "}";
 
+    @SuppressWarnings("PMD.NcssCount")
     private static List<Object> readWithArguments(final RepositorySelectorImpl selector) {
         final List<Object> values = new ArrayList<>();
         values.add(selector.allowUpdateBranch());

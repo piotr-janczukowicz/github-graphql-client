@@ -234,6 +234,7 @@ class OrganizationSelectorImplTest {
             + "\"viewerIsSponsoring\":true" + "," + "\"webCommitSignoffRequired\":true" + "," + "\"websiteUrl\":\"x\""
             + "}";
 
+    @SuppressWarnings("PMD.NcssCount")
     private static List<Object> readWithArguments(final OrganizationSelectorImpl selector) {
         final List<Object> values = new ArrayList<>();
         values.add(selector.announcementBanner(AnnouncementBannerSelector::createdAt));

@@ -13,6 +13,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.AddCommentPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.AddCommentPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.CustomPropertyValueInputBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.IssueCommentSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryCustomPropertyValuesPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryCustomPropertyValuesPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.SetRepositoryCustomPropertyValuesPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateProjectV2ItemPositionPayloadBuilder;
@@ -146,22 +147,23 @@ class GitHubGraphQLMutationIntegrationTest {
     void mutate_shouldSendTextOptionsAndNull_whenPropertiesAreSet() throws Exception {
         HTTP.stub(
                 POST, PATH, jsonOk("{\"data\":{\"setRepositoryCustomPropertyValues\":{\"clientMutationId\":\"m\"}}}"));
-        final var payload = SetRepositoryCustomPropertyValuesPayloadBuilder.builder()
-                .repositoryId("R_1")
-                .properties(List.of(
-                        CustomPropertyValueInputBuilder.builder()
-                                .propertyName("team")
-                                .value(OptionalNull.of(CustomPropertyValue.ofText("core")))
-                                .build(),
-                        CustomPropertyValueInputBuilder.builder()
-                                .propertyName("tags")
-                                .value(OptionalNull.of(CustomPropertyValue.ofOptions(List.of("a"))))
-                                .build(),
-                        CustomPropertyValueInputBuilder.builder()
-                                .propertyName("old")
-                                .value(OptionalNull.ofNull())
-                                .build()))
-                .build();
+        final SetRepositoryCustomPropertyValuesPayload payload =
+                SetRepositoryCustomPropertyValuesPayloadBuilder.builder()
+                        .repositoryId("R_1")
+                        .properties(List.of(
+                                CustomPropertyValueInputBuilder.builder()
+                                        .propertyName("team")
+                                        .value(OptionalNull.of(CustomPropertyValue.ofText("core")))
+                                        .build(),
+                                CustomPropertyValueInputBuilder.builder()
+                                        .propertyName("tags")
+                                        .value(OptionalNull.of(CustomPropertyValue.ofOptions(List.of("a"))))
+                                        .build(),
+                                CustomPropertyValueInputBuilder.builder()
+                                        .propertyName("old")
+                                        .value(OptionalNull.ofNull())
+                                        .build()))
+                        .build();
 
         try (final GitHubClient client = client()) {
             final GitHubGraphQL graphql = GitHubGraphQL.of(client);
