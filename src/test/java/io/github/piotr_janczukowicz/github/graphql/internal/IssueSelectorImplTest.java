@@ -154,6 +154,7 @@ class IssueSelectorImplTest {
             + "\"viewerThreadSubscriptionFormAction\":\"NONE\"" + ","
             + "\"viewerThreadSubscriptionStatus\":\"DISABLED\"" + "}";
 
+    @SuppressWarnings("PMD.NcssCount")
     private static List<Object> readWithArguments(final IssueSelectorImpl selector) {
         final List<Object> values = new ArrayList<>();
         values.add(selector.activeLockReason());

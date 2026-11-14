@@ -172,6 +172,7 @@ class PullRequestSelectorImplTest {
             + "," + "\"viewerLatestReviewRequest\":{\"asCodeOwner\": true}" + "," + "\"viewerMergeBodyText\":\"x\""
             + "," + "\"viewerMergeHeadlineText\":\"x\"" + "," + "\"viewerSubscription\":\"IGNORED\"" + "}";
 
+    @SuppressWarnings("PMD.NcssCount")
     private static List<Object> readWithArguments(final PullRequestSelectorImpl selector) {
         final List<Object> values = new ArrayList<>();
         values.add(selector.activeLockReason());

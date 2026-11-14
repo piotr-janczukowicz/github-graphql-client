@@ -228,6 +228,7 @@ class UserSelectorImplTest {
             + "\"watching\":{\"nodes\": [{\"allowUpdateBranch\": true}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + "," + "\"websiteUrl\":\"x\"" + "}";
 
+    @SuppressWarnings("PMD.NcssCount")
     private static List<Object> readWithArguments(final UserSelectorImpl selector) {
         final List<Object> values = new ArrayList<>();
         values.add(selector.anyPinnableItems(UserAnyPinnableItemsFilterBuilder.builder()
