@@ -8,6 +8,8 @@ import io.github.piotr_janczukowicz.github.graphql.model.ActorSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.CommentAuthorAssociation;
 import io.github.piotr_janczukowicz.github.graphql.model.CommentCannotUpdateReason;
 import io.github.piotr_janczukowicz.github.graphql.model.CommitSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CopilotCodeReviewSourceKind;
+import io.github.piotr_janczukowicz.github.graphql.model.CopilotCodeReviewSourceSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.LockReason;
 import io.github.piotr_janczukowicz.github.graphql.model.OrderDirection;
 import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewCommentReactionsFilterBuilder;
@@ -42,10 +44,11 @@ class PullRequestReviewCommentSelectorImplTest {
     private static final String RESPONSE = "{" + "\"author\":{\"avatarUrl\": \"x\"}" + ","
             + "\"authorAssociation\":\"COLLABORATOR\"" + "," + "\"body\":\"x\"" + "," + "\"bodyHTML\":\"x\"" + ","
             + "\"bodyText\":\"x\"" + "," + "\"commit\":{\"abbreviatedOid\": \"x\"}" + ","
+            + "\"copilotCodeReviewSources\":[{\"kind\": \"CUSTOM_INSTRUCTIONS\"}]" + ","
             + "\"createdAt\":\"2024-05-01T10:15:30Z\"" + "," + "\"createdViaEmail\":true" + "," + "\"databaseId\":1"
             + "," + "\"diffHunk\":\"x\"" + "," + "\"draftedAt\":\"2024-05-01T10:15:30Z\"" + ","
             + "\"editor\":{\"avatarUrl\": \"x\"}" + "," + "\"fullDatabaseId\":\"1\"" + "," + "\"id\":\"x\"" + ","
-            + "\"includesCreatedEdit\":true" + "," + "\"isMinimized\":true" + ","
+            + "\"includesCreatedEdit\":true" + "," + "\"isCopilotCodeReview\":true" + "," + "\"isMinimized\":true" + ","
             + "\"lastEditedAt\":\"2024-05-01T10:15:30Z\"" + "," + "\"line\":1" + "," + "\"minimizedReason\":\"x\"" + ","
             + "\"originalCommit\":{\"abbreviatedOid\": \"x\"}" + "," + "\"originalLine\":1" + ","
             + "\"originalPosition\":1" + "," + "\"originalStartLine\":1" + "," + "\"outdated\":true" + ","
@@ -71,6 +74,7 @@ class PullRequestReviewCommentSelectorImplTest {
         values.add(selector.bodyHTML());
         values.add(selector.bodyText());
         values.add(selector.commit(CommitSelector::abbreviatedOid));
+        values.add(selector.copilotCodeReviewSources(CopilotCodeReviewSourceSelector::kind));
         values.add(selector.createdAt());
         values.add(selector.createdViaEmail());
         values.add(selector.databaseId());
@@ -80,6 +84,7 @@ class PullRequestReviewCommentSelectorImplTest {
         values.add(selector.fullDatabaseId());
         values.add(selector.id());
         values.add(selector.includesCreatedEdit());
+        values.add(selector.isCopilotCodeReview());
         values.add(selector.isMinimized());
         values.add(selector.lastEditedAt());
         values.add(selector.line());
@@ -147,6 +152,7 @@ class PullRequestReviewCommentSelectorImplTest {
                         "x",
                         "x",
                         "x",
+                        List.of(CopilotCodeReviewSourceKind.CUSTOM_INSTRUCTIONS),
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),
                         true,
                         1,
@@ -155,6 +161,7 @@ class PullRequestReviewCommentSelectorImplTest {
                         "x",
                         BigInteger.ONE,
                         "x",
+                        true,
                         true,
                         true,
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),

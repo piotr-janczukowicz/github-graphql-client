@@ -19,6 +19,8 @@ public interface EnterpriseSelector {
 
     <R> @Nullable R billingInfo(Function<EnterpriseBillingInfoSelector, R> selection);
 
+    <R> @Nullable R copilotCodeReviewPolicy(Function<EnterpriseCopilotCodeReviewPolicySelector, R> selection);
+
     Instant createdAt();
 
     @Nullable Integer databaseId();

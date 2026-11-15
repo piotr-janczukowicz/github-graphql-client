@@ -587,6 +587,9 @@ public interface MutationSelector {
     <R> @Nullable R reprioritizeSubIssue(
             ReprioritizeSubIssuePayload input, Function<ReprioritizeSubIssuePayloadSelector, R> selection);
 
+    <R> @Nullable R requestCopilotCodeReview(
+            RequestCopilotCodeReviewPayload input, Function<RequestCopilotCodeReviewPayloadSelector, R> selection);
+
     <R> @Nullable R requestReviews(RequestReviewsPayload input, Function<RequestReviewsPayloadSelector, R> selection);
 
     <R> @Nullable R requestReviewsByLogin(
@@ -730,6 +733,10 @@ public interface MutationSelector {
             UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload input,
             Function<UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector, R> selection);
 
+    <R> @Nullable R updateEnterpriseCopilotCodeReviewPolicy(
+            UpdateEnterpriseCopilotCodeReviewPolicyPayload input,
+            Function<UpdateEnterpriseCopilotCodeReviewPolicyPayloadSelector, R> selection);
+
     <R> @Nullable R updateEnterpriseDefaultRepositoryPermissionSetting(
             UpdateEnterpriseDefaultRepositoryPermissionSettingPayload input,
             Function<UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector, R> selection);
@@ -838,6 +845,18 @@ public interface MutationSelector {
             UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload input,
             Function<UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector, R> selection);
 
+    <R> @Nullable R updateOrganizationCopilotCodeReviewPolicy(
+            UpdateOrganizationCopilotCodeReviewPolicyPayload input,
+            Function<UpdateOrganizationCopilotCodeReviewPolicyPayloadSelector, R> selection);
+
+    <R> @Nullable R updateOrganizationCopilotCodeReviewRunnerConfiguration(
+            UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayload input,
+            Function<UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadSelector, R> selection);
+
+    <R> @Nullable R updateOrganizationCopilotCodeReviewSettings(
+            UpdateOrganizationCopilotCodeReviewSettingsPayload input,
+            Function<UpdateOrganizationCopilotCodeReviewSettingsPayloadSelector, R> selection);
+
     <R> @Nullable R updateOrganizationWebCommitSignoffSetting(
             UpdateOrganizationWebCommitSignoffSettingPayload input,
             Function<UpdateOrganizationWebCommitSignoffSettingPayloadSelector, R> selection);
@@ -916,6 +935,10 @@ public interface MutationSelector {
 
     <R> @Nullable R updateRepository(
             UpdateRepositoryPayload input, Function<UpdateRepositoryPayloadSelector, R> selection);
+
+    <R> @Nullable R updateRepositoryCopilotCodeReviewSettings(
+            UpdateRepositoryCopilotCodeReviewSettingsPayload input,
+            Function<UpdateRepositoryCopilotCodeReviewSettingsPayloadSelector, R> selection);
 
     <R> @Nullable R updateRepositoryCustomProperty(
             UpdateRepositoryCustomPropertyPayload input,

@@ -8,6 +8,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.ActorSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.CommentAuthorAssociation;
 import io.github.piotr_janczukowicz.github.graphql.model.CommentCannotUpdateReason;
 import io.github.piotr_janczukowicz.github.graphql.model.CommitSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CopilotCodeReviewEffort;
 import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewCommentSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewReactionsFilter;
 import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewReactionsFilterBuilder;
@@ -92,6 +93,13 @@ final class PullRequestReviewSelectorImpl implements PullRequestReviewSelector {
     }
 
     @Override
+    public @Nullable CopilotCodeReviewEffort copilotCodeReviewEffort() {
+        return cursor.get(
+                "copilotCodeReviewEffort",
+                ScalarType.enumeration(CopilotCodeReviewEffort::fromWire, CopilotCodeReviewEffort.AUTO));
+    }
+
+    @Override
     public Instant createdAt() {
         return cursor.getRequired("createdAt", ScalarType.INSTANT);
     }
@@ -130,6 +138,11 @@ final class PullRequestReviewSelectorImpl implements PullRequestReviewSelector {
     @Override
     public boolean includesCreatedEdit() {
         return cursor.getRequired("includesCreatedEdit", ScalarType.BOOLEAN);
+    }
+
+    @Override
+    public boolean isCopilotCodeReview() {
+        return cursor.getRequired("isCopilotCodeReview", ScalarType.BOOLEAN);
     }
 
     @Override

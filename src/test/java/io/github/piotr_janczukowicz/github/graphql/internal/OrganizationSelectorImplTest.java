@@ -7,6 +7,7 @@ import io.github.piotr_janczukowicz.github.graphql.Paging;
 import io.github.piotr_janczukowicz.github.graphql.model.AnnouncementBannerSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.AuditLogOrderBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.CommentAuthorAssociation;
+import io.github.piotr_janczukowicz.github.graphql.model.CopilotCodeReviewEffortLevel;
 import io.github.piotr_janczukowicz.github.graphql.model.DiscussionCommentSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.DiscussionOrderBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.DiscussionOrderField;
@@ -38,6 +39,10 @@ import io.github.piotr_janczukowicz.github.graphql.model.OrgEnterpriseOwnerOrder
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationAnyPinnableItemsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationAuditLogFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationAvatarUrlFilterBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewPolicySelector;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewPolicyState;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewRunnerConfigurationSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewSettingsSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationDomainsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationEnterpriseOwnersFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationIdentityProviderSelector;
@@ -152,8 +157,11 @@ class OrganizationSelectorImplTest {
     private static final String RESPONSE = "{" + "\"announcementBanner\":{\"createdAt\": \"2024-05-01T10:15:30Z\"}"
             + "," + "\"anyPinnableItems\":true" + "," + "\"archivedAt\":\"2024-05-01T10:15:30Z\"" + ","
             + "\"auditLog\":{\"nodes\": [{\"__typename\": \"MembersCanDeleteReposClearAuditEntry\", \"enterpriseResourcePath\": \"x\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
-            + "," + "\"avatarUrl\":\"x\"" + "," + "\"createdAt\":\"2024-05-01T10:15:30Z\"" + "," + "\"databaseId\":1"
-            + "," + "\"description\":\"x\"" + "," + "\"descriptionHTML\":\"x\"" + ","
+            + "," + "\"avatarUrl\":\"x\"" + ","
+            + "\"copilotCodeReviewRunnerConfiguration\":{\"allowRepositoryCustomization\": true}" + ","
+            + "\"copilotCodeReviewSettings\":{\"availableReviewEfforts\": [\"AUTO\"]}" + ","
+            + "\"createdAt\":\"2024-05-01T10:15:30Z\"" + "," + "\"databaseId\":1" + "," + "\"description\":\"x\"" + ","
+            + "\"descriptionHTML\":\"x\"" + ","
             + "\"domains\":{\"nodes\": [{\"createdAt\": \"2024-05-01T10:15:30Z\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + "," + "\"email\":\"x\"" + ","
             + "\"enterpriseOwners\":{\"nodes\": [{\"anyPinnableItems\": true}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
@@ -180,6 +188,7 @@ class OrganizationSelectorImplTest {
             + "\"newTeamResourcePath\":\"x\"" + "," + "\"newTeamUrl\":\"x\"" + ","
             + "\"notificationDeliveryRestrictionEnabledSetting\":\"DISABLED\"" + ","
             + "\"organizationBillingEmail\":\"x\"" + ","
+            + "\"organizationCopilotCodeReviewPolicy\":{\"configuredState\": \"DISABLED\"}" + ","
             + "\"packages\":{\"nodes\": [{\"id\": \"x\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + ","
             + "\"pendingMembers\":{\"nodes\": [{\"anyPinnableItems\": true}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
@@ -253,6 +262,10 @@ class OrganizationSelectorImplTest {
                         MembersCanDeleteReposClearAuditEntrySelector::enterpriseResourcePath)));
         values.add(selector.avatarUrl(
                 OrganizationAvatarUrlFilterBuilder.builder().size(1).build()));
+        values.add(selector.copilotCodeReviewRunnerConfiguration(
+                OrganizationCopilotCodeReviewRunnerConfigurationSelector::allowRepositoryCustomization));
+        values.add(selector.copilotCodeReviewSettings(
+                OrganizationCopilotCodeReviewSettingsSelector::availableReviewEfforts));
         values.add(selector.createdAt());
         values.add(selector.databaseId());
         values.add(selector.description());
@@ -367,6 +380,8 @@ class OrganizationSelectorImplTest {
         values.add(selector.newTeamUrl());
         values.add(selector.notificationDeliveryRestrictionEnabledSetting());
         values.add(selector.organizationBillingEmail());
+        values.add(selector.organizationCopilotCodeReviewPolicy(
+                OrganizationCopilotCodeReviewPolicySelector::configuredState));
         values.add(selector.packages(
                 Paging.first(1),
                 OrganizationPackagesFilterBuilder.builder()
@@ -675,6 +690,8 @@ class OrganizationSelectorImplTest {
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),
                         new Page<>(List.of("x"), false, null),
                         "x",
+                        true,
+                        List.of(CopilotCodeReviewEffortLevel.AUTO),
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),
                         1,
                         "x",
@@ -709,6 +726,7 @@ class OrganizationSelectorImplTest {
                         "x",
                         NotificationRestrictionSettingValue.DISABLED,
                         "x",
+                        OrganizationCopilotCodeReviewPolicyState.DISABLED,
                         new Page<>(List.of("x"), false, null),
                         new Page<>(List.of(true), false, null),
                         new Page<>(List.of(Instant.parse(VALUE_2024_05_01_T10_15_30_Z)), false, null),

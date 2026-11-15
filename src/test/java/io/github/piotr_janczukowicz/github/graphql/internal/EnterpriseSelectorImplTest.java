@@ -7,6 +7,8 @@ import io.github.piotr_janczukowicz.github.graphql.Paging;
 import io.github.piotr_janczukowicz.github.graphql.model.AnnouncementBannerSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseAvatarUrlFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseBillingInfoSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseCopilotCodeReviewPolicySelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseCopilotCodeReviewPolicyState;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseEnterpriseTeamsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseInnersourceVulnerabilitiesFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseMemberOrderBuilder;
@@ -53,9 +55,10 @@ class EnterpriseSelectorImplTest {
 
     private static final String RESPONSE = "{" + "\"announcementBanner\":{\"createdAt\": \"2024-05-01T10:15:30Z\"}"
             + "," + "\"avatarUrl\":\"x\"" + "," + "\"billingEmail\":\"x\"" + ","
-            + "\"billingInfo\":{\"allLicensableUsersCount\": 1}" + "," + "\"createdAt\":\"2024-05-01T10:15:30Z\"" + ","
-            + "\"databaseId\":1" + "," + "\"description\":\"x\"" + "," + "\"descriptionHTML\":\"x\"" + ","
-            + "\"enterpriseTeam\":{\"combinedSlug\": \"x\"}" + ","
+            + "\"billingInfo\":{\"allLicensableUsersCount\": 1}" + ","
+            + "\"copilotCodeReviewPolicy\":{\"policyState\": \"CONFIGURED_BY_ORGANIZATION_ADMINS\"}" + ","
+            + "\"createdAt\":\"2024-05-01T10:15:30Z\"" + "," + "\"databaseId\":1" + "," + "\"description\":\"x\"" + ","
+            + "\"descriptionHTML\":\"x\"" + "," + "\"enterpriseTeam\":{\"combinedSlug\": \"x\"}" + ","
             + "\"enterpriseTeams\":{\"nodes\": [{\"combinedSlug\": \"x\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + "," + "\"id\":\"x\"" + ","
             + "\"innersourceVulnerabilities\":{\"nodes\": [{\"severity\": \"CRITICAL\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
@@ -81,6 +84,7 @@ class EnterpriseSelectorImplTest {
                 EnterpriseAvatarUrlFilterBuilder.builder().size(1).build()));
         values.add(selector.billingEmail());
         values.add(selector.billingInfo(EnterpriseBillingInfoSelector::allLicensableUsersCount));
+        values.add(selector.copilotCodeReviewPolicy(EnterpriseCopilotCodeReviewPolicySelector::policyState));
         values.add(selector.createdAt());
         values.add(selector.databaseId());
         values.add(selector.description());
@@ -194,6 +198,7 @@ class EnterpriseSelectorImplTest {
                         "x",
                         "x",
                         1,
+                        EnterpriseCopilotCodeReviewPolicyState.CONFIGURED_BY_ORGANIZATION_ADMINS,
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),
                         1,
                         "x",

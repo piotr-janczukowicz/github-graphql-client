@@ -8,6 +8,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.ActorSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.CommentAuthorAssociation;
 import io.github.piotr_janczukowicz.github.graphql.model.CommentCannotUpdateReason;
 import io.github.piotr_janczukowicz.github.graphql.model.CommitSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CopilotCodeReviewEffort;
 import io.github.piotr_janczukowicz.github.graphql.model.LockReason;
 import io.github.piotr_janczukowicz.github.graphql.model.OrderDirection;
 import io.github.piotr_janczukowicz.github.graphql.model.PullRequestReviewCommentSelector;
@@ -42,11 +43,11 @@ class PullRequestReviewSelectorImplTest {
             + "\"authorAssociation\":\"COLLABORATOR\"" + "," + "\"authorCanPushToRepository\":true" + ","
             + "\"body\":\"x\"" + "," + "\"bodyHTML\":\"x\"" + "," + "\"bodyText\":\"x\"" + ","
             + "\"comments\":{\"nodes\": [{\"authorAssociation\": \"COLLABORATOR\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
-            + "," + "\"commit\":{\"abbreviatedOid\": \"x\"}" + "," + "\"createdAt\":\"2024-05-01T10:15:30Z\"" + ","
-            + "\"createdViaEmail\":true" + "," + "\"databaseId\":1" + "," + "\"editor\":{\"avatarUrl\": \"x\"}" + ","
-            + "\"fullDatabaseId\":\"1\"" + "," + "\"id\":\"x\"" + "," + "\"includesCreatedEdit\":true" + ","
-            + "\"isMinimized\":true" + "," + "\"lastEditedAt\":\"2024-05-01T10:15:30Z\"" + ","
-            + "\"minimizedReason\":\"x\"" + ","
+            + "," + "\"commit\":{\"abbreviatedOid\": \"x\"}" + "," + "\"copilotCodeReviewEffort\":\"AUTO\"" + ","
+            + "\"createdAt\":\"2024-05-01T10:15:30Z\"" + "," + "\"createdViaEmail\":true" + "," + "\"databaseId\":1"
+            + "," + "\"editor\":{\"avatarUrl\": \"x\"}" + "," + "\"fullDatabaseId\":\"1\"" + "," + "\"id\":\"x\"" + ","
+            + "\"includesCreatedEdit\":true" + "," + "\"isCopilotCodeReview\":true" + "," + "\"isMinimized\":true" + ","
+            + "\"lastEditedAt\":\"2024-05-01T10:15:30Z\"" + "," + "\"minimizedReason\":\"x\"" + ","
             + "\"onBehalfOf\":{\"nodes\": [{\"avatarUrl\": \"x\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + "," + "\"publishedAt\":\"2024-05-01T10:15:30Z\"" + ","
             + "\"pullRequest\":{\"activeLockReason\": \"OFF_TOPIC\"}" + ","
@@ -70,6 +71,7 @@ class PullRequestReviewSelectorImplTest {
         values.add(selector.bodyText());
         values.add(selector.comments(Paging.first(1), PullRequestReviewCommentSelector::authorAssociation));
         values.add(selector.commit(CommitSelector::abbreviatedOid));
+        values.add(selector.copilotCodeReviewEffort());
         values.add(selector.createdAt());
         values.add(selector.createdViaEmail());
         values.add(selector.databaseId());
@@ -77,6 +79,7 @@ class PullRequestReviewSelectorImplTest {
         values.add(selector.fullDatabaseId());
         values.add(selector.id());
         values.add(selector.includesCreatedEdit());
+        values.add(selector.isCopilotCodeReview());
         values.add(selector.isMinimized());
         values.add(selector.lastEditedAt());
         values.add(selector.minimizedReason());
@@ -136,12 +139,14 @@ class PullRequestReviewSelectorImplTest {
                         "x",
                         new Page<>(List.of(CommentAuthorAssociation.COLLABORATOR), false, null),
                         "x",
+                        CopilotCodeReviewEffort.AUTO,
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),
                         true,
                         1,
                         "x",
                         BigInteger.ONE,
                         "x",
+                        true,
                         true,
                         true,
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),

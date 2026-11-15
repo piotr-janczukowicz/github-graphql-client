@@ -52,6 +52,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCodeownersSel
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCollaboratorsFilter;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCollaboratorsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryContactLinkSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCopilotCodeReviewSettingsSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCustomPropertyValueSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryDependencyGraphManifestsFilter;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryDependencyGraphManifestsFilterBuilder;
@@ -1269,6 +1270,14 @@ final class RepositorySelectorImpl implements RepositorySelector {
     @Override
     public <R> Page<R> releases(final Paging paging, final Function<ReleaseSelector, R> selection) {
         return releases(paging, RepositoryReleasesFilterBuilder.builder().build(), selection);
+    }
+
+    @Override
+    public <R> @Nullable R repositoryCopilotCodeReviewSettings(
+            final Function<RepositoryCopilotCodeReviewSettingsSelector, R> selection) {
+        return cursor.object(
+                "repositoryCopilotCodeReviewSettings",
+                child -> selection.apply(new RepositoryCopilotCodeReviewSettingsSelectorImpl(child)));
     }
 
     @Override
