@@ -21,6 +21,9 @@ import io.github.piotr_janczukowicz.github.graphql.model.OrganizationAuditLogFil
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationAuditLogFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationAvatarUrlFilter;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationAvatarUrlFilterBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewPolicySelector;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewRunnerConfigurationSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewSettingsSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationDomainsFilter;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationDomainsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.OrganizationEnterpriseOwnersFilter;
@@ -213,6 +216,22 @@ final class OrganizationSelectorImpl implements OrganizationSelector {
     @Override
     public String avatarUrl() {
         return avatarUrl(OrganizationAvatarUrlFilterBuilder.builder().build());
+    }
+
+    @Override
+    public <R> @Nullable R copilotCodeReviewRunnerConfiguration(
+            final Function<OrganizationCopilotCodeReviewRunnerConfigurationSelector, R> selection) {
+        return cursor.object(
+                "copilotCodeReviewRunnerConfiguration",
+                child -> selection.apply(new OrganizationCopilotCodeReviewRunnerConfigurationSelectorImpl(child)));
+    }
+
+    @Override
+    public <R> @Nullable R copilotCodeReviewSettings(
+            final Function<OrganizationCopilotCodeReviewSettingsSelector, R> selection) {
+        return cursor.object(
+                "copilotCodeReviewSettings",
+                child -> selection.apply(new OrganizationCopilotCodeReviewSettingsSelectorImpl(child)));
     }
 
     @Override
@@ -585,6 +604,14 @@ final class OrganizationSelectorImpl implements OrganizationSelector {
     @Override
     public @Nullable String organizationBillingEmail() {
         return cursor.get("organizationBillingEmail", ScalarType.STRING);
+    }
+
+    @Override
+    public <R> @Nullable R organizationCopilotCodeReviewPolicy(
+            final Function<OrganizationCopilotCodeReviewPolicySelector, R> selection) {
+        return cursor.object(
+                "organizationCopilotCodeReviewPolicy",
+                child -> selection.apply(new OrganizationCopilotCodeReviewPolicySelectorImpl(child)));
     }
 
     @Override

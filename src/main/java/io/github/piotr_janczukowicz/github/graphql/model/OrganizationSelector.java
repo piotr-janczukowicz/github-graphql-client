@@ -30,6 +30,11 @@ public interface OrganizationSelector {
 
     String avatarUrl();
 
+    <R> @Nullable R copilotCodeReviewRunnerConfiguration(
+            Function<OrganizationCopilotCodeReviewRunnerConfigurationSelector, R> selection);
+
+    <R> @Nullable R copilotCodeReviewSettings(Function<OrganizationCopilotCodeReviewSettingsSelector, R> selection);
+
     Instant createdAt();
 
     @Nullable Integer databaseId();
@@ -131,6 +136,9 @@ public interface OrganizationSelector {
     NotificationRestrictionSettingValue notificationDeliveryRestrictionEnabledSetting();
 
     @Nullable String organizationBillingEmail();
+
+    <R> @Nullable R organizationCopilotCodeReviewPolicy(
+            Function<OrganizationCopilotCodeReviewPolicySelector, R> selection);
 
     <R> Page<R> packages(Paging paging, OrganizationPackagesFilter arguments, Function<PackageSelector, R> selection);
 

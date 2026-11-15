@@ -8,6 +8,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.AnnouncementBannerSelec
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseAvatarUrlFilter;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseAvatarUrlFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseBillingInfoSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseCopilotCodeReviewPolicySelector;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseEnterpriseTeamsFilter;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseEnterpriseTeamsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseInnersourceVulnerabilitiesFilter;
@@ -82,6 +83,14 @@ final class EnterpriseSelectorImpl implements EnterpriseSelector {
     @Override
     public <R> @Nullable R billingInfo(final Function<EnterpriseBillingInfoSelector, R> selection) {
         return cursor.object("billingInfo", child -> selection.apply(new EnterpriseBillingInfoSelectorImpl(child)));
+    }
+
+    @Override
+    public <R> @Nullable R copilotCodeReviewPolicy(
+            final Function<EnterpriseCopilotCodeReviewPolicySelector, R> selection) {
+        return cursor.object(
+                "copilotCodeReviewPolicy",
+                child -> selection.apply(new EnterpriseCopilotCodeReviewPolicySelectorImpl(child)));
     }
 
     @Override

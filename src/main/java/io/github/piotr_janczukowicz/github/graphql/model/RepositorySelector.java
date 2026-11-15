@@ -310,6 +310,9 @@ public interface RepositorySelector {
 
     <R> Page<R> releases(Paging paging, Function<ReleaseSelector, R> selection);
 
+    <R> @Nullable R repositoryCopilotCodeReviewSettings(
+            Function<RepositoryCopilotCodeReviewSettingsSelector, R> selection);
+
     <R> @Nullable R repositoryCustomPropertyValue(
             String propertyName, Function<RepositoryCustomPropertyValueSelector, R> selection);
 

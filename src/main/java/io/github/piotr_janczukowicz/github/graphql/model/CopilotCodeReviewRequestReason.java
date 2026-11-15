@@ -1,0 +1,33 @@
+package io.github.piotr_janczukowicz.github.graphql.model;
+
+import static io.github.piotr_janczukowicz.util.ValidationUtils.requireNonNull;
+
+import io.github.piotr_janczukowicz.util.EnumUtils;
+
+/**
+ * The GraphQL enum {@code CopilotCodeReviewRequestReason}. {@link #UNRECOGNIZED} stands for a value GitHub added after
+ * this version.
+ */
+public enum CopilotCodeReviewRequestReason {
+    ACTOR_INELIGIBLE,
+    APP_NOT_INSTALLED,
+    LICENSED_ORGANIZATION_UNAVAILABLE,
+    NO_QUOTA_REMAINING,
+    REPOSITORY_INELIGIBLE,
+    REQUEST_CONFLICT,
+    UNRECOGNIZED;
+
+    private static final EnumUtils.WireIndex<CopilotCodeReviewRequestReason> WIRE_INDEX =
+            EnumUtils.index(CopilotCodeReviewRequestReason.class, CopilotCodeReviewRequestReason::name);
+
+    /**
+     * Returns the constant for a value GitHub sent.
+     *
+     * @param value the GraphQL value name
+     * @return the constant, or {@link #UNRECOGNIZED} when this version does not know the value
+     */
+    public static CopilotCodeReviewRequestReason fromWire(final String value) {
+        requireNonNull(value, "value");
+        return WIRE_INDEX.fromWire(value, UNRECOGNIZED);
+    }
+}

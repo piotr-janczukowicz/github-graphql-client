@@ -11,8 +11,11 @@ import io.github.piotr_janczukowicz.util.EnumUtils;
 public enum RepositoryPermission {
     ADMIN,
     MAINTAIN,
+    MODERATE,
     READ,
     TRIAGE,
+    /** @deprecated TRIAGE_PLUS has been renamed to MODERATE. Use MODERATE instead. Removal on 2027-04-01 UTC. */
+    @Deprecated(forRemoval = true)
     TRIAGE_PLUS,
     WRITE,
     UNRECOGNIZED;

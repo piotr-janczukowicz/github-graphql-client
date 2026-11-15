@@ -349,6 +349,8 @@ import io.github.piotr_janczukowicz.github.graphql.model.ReplaceActorsForAssigna
 import io.github.piotr_janczukowicz.github.graphql.model.ReplaceActorsForAssignablePayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayload;
 import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestCopilotCodeReviewPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestCopilotCodeReviewPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsPayload;
@@ -437,6 +439,8 @@ import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdminis
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdministratorRolePayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseCopilotCodeReviewPolicyPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseCopilotCodeReviewPolicyPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDeployKeySettingPayload;
@@ -497,6 +501,12 @@ import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestr
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestrictionSettingPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewPolicyPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewPolicyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewSettingsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewSettingsPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdatePatreonSponsorabilityPayload;
@@ -535,6 +545,8 @@ import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCopilotCodeReviewSettingsPayload;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCopilotCodeReviewSettingsPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayload;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryPayload;
@@ -2454,6 +2466,17 @@ final class MutationSelectorImpl implements MutationSelector {
     }
 
     @Override
+    public <R> @Nullable R requestCopilotCodeReview(
+            final RequestCopilotCodeReviewPayload input,
+            final Function<RequestCopilotCodeReviewPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "requestCopilotCodeReview",
+                child -> selection.apply(new RequestCopilotCodeReviewPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "RequestCopilotCodeReviewInput!", input.toVariable()));
+    }
+
+    @Override
     public <R> @Nullable R requestReviews(
             final RequestReviewsPayload input, final Function<RequestReviewsPayloadSelector, R> selection) {
         requireNonNull(input, INPUT);
@@ -2925,6 +2948,17 @@ final class MutationSelectorImpl implements MutationSelector {
     }
 
     @Override
+    public <R> @Nullable R updateEnterpriseCopilotCodeReviewPolicy(
+            final UpdateEnterpriseCopilotCodeReviewPolicyPayload input,
+            final Function<UpdateEnterpriseCopilotCodeReviewPolicyPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateEnterpriseCopilotCodeReviewPolicy",
+                child -> selection.apply(new UpdateEnterpriseCopilotCodeReviewPolicyPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateEnterpriseCopilotCodeReviewPolicyInput!", input.toVariable()));
+    }
+
+    @Override
     public <R> @Nullable R updateEnterpriseDefaultRepositoryPermissionSetting(
             final UpdateEnterpriseDefaultRepositoryPermissionSettingPayload input,
             final Function<UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector, R> selection) {
@@ -3268,6 +3302,40 @@ final class MutationSelectorImpl implements MutationSelector {
     }
 
     @Override
+    public <R> @Nullable R updateOrganizationCopilotCodeReviewPolicy(
+            final UpdateOrganizationCopilotCodeReviewPolicyPayload input,
+            final Function<UpdateOrganizationCopilotCodeReviewPolicyPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateOrganizationCopilotCodeReviewPolicy",
+                child -> selection.apply(new UpdateOrganizationCopilotCodeReviewPolicyPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateOrganizationCopilotCodeReviewPolicyInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateOrganizationCopilotCodeReviewRunnerConfiguration(
+            final UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayload input,
+            final Function<UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateOrganizationCopilotCodeReviewRunnerConfiguration",
+                child -> selection.apply(
+                        new UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateOrganizationCopilotCodeReviewRunnerConfigurationInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateOrganizationCopilotCodeReviewSettings(
+            final UpdateOrganizationCopilotCodeReviewSettingsPayload input,
+            final Function<UpdateOrganizationCopilotCodeReviewSettingsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateOrganizationCopilotCodeReviewSettings",
+                child -> selection.apply(new UpdateOrganizationCopilotCodeReviewSettingsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateOrganizationCopilotCodeReviewSettingsInput!", input.toVariable()));
+    }
+
+    @Override
     public <R> @Nullable R updateOrganizationWebCommitSignoffSetting(
             final UpdateOrganizationWebCommitSignoffSettingPayload input,
             final Function<UpdateOrganizationWebCommitSignoffSettingPayloadSelector, R> selection) {
@@ -3493,6 +3561,17 @@ final class MutationSelectorImpl implements MutationSelector {
                 "updateRepository",
                 child -> selection.apply(new UpdateRepositoryPayloadSelectorImpl(child)),
                 Argument.of(INPUT, "UpdateRepositoryInput!", input.toVariable()));
+    }
+
+    @Override
+    public <R> @Nullable R updateRepositoryCopilotCodeReviewSettings(
+            final UpdateRepositoryCopilotCodeReviewSettingsPayload input,
+            final Function<UpdateRepositoryCopilotCodeReviewSettingsPayloadSelector, R> selection) {
+        requireNonNull(input, INPUT);
+        return cursor.object(
+                "updateRepositoryCopilotCodeReviewSettings",
+                child -> selection.apply(new UpdateRepositoryCopilotCodeReviewSettingsPayloadSelectorImpl(child)),
+                Argument.of(INPUT, "UpdateRepositoryCopilotCodeReviewSettingsInput!", input.toVariable()));
     }
 
     @Override

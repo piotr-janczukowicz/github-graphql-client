@@ -12,6 +12,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.CommentAuthorAssociatio
 import io.github.piotr_janczukowicz.github.graphql.model.CommitCommentSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.ContentWarningSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.ContributingGuidelinesSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CopilotCodeReviewEffortLevel;
 import io.github.piotr_janczukowicz.github.graphql.model.DependencyGraphManifestSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.DeployKeySelector;
 import io.github.piotr_janczukowicz.github.graphql.model.DeploymentOrderBuilder;
@@ -92,6 +93,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCodeownersErr
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCodeownersFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCollaboratorsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryContactLinkSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCopilotCodeReviewSettingsSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryCustomPropertyValueSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryDependencyGraphManifestsFilterBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryDeploymentsFilterBuilder;
@@ -241,7 +243,8 @@ class RepositorySelectorImplTest {
             + "\"refs\":{\"nodes\": [{\"id\": \"x\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + "," + "\"release\":{\"createdAt\": \"2024-05-01T10:15:30Z\"}" + ","
             + "\"releases\":{\"nodes\": [{\"createdAt\": \"2024-05-01T10:15:30Z\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
-            + "," + "\"repositoryCustomPropertyValue\":{\"propertyName\": \"x\"}" + ","
+            + "," + "\"repositoryCopilotCodeReviewSettings\":{\"availableReviewEfforts\": [\"AUTO\"]}" + ","
+            + "\"repositoryCustomPropertyValue\":{\"propertyName\": \"x\"}" + ","
             + "\"repositoryCustomPropertyValues\":{\"nodes\": [{\"propertyName\": \"x\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
             + ","
             + "\"repositoryTopics\":{\"nodes\": [{\"id\": \"x\"}], \"pageInfo\": {\"hasNextPage\": false, \"endCursor\": null}}"
@@ -578,6 +581,8 @@ class RepositorySelectorImplTest {
                                 .build())
                         .build(),
                 ReleaseSelector::createdAt));
+        values.add(selector.repositoryCopilotCodeReviewSettings(
+                RepositoryCopilotCodeReviewSettingsSelector::availableReviewEfforts));
         values.add(selector.repositoryCustomPropertyValue("x", RepositoryCustomPropertyValueSelector::propertyName));
         values.add(selector.repositoryCustomPropertyValues(
                 Paging.first(1), RepositoryCustomPropertyValueSelector::propertyName));
@@ -810,6 +815,7 @@ class RepositorySelectorImplTest {
                         new Page<>(List.of("x"), false, null),
                         Instant.parse(VALUE_2024_05_01_T10_15_30_Z),
                         new Page<>(List.of(Instant.parse(VALUE_2024_05_01_T10_15_30_Z)), false, null),
+                        List.of(CopilotCodeReviewEffortLevel.AUTO),
                         "x",
                         new Page<>(List.of("x"), false, null),
                         new Page<>(List.of("x"), false, null),

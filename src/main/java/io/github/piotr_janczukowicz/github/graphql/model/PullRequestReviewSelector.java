@@ -27,6 +27,8 @@ public interface PullRequestReviewSelector {
 
     <R> @Nullable R commit(Function<CommitSelector, R> selection);
 
+    @Nullable CopilotCodeReviewEffort copilotCodeReviewEffort();
+
     Instant createdAt();
 
     boolean createdViaEmail();
@@ -45,6 +47,8 @@ public interface PullRequestReviewSelector {
     String id();
 
     boolean includesCreatedEdit();
+
+    boolean isCopilotCodeReview();
 
     boolean isMinimized();
 

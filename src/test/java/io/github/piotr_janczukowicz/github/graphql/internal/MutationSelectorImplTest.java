@@ -107,6 +107,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectV2DraftIs
 import io.github.piotr_janczukowicz.github.graphql.model.ConvertProjectV2DraftIssueItemToIssuePayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.ConvertPullRequestToDraftPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.ConvertPullRequestToDraftPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.CopilotCodeReviewRunnerType;
 import io.github.piotr_janczukowicz.github.graphql.model.CopyProjectV2PayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.CopyProjectV2PayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.CreateAttributionInvitationPayloadBuilder;
@@ -256,6 +257,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.EnablePullRequestAutoMe
 import io.github.piotr_janczukowicz.github.graphql.model.EnqueuePullRequestPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.EnqueuePullRequestPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseAdministratorRole;
+import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseCopilotCodeReviewPolicyState;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseDefaultRepositoryPermissionSettingValue;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseDisallowedMethodsSettingValue;
 import io.github.piotr_janczukowicz.github.graphql.model.EnterpriseEnabledDisabledSettingValue;
@@ -308,6 +310,7 @@ import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectCardPayloadS
 import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectColumnPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.MoveProjectColumnPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.NotificationRestrictionSettingValue;
+import io.github.piotr_janczukowicz.github.graphql.model.OrganizationCopilotCodeReviewPolicyState;
 import io.github.piotr_janczukowicz.github.graphql.model.PendingIssueSuggestionKind;
 import io.github.piotr_janczukowicz.github.graphql.model.PendingIssueSuggestionRefBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.PinEnvironmentPayloadBuilder;
@@ -386,6 +389,8 @@ import io.github.piotr_janczukowicz.github.graphql.model.RepositoryRuleCondition
 import io.github.piotr_janczukowicz.github.graphql.model.RepositoryVisibility;
 import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.ReprioritizeSubIssuePayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestCopilotCodeReviewPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.RequestCopilotCodeReviewPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsByLoginPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.RequestReviewsPayloadBuilder;
@@ -479,6 +484,8 @@ import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdminis
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAdministratorRolePayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseCopilotCodeReviewPolicyPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseCopilotCodeReviewPolicyPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateEnterpriseDeployKeySettingPayloadBuilder;
@@ -539,6 +546,12 @@ import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestr
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateNotificationRestrictionSettingPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewPolicyPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewPolicyPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewSettingsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationCopilotCodeReviewSettingsPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateOrganizationWebCommitSignoffSettingPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdatePatreonSponsorabilityPayloadBuilder;
@@ -577,6 +590,8 @@ import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayloadBuilder
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRefsPayloadSelector;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCopilotCodeReviewSettingsPayloadBuilder;
+import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCopilotCodeReviewSettingsPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayloadBuilder;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryCustomPropertyPayloadSelector;
 import io.github.piotr_janczukowicz.github.graphql.model.UpdateRepositoryPayloadBuilder;
@@ -780,6 +795,7 @@ class MutationSelectorImplTest {
             + "\"reorderEnvironment\":{\"clientMutationId\": \"x\"}" + ","
             + "\"replaceActorsForAssignable\":{\"clientMutationId\": \"x\"}" + ","
             + "\"reprioritizeSubIssue\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"requestCopilotCodeReview\":{\"clientMutationId\": \"x\"}" + ","
             + "\"requestReviews\":{\"clientMutationId\": \"x\"}" + ","
             + "\"requestReviewsByLogin\":{\"clientMutationId\": \"x\"}" + ","
             + "\"rerequestCheckSuite\":{\"clientMutationId\": \"x\"}" + ","
@@ -824,6 +840,7 @@ class MutationSelectorImplTest {
             + "\"updateDiscussionComment\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateEnterpriseAdministratorRole\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateEnterpriseAllowPrivateRepositoryForkingSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateEnterpriseCopilotCodeReviewPolicy\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateEnterpriseDefaultRepositoryPermissionSetting\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateEnterpriseDeployKeySetting\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateEnterpriseMembersCanChangeRepositoryVisibilitySetting\":{\"clientMutationId\": \"x\"}" + ","
@@ -854,6 +871,9 @@ class MutationSelectorImplTest {
             + "\"updateLabel\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateNotificationRestrictionSetting\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateOrganizationAllowPrivateRepositoryForkingSetting\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateOrganizationCopilotCodeReviewPolicy\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateOrganizationCopilotCodeReviewRunnerConfiguration\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateOrganizationCopilotCodeReviewSettings\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateOrganizationWebCommitSignoffSetting\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updatePatreonSponsorability\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateProject\":{\"clientMutationId\": \"x\"}" + ","
@@ -873,6 +893,7 @@ class MutationSelectorImplTest {
             + "\"updatePullRequestReviewComment\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateRef\":{\"clientMutationId\": \"x\"}" + "," + "\"updateRefs\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateRepository\":{\"clientMutationId\": \"x\"}" + ","
+            + "\"updateRepositoryCopilotCodeReviewSettings\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateRepositoryCustomProperty\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateRepositoryRuleset\":{\"clientMutationId\": \"x\"}" + ","
             + "\"updateRepositoryWebCommitSignoffSetting\":{\"clientMutationId\": \"x\"}" + ","
@@ -1728,6 +1749,11 @@ class MutationSelectorImplTest {
                         .subIssueId("x")
                         .build(),
                 ReprioritizeSubIssuePayloadSelector::clientMutationId));
+        values.add(selector.requestCopilotCodeReview(
+                RequestCopilotCodeReviewPayloadBuilder.builder()
+                        .pullRequestId("x")
+                        .build(),
+                RequestCopilotCodeReviewPayloadSelector::clientMutationId));
         values.add(selector.requestReviews(
                 RequestReviewsPayloadBuilder.builder().pullRequestId("x").build(),
                 RequestReviewsPayloadSelector::clientMutationId));
@@ -1951,6 +1977,12 @@ class MutationSelectorImplTest {
                         .settingValue(EnterpriseEnabledDisabledSettingValue.DISABLED)
                         .build(),
                 UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateEnterpriseCopilotCodeReviewPolicy(
+                UpdateEnterpriseCopilotCodeReviewPolicyPayloadBuilder.builder()
+                        .enterpriseId("x")
+                        .policyState(EnterpriseCopilotCodeReviewPolicyState.CONFIGURED_BY_ORGANIZATION_ADMINS)
+                        .build(),
+                UpdateEnterpriseCopilotCodeReviewPolicyPayloadSelector::clientMutationId));
         values.add(selector.updateEnterpriseDefaultRepositoryPermissionSetting(
                 UpdateEnterpriseDefaultRepositoryPermissionSettingPayloadBuilder.builder()
                         .enterpriseId("x")
@@ -2110,6 +2142,23 @@ class MutationSelectorImplTest {
                         .organizationId("x")
                         .build(),
                 UpdateOrganizationAllowPrivateRepositoryForkingSettingPayloadSelector::clientMutationId));
+        values.add(selector.updateOrganizationCopilotCodeReviewPolicy(
+                UpdateOrganizationCopilotCodeReviewPolicyPayloadBuilder.builder()
+                        .organizationId("x")
+                        .state(OrganizationCopilotCodeReviewPolicyState.DISABLED)
+                        .build(),
+                UpdateOrganizationCopilotCodeReviewPolicyPayloadSelector::clientMutationId));
+        values.add(selector.updateOrganizationCopilotCodeReviewRunnerConfiguration(
+                UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadBuilder.builder()
+                        .organizationId("x")
+                        .runnerType(CopilotCodeReviewRunnerType.LABELED)
+                        .build(),
+                UpdateOrganizationCopilotCodeReviewRunnerConfigurationPayloadSelector::clientMutationId));
+        values.add(selector.updateOrganizationCopilotCodeReviewSettings(
+                UpdateOrganizationCopilotCodeReviewSettingsPayloadBuilder.builder()
+                        .organizationId("x")
+                        .build(),
+                UpdateOrganizationCopilotCodeReviewSettingsPayloadSelector::clientMutationId));
         values.add(selector.updateOrganizationWebCommitSignoffSetting(
                 UpdateOrganizationWebCommitSignoffSettingPayloadBuilder.builder()
                         .organizationId("x")
@@ -2209,6 +2258,11 @@ class MutationSelectorImplTest {
         values.add(selector.updateRepository(
                 UpdateRepositoryPayloadBuilder.builder().repositoryId("x").build(),
                 UpdateRepositoryPayloadSelector::clientMutationId));
+        values.add(selector.updateRepositoryCopilotCodeReviewSettings(
+                UpdateRepositoryCopilotCodeReviewSettingsPayloadBuilder.builder()
+                        .repositoryId("x")
+                        .build(),
+                UpdateRepositoryCopilotCodeReviewSettingsPayloadSelector::clientMutationId));
         values.add(selector.updateRepositoryCustomProperty(
                 UpdateRepositoryCustomPropertyPayloadBuilder.builder()
                         .repositoryCustomPropertyId("x")
@@ -2293,6 +2347,6 @@ class MutationSelectorImplTest {
                         "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
                         "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
                         "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x",
-                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x");
+                        "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x");
     }
 }
